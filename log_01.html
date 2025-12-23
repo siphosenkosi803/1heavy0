@@ -1,0 +1,2357 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>1heavy0 - Issue 01</title>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;900&family=Playfair+Display:wght@400;700;900&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Space Mono', monospace;
+            text-transform: uppercase;
+            background: #ffffff;
+            color: #000000;
+            overflow-x: hidden;
+        }
+
+
+/* Interview Separator */
+.interview-separator {
+ width: calc(100% + 120px);
+ margin-left: -60px;
+ height: 1px;
+ background: linear-gradient(90deg, 
+ transparent 0%, 
+ rgba(255, 255, 255, 0.2) 20%, 
+ rgba(255, 255, 255, 0.6) 50%, 
+ rgba(255, 255, 255, 0.2) 80%, 
+ transparent 100%);
+ margin: 40px 0;
+ position: relative;
+ overflow: hidden;
+}
+.interview-separator::before {
+ content: '';
+ position: absolute;
+ top: 0;
+ left: 0;
+ width: 100%;
+ height: 100%;
+ background: linear-gradient(90deg, 
+ transparent 0%, 
+ rgba(255, 255, 255, 0.8) 50%, 
+ transparent 100%);
+ animation: separatorGlow 3s ease-in-out infinite;
+}
+@keyframes separatorGlow {
+ 0%, 100% { opacity: 0.3; }
+ 50% { opacity: 0.8; }
+}
+@media (max-width: 768px) {
+ .interview-separator {
+ width: calc(100% + 60px);
+ margin-left: -30px;
+ margin: 30px 0;
+ }
+}
+
+        
+ /*.dossier-container {
+ margin: 0;
+ display: flex;
+ justify-content: center;
+ align-items: center;
+ 
+ width: 100%;
+ max-width: 100%;
+ height: 500px;
+ background: linear-gradient(135deg, #1a1a1a 0%, #0a0a0a 100%);
+ border: 3px solid #ffffff;
+ box-shadow: 0 0 30px rgba(0, 0, 0, 0.8),
+ inset 0 0 60px rgba(255, 255, 255, 0.02);
+ position: relative;
+ overflow: hidden;
+ }
+ @media (max-width: 768px) {
+ .dossier-container {
+ height: auto;
+ min-height: 500px;
+ }
+ }
+ @keyframes flicker {
+ 0%, 100% { opacity: 1; }
+ 50% { opacity: 0.96; }
+ }
+ @keyframes scanline {
+ 0% { transform: translateY(-100%); }
+ 100% { transform: translateY(100%); }
+ }
+ @keyframes glitchSlide {
+ 0%, 100% { transform: translateX(0); }
+ 33% { transform: translateX(-2px); }
+ 66% { transform: translateX(2px); }
+ } */
+ .scanline {
+ position: absolute;
+ top: 0;
+ left: 0;
+ width: 100%;
+ height: 1px;
+ background: #000000;
+ animation: scanline 4s linear infinite;
+ z-index: 10;
+ }
+ .glitch-overlay {
+ position: absolute;
+ top: 0;
+ left: 0;
+ width: 100%;
+ height: 100%;
+ background: repeating-linear-gradient(
+ 0deg,
+ transparent,
+ transparent 2px,
+ rgba(255, 255, 255, 0.02) 2px,
+ rgba(255, 255, 255, 0.02) 4px
+ );
+ pointer-events: none;
+ z-index: 5;
+ }
+ .dossier-header {
+ background: rgba(255, 255, 255, 0.1);
+ border-bottom: 2px solid #000000;
+ padding: 12px 20px;
+ display: flex;
+ justify-content: space-between;
+ align-items: center;
+ flex-wrap: wrap;
+ gap: 10px;
+ }
+ @media (max-width: 768px) {
+ .dossier-header {
+ padding: 10px 15px;
+ }
+ }
+ .header-left {
+ display: flex;
+ align-items: center;
+ gap: 15px;
+ }
+ .status-indicator {
+ width: 8px;
+ height: 8px;
+ background: #000000;
+ border-radius: 50%;
+ animation: pulse 1.5s ease-in-out infinite;
+ }
+ @keyframes pulse {
+ 0%, 100% { opacity: 1; box-shadow: 0 0 5px 000000; }
+ 50% { opacity: 0.5; box-shadow: 0 0 10px 000000; }
+ }
+ .header-title {
+ color: #000000;
+ font-size: 11px;
+ letter-spacing: 2px;
+ text-transform: uppercase;
+ }
+ @media (max-width: 768px) {
+ .header-title {
+ font-size: 9px;
+ letter-spacing: 1px;
+ }
+ }
+ .header-right {
+ color: #000000;
+ font-size: 10px;
+ letter-spacing: 1px;
+ animation: glitchSlide 0.3s infinite;
+ }
+ @media (max-width: 768px) {
+ .header-right {
+ font-size: 8px;
+ }
+ }
+ .dossier-content {
+ display: grid;
+ grid-template-columns: 280px 1fr;
+ height: calc(100% - 48px);
+ gap: 0;
+ }
+ @media (max-width: 768px) {
+ .dossier-content {
+ grid-template-columns: 1fr;
+ height: auto;
+ }
+ }
+ .photo-section {
+ background: rgba(0, 0, 0, 0.6);
+ border-right: 2px solid #000000;
+ padding: 30px 20px;
+ display: flex;
+ flex-direction: column;
+ align-items: center;
+ position: relative;
+ }
+ @media (max-width: 768px) {
+ .photo-section {
+ border-right: none;
+ border-bottom: 2px solid #000000;
+ padding: 20px;
+ }
+ }
+ .photo-frame {
+ width: 220px;
+ height: 280px;
+ 
+ position: relative;
+ overflow: hidden;
+ box-shadow: 0 0 20px rgba(0, 0, 0, 0.8);
+ background: #0a0a0a;
+ }
+ @media (max-width: 768px) {
+ .photo-frame {
+ width: 180px;
+ height: 240px;
+ }
+ }
+ .photo-frame::before {
+ content: '';
+ position: absolute;
+ top: 0;
+ left: 0;
+ width: 100%;
+ height: 100%;
+ background: repeating-linear-gradient(
+ 0deg,
+ transparent,
+ transparent 3px,
+ rgba(255, 255, 255, 0.03) 3px,
+ rgba(255, 255, 255, 0.03) 6px,
+ );
+ pointer-events: none;
+ z-index: 2;
+ }
+ .photo-frame img {
+ width: 100%;
+ height: 100%;
+ object-fit: cover;
+ filter: grayscale(100%) contrast(1.2) brightness(0.9);
+ }
+ .photo-id {
+ margin-top: 15px;
+ text-align: center;
+ color: #ffffff;
+ font-size: 9px;
+ letter-spacing: 1px;
+ }
+ @media (max-width: 768px) {
+ .photo-id {
+ font-size: 8px;
+ margin-top: 10px;
+ }
+ }
+ .info-section {
+ padding: 30px;
+ color: #000000;
+ overflow-y: auto;
+ }
+ @media (max-width: 768px) {
+ .info-section {
+ padding: 20px;
+ }
+ }
+ .classified-banner {
+ background: #ffffff;
+ color: #000000;
+ padding: 8px;
+ text-align: center;
+ font-weight: 700;
+ font-size: 14px;
+ letter-spacing: 3px;
+ margin-bottom: 25px;
+ border: 2px solid 000000;
+ }
+ @media (max-width: 768px) {
+ .classified-banner {
+ font-size: 11px;
+ letter-spacing: 2px;
+ padding: 6px;
+ margin-bottom: 20px;
+ }
+ }
+ .data-row {
+ display: grid;
+ grid-template-columns: 140px 1fr;
+ margin-bottom: 12px;
+ font-size: 11px;
+ border-bottom: 1px solid 000000;
+ padding-bottom: 8px;
+ }
+ @media (max-width: 768px) {
+ .data-row {
+ grid-template-columns: 120px 1fr;
+ font-size: 10px;
+ margin-bottom: 10px;
+ }
+ }
+ .data-label {
+ color: 000000;
+ text-transform: uppercase;
+ letter-spacing: 1px;
+ }
+ .data-value {
+ color: 000000;
+ font-weight: 700;
+ }
+ .notes-section {
+ margin-top: 25px;
+ padding-top: 20px;
+ border-top: 2px solid 000000;
+ }
+ @media (max-width: 768px) {
+ .notes-section {
+ margin-top: 20px;
+ padding-top: 15px;
+ }
+ }
+ .notes-header {
+ color: 000000;
+ font-size: 10px;
+ letter-spacing: 2px;
+ margin-bottom: 12px;
+ text-transform: uppercase;
+ font-weight: 700;
+ }
+ @media (max-width: 768px) {
+ .notes-header {
+ font-size: 9px;
+ }
+ }
+ .notes-text {
+ color: 000000;
+ font-size: 10px;
+ line-height: 1.6;
+ font-style: italic;
+ }
+ @media (max-width: 768px) {
+ .notes-text {
+ font-size: 9px;
+ line-height: 1.5;
+ }
+ }
+ .corner-markers {
+ position: absolute;
+ width: 20px;
+ height: 20px;
+ border: 2px solid 000000;
+ }
+ @media (max-width: 768px) {
+ .corner-markers {
+ width: 15px;
+ height: 15px;
+ }
+ }
+ .corner-tl { top: 10px; left: 10px; border-right: none; border-bottom: none; }
+ .corner-tr { top: 10px; right: 10px; border-left: none; border-bottom: none; }
+ .corner-bl { bottom: 10px; left: 10px; border-right: none; border-top: none; }
+ .corner-br { bottom: 10px; right: 10px; border-left: none; border-top: none; }
+ @media (max-width: 768px) {
+ .corner-tl, .corner-tr { top: 5px; }
+ .corner-bl, .corner-br { bottom: 5px; }
+ .corner-tl, .corner-bl { left: 5px; }
+ .corner-tr, .corner-br { right: 5px; }
+ }
+ .timestamp {
+ position: absolute;
+ bottom: 15px;
+ right: 20px;
+ font-size: 9px;
+ color: 000000;
+ letter-spacing: 1px;
+ }
+ @media (max-width: 768px) {
+ .timestamp {
+ position: relative;
+ bottom: auto;
+ right: auto;
+ margin-top: 20px;
+ font-size: 8px;
+ text-align: center;
+ }
+ }
+
+
+        
+        .magazine {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: #ffffff;
+            box-shadow: 0 0 60px rgba(0,0,0,0.1);
+        }
+        
+        /* Cover */
+        /* RETRO FOLDER COVER - Add this entire block */
+.retro-cover {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 60px;
+    position: relative;
+    overflow: hidden;
+    background: #f5f5f3;
+    border: 1px solid #333;
+    box-shadow: 8px 8px 0px rgba(0, 0, 0, 0.1);
+}
+.retro-cover::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: repeating-linear-gradient(
+        0deg,
+        transparent,
+        transparent 3px,
+        rgba(0, 0, 0, 0.03) 3px,
+        rgba(0, 0, 0, 0.03) 4px
+    );
+    pointer-events: none;
+    z-index: 1;
+}
+/* Folder tab */
+.folder-tab {
+    position: absolute;
+    top: -1px;
+    right: 40px;
+    width: 80px;
+    height: 30px;
+    background: #e8e8e6;
+    border: 1px solid #333;
+    border-bottom: 1px solid #e8e8e6;
+    border-radius: 4px 4px 0 0;
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.tab-hole {
+    width: 10px;
+    height: 10px;
+    background: #333;
+    border-radius: 50%;
+}
+/* Corner fold effect */
+.retro-cover::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 0 30px 30px 0;
+    border-color: transparent #ddd transparent transparent;
+    z-index: 2;
+}
+/* Cover header */
+.cover-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: start;
+    position: relative;
+    z-index: 3;
+}
+.logo-img {
+    height: 85px;
+    width: auto;
+    filter: brightness(0.9);
+}
+.issue {
+    text-align: right;
+    color: rgba(0, 0, 0, 0.6);
+    font-size: 14px;
+    font-weight: 400;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+}
+/* Cover title area */
+.cover-title {
+    position: relative;
+    z-index: 3;
+    margin: auto 0;
+    text-align: center;
+    padding: 2rem 0;
+}
+.cover-subtitle {
+    font-size: 2.5rem;
+    color: #333;
+    font-weight: 700;
+    max-width: 600px;
+    margin: 0 auto;
+    line-height: 1.2;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-family: 'Space Mono', monospace;
+    position: relative;
+    padding: 2rem 0;
+}
+.cover-subtitle::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100px;
+    height: 2px;
+    background: #333;
+}
+.cover-subtitle::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100px;
+    height: 2px;
+    background: #333;
+}
+/* Cover footer */
+.cover-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: end;
+    position: relative;
+    z-index: 3;
+    padding-top: 2rem;
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+}
+.date {
+    text-align: right;
+    color: #333;
+    font-size: 18px;
+    font-weight: 600;
+    letter-spacing: 1px;
+}
+/* Classification stamp */
+.classification {
+    position: absolute;
+    bottom: 60px;
+    left: 60px;
+    font-size: 12px;
+    letter-spacing: 1px;
+    color: rgba(0, 0, 0, 0.4);
+    text-transform: uppercase;
+}
+.classification::before {
+    content: "CLASSIFIED";
+    display: block;
+    font-size: 10px;
+    letter-spacing: 2px;
+    margin-bottom: 5px;
+    color: rgba(0, 0, 0, 0.3);
+}
+/* Responsive for retro cover */
+@media (max-width: 1024px) {
+    .cover-subtitle {
+        font-size: 2rem;
+    }
+    .logo-img {
+        height: 70px;
+    }
+}
+@media (max-width: 768px) {
+    .retro-cover {
+        padding: 40px 30px;
+    }
+    .folder-tab {
+        right: 30px;
+        width: 70px;
+        height: 25px;
+    }
+    .logo-img {
+        height: 60px;
+    }
+    .issue {
+        font-size: 12px;
+    }
+    .cover-subtitle {
+        font-size: 1.8rem;
+    }
+    .date {
+        font-size: 16px;
+    }
+    .classification {
+        left: 30px;
+        bottom: 40px;
+    }
+}
+@media (max-width: 480px) {
+    .retro-cover {
+        padding: 30px 20px;
+    }
+    .folder-tab {
+        right: 20px;
+        width: 60px;
+        height: 20px;
+    }
+    .tab-hole {
+        width: 8px;
+        height: 8px;
+    }
+    .logo-img {
+        height: 50px;
+    }
+    .cover-subtitle {
+        font-size: 1.4rem;
+    }
+    .cover-subtitle::before,
+    .cover-subtitle::after {
+        width: 60px;
+    }
+    .date {
+        font-size: 14px;
+    }
+    .classification {
+        font-size: 10px;
+        left: 20px;
+        bottom: 30px;
+    }
+}
+
+
+/* Back cover */
+.back-cover {
+    background: #000000;
+    color: #ffffff;
+    text-align: center;
+    padding: 100px 60px;
+}
+.back-cover .section-border {
+    border-color: rgba(255, 255, 255, 0.2);
+}
+.back-cover::before {
+    background: repeating-linear-gradient(
+        0deg,
+        transparent,
+        transparent 2px,
+        rgba(255, 255, 255, 0.03) 2px,
+        rgba(255, 255, 255, 0.03) 4px
+    );
+}
+.back-logo {
+    height: 120px;
+    width: auto;
+    margin-bottom: 40px;
+    opacity: 0.9;
+}
+.archive-seal {
+    font-size: 24px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    margin-bottom: 20px;
+    color: rgba(255, 255, 255, 0.9);
+}
+.micro-text {
+    font-size: 9px;
+    letter-spacing: 1px;
+    color: rgba(255, 255, 255, 0.4);
+    max-width: 400px;
+    margin: 0 auto;
+    line-height: 1.4;
+}
+.back-cover-text {
+    font-size: 14px;
+    letter-spacing: 2px;
+    line-height: 1.8;
+    color: rgba(255, 255, 255, 0.7);
+    margin: 40px 0;
+}
+
+
+
+
+        /* Editor's Note */
+.editor-note {
+    padding: 100px 60px;
+    text-transform: uppercase;
+    background: #ffffff;
+    color: #000000;
+    font-family: 'Space Mono', monospace;
+    border-top: 1px solid #333333;
+    border-bottom: 1px solid #333333;
+    }
+
+.editor-note-content {
+    
+}
+
+.editor-note-title {
+    font-family: 'Space Mono', monospace;
+    text-transform: uppercase;
+    font-size: 72px;
+    font-weight: 900;
+    margin-bottom: 60px;
+    border-bottom:3px solid #000000;
+    padding-bottom: 20px;
+    
+    letter-spacing: normal;
+    color: 000000;
+}
+
+.editor-note-body {
+    font-size: 18px;
+    line-height: 1.8;
+    color: #000000;
+}
+
+.editor-note-body p {
+    margin-bottom: 24px;
+}
+
+.editor-note-body p:last-child {
+    margin-bottom: 0;
+}
+
+.editor-signoff {
+    margin-top: 40px;
+    font-style: italic;
+    color: 333333;
+    font-size: 16px;
+}
+
+        
+        /* Table of Contents */
+        .toc {
+            padding: 100px 60px;
+            background: #ffffff;     }
+        
+        .toc-title {
+            font-family: 'Space Mono', monospace;
+            font-size: 72px;
+            font-weight: 900;
+            margin-bottom: 60px;
+            border-bottom: 3px solid black;
+            padding-bottom: 20px;
+        }
+        
+        .toc-item {
+            display: grid;
+            grid-template-columns: 80px 1fr 120px;
+            gap: 30px;
+            padding: 40px 0;
+            border-bottom: 1px solid cccccc;
+            align-items: start;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .toc-item:hover {
+            background: ffffff;
+            padding-left: 20px;
+        }
+        
+        .toc-number {
+            font-family: 'Space Mono', monospace;
+            font-size: 48px;
+            font-weight: 700;
+            color: 000000;
+        }
+        
+        .toc-content h3 {
+            font-size: 28px;
+            font-weight: 700;
+            margin-bottom: 8px;
+            color: 000000;
+        }
+        
+        .toc-content p {
+            color: 000000;
+            font-size: 16px;
+            line-height: 1.6;
+            margin-bottom: 8px;
+        }
+        
+        .toc-tag {
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            color: 000000;
+            font-weight: 600;
+        }
+        
+        .toc-page {
+            font-family: 'Playfair Display', serif;
+            font-size: 36px;
+            font-weight: 700;
+            text-align: right;
+        }
+        
+        /* Interview Spread */
+        .spread {
+            min-height: 100vh;
+            padding: 80px 60px;
+            background: #ffffff;
+            position: relative;
+        }
+        
+        .page-number {
+            position: absolute;
+            bottom: 40px;
+            right: 60px;
+            font-family: 'Space Mono', monospace;
+            font-size: 14px;
+            color: #999;
+        }
+        
+        .spread-header {
+            margin-bottom: 60px;
+        }
+        
+        .spread-meta {
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            
+            margin-bottom: 20px;
+        }
+        
+        .spread-title {
+            font-family: 'Space Mono', monospace;
+            font-size: 84px;
+            font-weight: 900;
+            line-height: 0.95;
+            margin-bottom: 20px;
+            letter-spacing: -2px;
+        }
+        
+        .spread-intro {
+            font-size: 18px;
+            color: #000000;
+            max-width: 900px;
+            line-height: 1.7;
+            font-style: italic;
+            margin-bottom: 40px;
+        }
+        
+        .hero-image {
+            width: 100%;
+            height: 500px;
+            background: ffffff;
+            margin: 40px 0 60px 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+        
+        .hero-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .hero-placeholder {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #222222 0%, #444444 100%);
+            color: #999;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-size: 18px;
+        }
+        
+        .two-column {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            margin-top: 60px;
+        }
+        
+        .single-column {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .question {
+            font-weight: 700;
+            font-size: 17px;
+		text-transform: uppercase;
+            margin-bottom: 16px;
+            margin-top: 40px;
+            line-height: 1.5;
+        }
+        
+        .question::before {
+            content: 'Q: ';
+            color: #000000;
+            font-weight: 900;
+        }
+        
+        .answer {
+            font-size: 16px;
+	    text-transform: uppercase;
+            line-height: 1.8;
+            color: #000000;
+        }
+        
+        .pull-quote {
+            font-family: 'Space Mono', monospace;
+            text-transform: uppercase;
+            font-size: 30px;
+            font-weight: 700;
+            line-height: 1.2;
+            padding: 40px;
+            margin: 60px 0;
+            border-left: 6px white;
+            background: ffffff;
+            font-style: italic;
+            grid-column: 1 / -1;
+        }
+        
+        .inline-image {
+            width: 100%;
+            height: 400px;
+            background: #f0f0f0;
+            margin: 40px 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+        
+        .inline-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .inline-placeholder {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #222222 0%, #444444 100%);
+            color: #999;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-size: 14px;
+        }
+        
+        .full-width-image {
+            width: calc(100% + 120px);
+            margin-left: -60px;
+            height: 600px;
+            background: #f0f0f0;
+            margin-top: 80px;
+            margin-bottom: 80px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+        
+        .full-width-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .full-width-placeholder {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #222222 0%, #444444 100%);
+            color: #999;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-size: 18px;
+        }
+        
+        /* Back Cover */
+        .back-cover {
+            min-height: 100vh;
+            background: black;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            padding: 60px;
+            position: relative;
+        }
+        
+        .back-cover .logo-img {
+            height: 150px;
+            margin-bottom: 40px;
+        }
+        
+        .back-cover-text {
+            color: rgba(255,255,255,0.6);
+            font-size: 16px;
+            text-align: center;
+            max-width: 500px;
+            line-height: 1.8;
+        }
+        
+        @media (max-width: 768px) {
+            .cover, .spread, .toc {
+                padding: 40px 30px;
+            }
+            
+            .logo-img {
+                height: 60px;
+            }
+            
+            .cover-title h1 {
+                font-size: 60px;
+            }
+            
+            .spread-title {
+                font-size: 48px;
+            }
+            
+            .two-column {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+            
+            .toc-item {
+                grid-template-columns: 50px 1fr 80px;
+                gap: 20px;
+            }
+            
+            .toc-number {
+                font-size: 32px;
+            }
+            
+            .pull-quote {
+                font-size: 28px;
+                padding: 30px;
+            }
+            
+            .full-width-image {
+                width: calc(100% + 60px);
+                margin-left: -30px;
+                height: 400px;
+            }
+
+            .editor-note {
+    padding: 60px 30px;
+}
+
+.editor-note-body {
+    font-size: 16px;
+    line-height: 1.7;
+}
+
+.editor-note-title {
+    font-size: 48px;
+    margin-bottom: 40px;
+    color: 000000;
+}
+        }
+    </style>
+</head>
+<body>
+    <div class="magazine">
+        <!-- Cover -->
+        <section class="retro-cover" id="cover">
+    <div class="folder-tab">
+        <div class="tab-hole"></div>
+    </div>
+    <div class="cover-header">
+        <div class="logo">
+            <a href= "zine.html">
+                <img src="images/1heavy0.png" alt="1heavy0 Logo" class="logo-img">
+            </a>
+        </div>
+        <div class="issue">
+            LOG ENTRY 01
+        </div>
+    </div>
+    <div class="cover-title">
+        <div class="cover-subtitle">
+            UNSEEN CONVERSATIONS
+        </div>
+    </div>
+    <div class="cover-footer">
+        <div class="classification">
+            ISSUE 01<br>
+            ACCESS LEVEL 3
+        </div>
+        <div class="date">
+            DEC 2025
+        </div>
+    </div>
+</section>
+
+
+
+        <!-- Editor's Note -->
+<div class="editor-note">
+ <div class="editor-note-content">
+ <h2 class="editor-note-title">Editor's Note</h2>
+ <div class="editor-note-body">
+ <p>The grid expects compliance.</p>
+ 
+ <p>It allocates space for predictable outputs.<br>
+ Tolerates margins of error.<br>
+ Generates metrics for measurable deviation.</p>
+ 
+ <p>What happens outside those margins<br>
+ is labeled noise.</p>
+ 
+ <p>This issue documents the noise.</p>
+ 
+ <p>Not as artifact, but as transmission.<br>
+ Not as malfunction, but as alternate protocol.</p>
+ 
+ <p>Each conversation here operates<br>
+ outside the optimization loop.<br>
+ Refuses the conversion funnel.<br>
+ Exists in the buffer between<br>
+ what systems can process<br>
+ and what intelligence actually produces.</p>
+ 
+ <p>These are not case studies.<br>
+ They are runtime logs.</p>
+ 
+ <p>Princy speaks in control rods and sovereignty—<br>
+ energy as uncompressed agency.<br>
+ Arianne stitches panic into armor—<br>
+ textiles as trauma syntax.<br>
+ Masaki renders neural networks as cosmic webs—<br>
+ streetwear as spiritual interface.<br>
+ Faisa shorts circuits between canvas and code—<br>
+ art as executable rebellion.<br>
+ Batsheva encrypts displacement into identity—<br>
+ misfit as cryptographic key.</p>
+ 
+ <p>Notice the pattern:<br>
+ agency that cannot be platformed,<br>
+ creativity that corrupts when formatted,<br>
+ communities that route around central servers.</p>
+ 
+ <p>This isn't about "resilience" or "disruption."<br>
+ Those are system-sanctified rebellions.</p>
+ 
+ <p>This is about signal degradation.<br>
+ About remaining intentionally illegible<br>
+ to architectures built for legibility.</p>
+ 
+ <p>We are not building a better system.<br>
+ We are recording what grows in its fractures.</p>
+ 
+ <p>1heavy0 operates as a local cache<br>
+ of conversations the cloud cannot index.<br>
+ Each issue is a .zip file of human frequency—<br>
+ compressed but not lossy.</p>
+ 
+ <p>You are not reading a magazine.<br>
+ You are mounting a filesystem.</p>
+ 
+ <p>Access requires accepting<br>
+ that some data refuses to be structured.<br>
+ That the most valuable packets<br>
+ are often those the network drops.</p>
+ 
+ <p>Proceed without expectation of resolution.<br>
+ The artifacts are the argument.</p>
+ 
+ <p class="editor-signoff"></p>
+ </div>
+ </div>
+</div>
+        
+        <!-- Table of Contents -->
+<div class="toc">
+ <h2 class="toc-title">Contents</h2>
+ 
+ <div class="toc-item">
+ <div class="toc-number">01</div>
+ <div class="toc-content">
+ <h3>Faisa</h3>
+ <p>Buffer State Operations — Operating in interstitial zones where digital protocols collapse into 
+human expression, rendering artifacts that resist parsing by either system.</p>
+ <div class="toc-tag">Digital Interface</div>
+ </div>
+ <div class="toc-page"></div>
+ </div>
+ 
+ <div class="toc-item">
+ <div class="toc-number">02</div>
+ <div class="toc-content">
+ <h3>Masaki</h3>
+ <p>Cosmic Cartography of Neural Networks — Plotting coordinates where street culture 
+intersects with spiritual transmission, creating recursive systems that route around centralized servers 
+of culture.</p>
+ <div class="toc-tag">Spiritual Framework</div>
+ </div>
+ <div class="toc-page"></div>
+ </div>
+ 
+ <div class="toc-item">
+ <div class="toc-number">03</div>
+ <div class="toc-content">
+ <h3>Arianne</h3>
+ <p>Somatic Archives in Secondhand Textiles — Translating psychological states into textile 
+syntax, constructing wearable archives of survival from discarded fragments and haunted seams.</p>
+ <div class="toc-tag">Somatic Translation</div>
+ </div>
+ <div class="toc-page"></div>
+ </div>
+ 
+ <div class="toc-item">
+ <div class="toc-number">04</div>
+ <div class="toc-content">
+ <h3>Princy</h3>
+ <p>The Architect of Atomic Sovereignty — Approaching energy not as engineering 
+problem but as liberation vector, architecting uncompressed agency for 600 million Africans.</p>
+ <div class="toc-tag">Institutional Confrontation</div>
+ </div>
+ <div class="toc-page"></div>
+ </div>
+ 
+ <div class="toc-item">
+ <div class="toc-number">05</div>
+ <div class="toc-content">
+ <h3>Batsheva</h3>
+ <p>Identity as Cryptographic Protocol — Transforming displacement into navigation keys, 
+developing recursive encryption systems for identity that refuse optimization algorithms.</p>
+ <div class="toc-tag">Identity Synthesis</div>
+ </div>
+ <div class="toc-page"></div>
+ </div>
+</div>
+        <!-- Interview 01: Faisa -->
+        <div class="interview-separator"></div>
+        <div class="spread">
+            <div class="page-number"></div>
+            <div class="spread-header">
+                <div class="spread-meta">Interview 01 — @faisa.webp</div>
+                <h2 class="spread-title">Buffer State<br>Operations</h2>
+ <p class="spread-intro">
+ In the architecture of contemporary creation, protocols separate function from form. Faisa 
+operates in the interstitial zones where these protocols collapse—where executable code bleeds into 
+canvas, where system logic becomes emotional syntax. Her work emerges from the corruption of 
+boundaries, rendering artifacts that neither digital nor analog systems can fully parse. This is production 
+at the threshold, where the buffer between medium and message becomes the message itself.
+ </p>
+ 
+            </div>
+            
+            <!--<div class="hero-image">
+                <div class="hero-placeholder">Faisa's Digital Art</div>
+            </div> -->
+
+          <!--  <div class="dossier-container"> -->
+ <!--<div class="scanline"></div>
+ <div class="glitch-overlay"></div> -->
+ 
+ <!--<div class="corner-markers corner-tl"></div>
+ <div class="corner-markers corner-tr"></div>
+ <div class="corner-markers corner-bl"></div>
+ <div class="corner-markers corner-br"></div> -->
+ <div class="dossier-header">
+ <div class="header-left">
+ <div class="status-indicator"></div>
+ <span class="header-title">CLASSIFIED DATABASE ACCESS</span>
+ </div>
+ <div class="header-right"> UNAUTHORIZED ACCESS DETECTED </div>
+ </div>
+ <div class="dossier-content">
+ <div class="photo-section">
+ <div class="photo-frame">
+ <!-- PLACE YOUR GRAINY FAISA IMAGE HERE -->
+ <img src="images/faisa.png" alt="Subject Photo">
+ </div>
+ <div class="photo-id">
+ SUBJECT ID: FSA-4172<br>
+ CAPTURE: 2025-12-14
+ </div>
+ </div>
+ <div class="info-section">
+ <div class="classified-banner">
+ TOP SECRET 
+ </div>
+ <div class="data-row">
+ <div class="data-label">CODENAME:</div>
+ <div class="data-value">FAISA.WEBP</div>
+ </div>
+ <div class="data-row">
+ <div class="data-label">CLASSIFICATION:</div>
+ <div class="data-value">DIGITAL INSURGENT</div>
+ </div>
+ <div class="data-row">
+ <div class="data-label">SPECIALIZATION:</div>
+ <div class="data-value">CODE / CANVAS HYBRID</div>
+ </div>
+ <div class="data-row">
+ <div class="data-label">THREAT LEVEL:</div>
+ <div class="data-value">CREATIVE DISRUPTOR</div>
+ </div>
+ <div class="data-row">
+ <div class="data-label">LOCATION STATUS:</div>
+ <div class="data-value">NOMADIC // UNTRACEABLE</div>
+ </div>
+ <!--<div class="data-row">
+ <div class="data-label">KNOWN ALIASES:</div>
+ <div class="data-value">@FAISA.WEBP</div>
+ </div> -->
+ <div class="data-row">
+ <div class="data-label">OPERATIONAL MODE:</div>
+ <div class="data-value">ANALOG/DIGITAL FUSION</div>
+ </div>
+ <div class="notes-section">
+ <div class="notes-header"> INTELLIGENCE BRIEFING </div>
+ <div class="notes-text">
+ Subject operates at the intersection of systematic logic and chaotic expression. 
+ Exhibits resistance to algorithmic predictability. Known to traverse between 
+ physical and digital art spaces, leaving minimal traceable pattern. 
+ <!--Approaches creation through cycles of deep immersion—alternating between 
+ technical precision and raw emotional output. Status: UNCONTAINABLE. -->
+ </div>
+ </div>
+ 
+ </div>
+ </div>
+ </div>
+
+            
+            <div class="single-column">
+                <div>
+                    <div class="question">You live in the collision zone between digital systems and raw human expression. When you code and when you paint, do you feel like you're speaking the same language through different mediums — or are they completely separate realities?</div>
+                    <div class="answer">
+                        Not really, because I approach them with different intentions. Painting is a personal and expressive outlet — it's about exploring my own perspective and emotions. Coding, on the other hand, is usually in service of someone else's vision, whether it's a client or an employer. It requires me to step into their shoes, understand their goals, and build something functional and user-centred. So while both involve creativity and problem-solving, the mindset and purpose behind each are quite different for me.
+                    </div>
+                    
+                    <div class="question">If your mind were a glitchy operating system, what hidden process would be quietly running in the background of everything you make?</div>
+                    <div class="answer">
+                        A constant loop of questioning — that would be the hidden process quietly running in the background of everything I make. I'm always trying to challenge the user or viewer to question what they're seeing and experiencing. I want what I create to be engaging, not just visually or functionally, but mentally — something that pulls people in and makes them pause, even briefly. It's less about offering answers and more about creating space for curiosity and reflection.
+                    </div>
+                </div>
+                
+                <div>
+                    <div class="question">Do you feel like technology is expanding your world or trapping you in it? How do you consciously design your relationship with digital tools?</div>
+                    <div class="answer">
+                        It definitely expands my world. Technology gives me access to things I wouldn't have otherwise, from resources and inspiration to communities and opportunities. But I don't approach digital tools the same way I do non-digital ones. Digital tools come with rules, systems, and constraints — they push you to think in terms of structure and logic. Non-digital tools feel freer to me; they let me create more intuitively, without the same pressure to "follow the rules." So I try to stay conscious of how each tool shapes the way I work, and make sure I'm still creating on my own terms.
+                    </div>
+                    
+                    
+                </div>
+            </div>
+            
+            
+            
+            <div class="single-column">
+ <div>
+ <div class="question">You once described social art spaces as places that "fill you with life." What is 
+it about these spaces that feels so fundamentally different from everywhere else?</div>
+ <div class="answer">
+ There's something simple yet energising about social art spaces — they feel alive in a way that 
+most places don't. You're surrounded by people who are creating, experimenting, and expressing things 
+that might not have a place anywhere else. There's a kind of openness and mutual understanding, even 
+among strangers, that invites parts of your mind to open up, ones you didn't even know were there. 
+Unlike more structured environments, these spaces don't expect you to explain yourself — you can just 
+be, make, connect, and leave. That's what fills me with life: the freedom, the shared energy, and the 
+sense that art doesn't have to make sense to matter.
+ </div>
+ 
+ <div class="question">When you paint, is it about capturing a specific emotion, escaping the 
+external world, or decoding something you don't have the words for?</div>
+ <div class="answer">
+ When I paint, I'm often decoding what I'm feeling and what I don't want to talk about. I used to 
+approach the canvas with a specific idea in mind, but now I let the colours and brushes lead the way. 
+The less planned paintings tend to express my feelings more honestly because they're driven by instinct 
+rather than intention. It's less about capturing something specific and more about allowing the process 
+to reveal emotions I might not fully understand at first.
+ </div>
+ 
+ <div class="question">Your life has moved between structured, high-pressure coding schools and 
+open, freeform creative circles. Which one feels more real to you — or are both equally constructed 
+systems?</div>
+ <div class="answer">
+ Both feel like constructed systems in their own way, but what's real to me is the space I occupy 
+between them. Coding school taught me discipline and the importance of showing up — it gave me 
+structure, rules, and a clear path to follow. Creative spaces, on the other hand, taught me to think more 
+broadly, to have a more open mind, and not to doubt myself as much. There's a balance I try to strike 
+between these worlds: the freedom to experiment with the discipline of structure, and the discipline to 
+stay focused and follow through while allowing room for creativity.
+ </div>
+ </div>
+ 
+ <div>
+ <div class="question">If you could visualize your creative process as a map or diagram, what would 
+it look like? Would it be a grid, a network, a looping spiral, or total chaos?</div>
+ <div class="answer">
+ I'd say my creative process looks more like a network. It's made up of many interconnected ideas, 
+experiences, and influences that constantly feed into each other. There's no straight path, but 
+everything is connected and has the potential to spark something new. I might start at one point and 
+end up somewhere completely different, but everything I do builds on something else, whether I realise 
+it or not. It's all about the connections, experiences and the relationships between different elements.
+ </div>
+ 
+ <div class="question">What does imperfection mean to you — both in code and in art? Is it a flaw, a 
+feature, or the point?</div>
+ <div class="answer">
+ In code, imperfection is a flaw — things might not break immediately, but eventually the flaws 
+will show up. In art, however, there are no mistakes, only happy accidents. A flaw in a painting or piece 
+of art can be embraced, incorporated, and even become a defining element of the work. It's less about 
+fixing things and more about letting them shape the piece, making it uniquely imperfect and human.
+ </div>
+ 
+ <div class="question">In tech, everything's about precision and optimization. In art, it's about 
+meaning and feeling. How do you navigate those two value systems inside yourself without one killing 
+the other?</div>
+ <div class="answer">
+ I won't lie, it's difficult for me to balance the two. One thing I've found is that my life tends to 
+operate in cycles. Some months I'm able to fully focus on art, where I can dive deep into meaning and 
+feeling, letting go of structure. Other months, I'm completely immersed in tech, where precision and 
+optimization take center stage. It's not always easy to switch between the two, but I've learned to 
+accept these shifts. Each cycle informs the other — the creativity I explore in art sometimes brings fresh 
+perspectives to my tech work, and the structure in tech grounds the freedom I feel in art.
+ </div>
+ </div>
+</div>
+<div class="single-column">
+ <div class="question">What's the most transformative conversation you've had in a creative space —
+one that made you question how you were living or creating?</div>
+ <div class="answer">
+ It's not one specific conversation, but a theme that comes up a lot when talking to artists: "Nothing 
+is wrong or bad, just do." I've realised that nothing in the world is inherently wrong or bad — we all just 
+have our own morals that guide us. Otherwise, everything goes, and all the rules and laws we follow are 
+just made up. In creative spaces, this mindset is liberating because it means there's no one "right" way 
+to do things. It's all about expressing yourself, and there's freedom in that. Letting go of the idea that 
+something needs to be perfect has made me focus more on just creating and less on trying to follow 
+some imagined set of rules.
+ </div>
+ 
+ <div class="question">If you could build your own creative/digital utopia, what would be its one 
+unbreakable rule — and what would you ban forever?</div>
+ <div class="answer">
+ If I could build my own creative/digital utopia, the one unbreakable rule would be: "Everyone has 
+the freedom to create without fear of judgment or restriction." In this space, people could explore, 
+experiment, and express themselves in whatever way felt right, without worrying about fitting into a 
+particular box or standard. What I'd ban forever is the idea of comparison. No one would be allowed to 
+compare their work to anyone else's or feel pressured to measure their creativity against someone 
+else's success. It's all about individual expression, and the value of creation would come from within, not 
+from external validation. But, if we're talking fantasy utopia, it would be like The Jetsons — flying cars, 
+robotic assistants, and a world where creativity flows effortlessly because technology and art blend 
+perfectly. A place where everything is futuristic, and there's endless space for exploration, but with zero 
+pressure to conform.
+ </div>
+ 
+ <div class="question">Pop culture time: what fictional universe most accurately reflects your 
+experience of reality right now? (Bonus points if it's dystopian.)</div>
+ <div class="answer">
+ I'd say The Matrix feels pretty accurate for me right now. There's this constant pull between the 
+digital world and the real world, and sometimes it feels like we're all just plugged into a system that 
+shapes how we experience everything. What's unsettling is that some people can see the loop — this 
+repetitive cycle we're stuck in that slowly drains the life and originality out of us — while others move 
+through it without ever questioning. It makes you think about what's real, what's chosen, and what 
+we're unknowingly accepting as normal.
+ </div>
+ 
+ <div class="question">How does moving through different cities, digital platforms, and art scenes 
+reprogram the way you see yourself? Do you think place still matters in a hyperconnected world?</div>
+ <div class="answer">
+ Changing cities doesn't really change who I am as a person — it might expose me to more, but it 
+doesn't shift how I see myself at the core. What does change how I reflect or process things is what I 
+create. Whether it's something I put out on a digital platform or in an art scene, that act of creating lets 
+me engage with what's already going on inside. My work is internal — it's a mirror, not a reaction to a 
+place. So while environments can influence style or context, the real shifts happen through making, not 
+moving.
+ </div>
+ 
+ <div class="question">When does a painting or piece of code feel truly finished to you? Or is 
+everything permanently a work in progress, including you?</div>
+ <div class="answer">
+ With code, it's simple — once the program meets its purpose, I'm done. There's a clear function, a 
+reason it exists, and once that's working, I can step away. Painting is different. I have to sit with it for a 
+couple of days, look at it in different lights and from different angles before I can even decide if it's 
+finished. It's harder to call it done because I don't always know why I'm painting in the first place. 
+There's no real end goal — it's more about the act of creating than completing.
+ </div>
+ 
+ <div class="question">Is your creativity driven more by curiosity, rebellion, or survival?</div>
+ <div class="answer">
+ It starts with rebellion — I've always loved doing what I want, especially when it's something I've 
+been told not to do or that it's "wrong" or "bad." But once I start creating, it shifts into curiosity. It 
+becomes more about asking, what happens if I do this? or what if I mix this with that? So even though 
+it's rebellion that gets me going, it's curiosity that carries me through the process.
+ </div>
+ 
+ <div class="question">If code and art are both forms of control — shaping what people see, feel, and 
+experience — which medium feels more honest to you?</div>
+ <div class="answer">
+ Art feels more honest to me. With code, I'm usually building for someone else — their goals, their 
+users, their vision. It's about solving a problem or guiding people through a specific experience. Art, on 
+the other hand, comes from me. It doesn't need to make sense or follow a brief. I can be unsure, messy, 
+or emotional in art in a way that would never fly in code.
+ </div>
+ 
+ <div class="question">We live in a world increasingly shaped by algorithms and curated feeds. How do 
+you resist becoming a predictable product of those systems as both a creator and a person?</div>
+ <div class="answer">
+ To be honest, that's tough. You can't help but be affected by what you're constantly exposed to. But 
+I've gotten really good at unplugging and disappearing when I need to. I'd rather be influenced by my 
+physical environment or my own personal past experiences than by algorithms or other people's 
+opinions — that stuff kills uniqueness. When everything starts to look and feel the same, I know it's time 
+to step away and remind myself who I am.
+ </div>
+ 
+ <div class="question">If your 16-year-old self could see the world you're building now, what would 
+they say — and what would they misunderstand completely?</div>
+ <div class="answer">
+ She'd probably be quite confused, lol. At 16, I had materialistic dreams like any normal teenager — I 
+thought success looked a certain way: big things, nice stuff, a flashy life. Now, I can't say I care much 
+about any of that. What matters to me is sustaining myself through tech, art, and even agriculture. She'd 
+probably think I'm an unambitious loser for derailing from the "dream," but I think she'd come around 
+once she saw the kind of freedom I'm building instead.
+ </div>
+ 
+ <div class="question">What's one belief, habit, or rule you've unlearned in the past year that changed 
+how you approach life, tech, or art?</div>
+ <div class="answer">
+ I stopped obsessing over plans. If things aren't going according to plan, I used to sulk or get 
+frustrated. Now, I adapt and keep it moving. I've learned to come up with a new plan on top of the old 
+one instead of clinging to what's not working. It's made a difference in how I approach both my personal 
+life and creative projects — things don't always go as expected, and that's fine.
+ </div>
+ 
+ <div class="question">What do you ultimately want to leave behind — not just for people who follow 
+your work, but for anyone who's ever felt like they exist between worlds?</div>
+ <div class="answer">
+ I want to leave behind this message: Just do you. Let go of shame, doubt, guilt, insecurities, and all 
+that stuff. Do everything you want to do. I promise, it only matters the most to you — at the end of the 
+day, you'll be the one sitting with it, not the people whose opinions you were so worried about. Just be, 
+everything has space to exist emhlabeni kaThixo.
+ </div>
+</div>
+            <div class="single-column">
+                <div class="pull-quote">
+                    "I want to leave behind this message: Just do you. Let go of shame, doubt, guilt, insecurities, and all that stuff."
+                </div>
+            </div>
+        </div>
+
+        
+                
+        <!-- Interview 02: @COSMICWEB_IS_MINE -->
+        <div class="interview-separator"></div>
+        <div class="spread">
+            <div class="page-number"></div>
+            <div class="spread-header">
+                <div class="spread-meta">Interview 02 — @cosmicweb_is_mine</div>
+                <h2 class="spread-title">Cosmic Cartography<br>of Neural Networks</h2>
+ <p class="spread-intro">
+ When digital networks echo universal structures, creation becomes cartography. Masaki plots 
+coordinates where street culture intersects with spiritual transmission, where glitch aesthetics serve as 
+interfaces for ancestral wisdom. His practice is topological mapping—connecting nodes between a Yuta 
+grandmother's teachings and Tokyo's underground, between neural pathways and galactic filaments. 
+The work functions as recursive system design, routing cultural traffic around centralized servers.
+ </p>
+            </div>
+            
+            <div class="hero-image">
+                
+                <img src="images/WWBz.jpg" alt="">
+
+            </div>
+            
+            <div class="single-column">
+                <div>
+                    <div class="question">Your work feels like a collision of streetwear, glitch art, and cyberpunk, but there's also something uniquely Japanese in its DNA. How do these worlds collide inside your head — and what draws you to this intersection?</div>
+                    <div class="answer">
+                        Maybe it's because I've always been drawn to cutting-edge technology and virtual worlds since I was a kid. Even in games and music videos, I often find myself captivated by CG and digital effects. I wouldn't say I'm strictly focused on streetwear — I actually want to explore a broader range of creative expressions.
+                    </div>
+                    
+                    <div class="question">You blend fashion and music like they belong to the same organism. Are they equal parts of your identity, or is one secretly a portal for the other?</div>
+                    <div class="answer">
+                        I think I just enjoy finding connections between things that seem unrelated — like lyrics, music, visuals, or even real-life events. I often imagine colors and shapes when I listen to music, and at the same time, I like thinking about what kind of sound would match a certain graphic. For example, I feel like a "typhoon" and a "trend" are actually similar — they start locally, move unpredictably, and eventually disappear. That kind of hidden parallel fascinates me. So maybe that's why I blend music and fashion as if they're part of the same flow.
+                    </div>
+                    
+                   
+                    
+                    <div class="question">If WORLD WIDE BOYZ was a movie, what would it look like? A dystopian sci-fi, a vaporwave dream, a Tokyo alleyway at 2AM?</div>
+                    <div class="answer">
+                        If WORLD WIDE BOYZ were a movie, it would probably start with an ordinary day in the real world — but underneath, there's a massive, hidden conspiracy involving religion and science, humans and aliens, angels and demons. It would be a raw, hyperreal sci-fi filled with symbolism and layers. On the surface, it might look like a dystopia. But at its core, it's about something deeper: a reminder that in today's world — where money, luxury, and power seem to dominate — things like warmth, connection, and inner strength matter so much more.
+                    </div>
+                </div>
+                
+                <div>
+                    <div class="question">The name cosmicweb_is_mine feels like a manifesto. Is the "cosmic web" something you believe connects creators, or is it your personal rebellion against the system?</div>
+                    <div class="answer">
+                        The cosmic web is a structure that connects galaxies in the universe — but if you look up images of it, you'll notice it looks strikingly similar to the structure of neural networks in the human brain. That resemblance made me wonder: what if the universe and our minds are somehow connected? "cosmicweb_is_mine" is my way of saying, this universe belongs to me. But it's not a selfish declaration — it's an invitation for everyone to feel that they are the main character of this universe. If each person believed that the world was theirs, maybe the world would become a more meaningful and empowered place. It's kind of like The Matrix, in a way.
+                    </div>
+                    
+                    <div class="question">Mystery and coded symbolism seem important in your visuals. Do you want people to decode what you're doing, or is it more about creating an emotion they can't explain?</div>
+                    <div class="answer">
+                        Honestly, it's both. I do want to give people a bit of a hint — some clues to guide them — but I don't want to explain everything from A to Z. If there's no room left to imagine or interpret, it's not as interesting. That said, this approach is mostly for what I put out on social media. In private, I actually love talking deeply about all kinds of things. I also hope that my work might attract others with a similar way of thinking — like a signal for kindred spirits.
+                    </div>
+                </div>
+            </div>
+            
+            
+            
+            
+            <div class="single-column">
+ <div>
+ <div class="question">Your designs feel like organized chaos — raw, glitchy, but intentional. How do 
+you navigate between control and disorder when you create?</div>
+ <div class="answer">
+ I think a lot of it comes from spontaneous bursts of inspiration. I prefer creating with a fresh 
+mindset, right in the moment when the idea hits me. But with WORLD WIDE BOYZ, there's a broader 
+vision behind it — so it makes sense if people feel there's a calculated intention in the chaos.
+ </div>
+ 
+ <div class="question">Japanese street culture has always thrived underground, away from the 
+mainstream spotlight. What's one thing about this subculture outsiders never get to see or 
+understand?</div>
+ <div class="answer">
+ I wouldn't say I can speak for street culture itself, but from what I observe, I think it's fueled by 
+the "otaku spirit." The underground scene has always been supported by the otaku community. For 
+example, people who grew up with Vocaloid culture, like Hatsune Miku, are now thriving in Japan's 
+music industry. About 15 years ago, just listening to Vocaloid music was considered "uncool" in the real 
+world. But now, producers who started with Vocaloid, like Kenshi Yonezu and YOASOBI, are leading the 
+Japanese music scene, and that's pretty exciting. Also, in Japan, entertainment rooted in the online 
+world, like singing streamers and VTubers, has really developed. I'm really looking forward to how online 
+entertainment will evolve in the future, both as a creator and as a fan. Sorry if I went off track there!
+ </div>
+ 
+ <div class="question">Tokyo's creative underground is famous for blurring lines between fashion, 
+music, and digital art. What's your experience of being part of that — or pushing against it?</div>
+ <div class="answer">
+ Honestly, I don't really know much about Tokyo's underground scene. But Tokyo itself is a chaotic 
+mix of so many different people and energies — so it makes sense that boundaries are constantly being 
+broken and new things are born all the time. As for me, I'm more focused on understanding what it 
+means to be human, and exploring how we can tap into our potential. I want to create work from 
+different angles that helps unlock that deeper part of ourselves.
+ </div>
+ </div>
+ 
+ <div>
+ <div class="question">Are you consciously breaking rules when you create, or is rebellion just 
+naturally wired into what you do?</div>
+ <div class="answer">
+ Breaking rules feels good. More than anything, I just want to break free from anything that feels 
+like a cage or limitation. It's not about rebelling for the sake of it — it's about escaping whatever tries to 
+trap me.
+ </div>
+ 
+ <div class="question">Do you see your designs as a reflection of this world, or glimpses into a 
+better, stranger, future world you're building?</div>
+ <div class="answer">
+ I see my work as a kind of reflection of this world — almost like satire. At the same time, I like to 
+imagine an optimistic future. But if we're heading toward a darker one, then I want my art and mindset 
+to act as something that can help shift that trajectory. It's about showing both what is, and what could 
+be — and offering a push toward the better path.
+ </div>
+ 
+ <div class="question">You have this recurring visual language — symbols, colors, chaos. What's the 
+one motif or theme that keeps haunting your work?</div>
+ <div class="answer">
+ If this world is being driven by a chaotic and complex system, then I want to keep sending 
+messages that help unravel it.
+ </div>
+ 
+ <div class="question">Was there a specific memory, space, or person that made you realize: "Yeah 
+— this is my world, I'm building it now"?</div>
+ <div class="answer">
+ My grandmother was a Yuta — a spiritual medium in Okinawa — and ever since I was little, she 
+taught me to respect the gods and our ancestors. Because of that, I probably spent more time than most 
+people thinking about what "god" really means. I even had one mysterious experience while living with 
+her — just once, but it was enough to convince me that there's something real beyond what we can see. 
+Looking back now as an adult, I think that's where everything I'm doing today really started.
+ </div>
+ </div>
+</div>
+<div class="single-column">
+ <div class="question">If you had to design something for a person feeling invisible or lost in the noise 
+of society, what would it look like — what would it say to them without words?</div>
+ <div class="answer">
+ I think I'd design a perfectly structured daily routine schedule — seriously. When you feel lost or 
+overwhelmed by society, it's easy to blame the outside world. But society has always been chaotic in 
+every era. Whether we can handle it or not isn't society's fault — it's often a reflection of our own 
+internal state. So instead of trying to fix the world, I'd start by asking: Are you sleeping well? Are you 
+eating properly? Are you moving your body? That's why my design would quietly say: Start here. With 
+something as simple as a daily routine.
+ </div>
+ 
+ <div class="question">Fashion and music both live publicly, but they're deeply personal for creators. 
+How do you protect your private self while creating for an audience?</div>
+ <div class="answer">
+ I think I'm pretty open — maybe even more than most people around me. Sometimes I'm so open 
+that it makes others feel uncomfortable. But I've started to feel that the people who still stick around 
+after seeing me like that… they're the ones who are truly for life. Of course, I'm always trying to grow, 
+but I want to do that without pretending to be someone I'm not.
+ </div>
+ 
+ <div class="question">If you woke up tomorrow and the internet was gone — what part of your 
+creative identity would survive, and what would you gladly let vanish?</div>
+ <div class="answer">
+ Honestly, if the internet disappeared tomorrow, I probably wouldn't be able to do anything. 
+Everything I create right now is through a computer and the internet — I'm not into drawing by hand, 
+and I don't have the motivation to learn an instrument. My creativity exists because the internet exists. 
+But I'm always optimistic. If it came to that, maybe I'd just start farming — for the sake of Japan.
+ </div>
+ 
+ <div class="question">The world sees Japan's streetwear scene as clean, curated, and iconic — but 
+what's the raw, unseen side of that world that you wish more people knew about?</div>
+ <div class="answer">
+ It's hard for me to say, because I can only really speak from my own experience. I don't feel like I 
+fully know the scene well enough to talk about its hidden sides — I'm just doing my thing in my own 
+way.
+ </div>
+ 
+ <div class="question">What's one risk you've taken in your work — a project or idea — that made you 
+nervous but felt necessary?</div>
+ <div class="answer">
+ I've never really felt nervous about taking risks. And even if something did make me uneasy, I'd still 
+want to go for it — because the experience itself is valuable. Worst case, I crash and burn. And honestly, 
+I'm fine with that.
+ </div>
+ 
+ <div class="question">Who are the underground designers, artists, or musicians in Tokyo you think 
+the world should be paying attention to right now?</div>
+ <div class="answer">
+ They might not be considered underground anymore, but for me, it's definitely THE MILLENNIUM 
+PARADE. I just want to dive headfirst into their world — the atmosphere, the visuals, the sound —
+everything about it feels like a fully formed universe.
+ </div>
+ 
+ <div class="question">If you could leave behind one strange object, phrase, or piece of art that 
+represents your life's work, what would it be?</div>
+ <div class="answer">
+ Café au lait.
+ </div>
+ 
+ <div class="question">Last one — what do you hope people feel when they wear or hear something 
+you made? Is there a word for it in Japanese, or is it something beyond language?</div>
+ <div class="answer">
+ I want them to feel like they have the power to change the world. And thank you — truly — for 
+reading this far.
+ </div>
+</div>
+            
+            <div class="single-column">
+                <div class="pull-quote">
+                    "My grandmother was a Yuta — a spiritual medium in Okinawa — and ever since I was little, she 
+taught me to respect the gods and our ancestors."
+                </div>
+                
+                
+            </div>
+        </div>
+        
+        <!-- Interview 03: Arianne -->
+        <div class="interview-separator"></div>
+        <div class="spread">
+            <div class="page-number"></div>
+            <div class="spread-header">
+                <div class="spread-meta">Interview 03 — @dirtbag666shop</div>
+                <h2 class="spread-title">Somatic Archives<br>in Secondhand Textiles</h2>
+ <p class="spread-intro">
+ Memory encodes itself in material. Arianne's work translates psychological states into textile 
+syntax, converting panic into pattern, trauma into texture. Each seam documents survival; each patch 
+maps vulnerability against resilience. Operating with secondhand fabrics and haunted seams, she 
+constructs wearable archives—armor engineered from discarded fragments. The garments become 
+somatic interfaces where the body's unspoken narratives meet the world's abrasive surfaces.
+ </p>
+
+            </div>
+            
+            <div class="hero-image">
+                
+                <img src="images/ari_side.jpg" alt="Arianne Potrait">
+            </div>
+            
+            <div class="single-column">
+                <div>
+                    <div class="question">Let's start here — if you had to describe your soul as a piece of clothing, what would it be? Ripped denim? An old leather jacket? A silk scarf with a coffee stain?</div>
+                    <div class="answer">
+                        A Victorian white cotton night gown - ripped and stained at the hem.
+                    </div>
+                    
+                    <div class="question">You've said sewing helped you heal after a dark time. What was it about working with your hands, thread, and fabric that gave you something life couldn't at that moment?</div>
+                    <div class="answer">
+                        I used to experience auditory hallucinations. At the time, I had a very old, very loud machine, which drowned them out better than anything else. Even once those were gone, I found it so soothing to work with second-hand textiles, figuring out ways to repurpose them, it felt like a puzzle so to have the satisfaction of solving it gave me much needed dopamine.
+                    </div>
+                    
+                    <div class="question">What's the weirdest or most random item you've ever stitched into one of your pieces?</div>
+                    <div class="answer">
+                        I once stitched a t-shirt with a print of Billie Eilish and Finneus being caught in the tentacles of Audrey II from the little shop of horrors onto a t-shirt for her - it never got worn in the end, but it was a weird moment for sure haha.
+                    </div>
+                    
+                    
+                    
+                    <div class="question">Living with autism and panic attacks in a world obsessed with order and hustle — how do you carve out your own space in that madness?</div>
+                    <div class="answer">
+                        I live in the countryside to avoid all of the rush of city life. I don't do "normal people" things just for the sake of it - no restaurants, no supermarkets, no shopping in malls, no going out after 8 pm (that's reading time). Some people would hate living as though I'm 80 years old, but I think it's perfect. I am careful with how I spend my time.
+                    </div>
+                </div>
+                
+                <div>
+                    <div class="question">If your life had a color palette right now, what would the colors be called? (Real or made up — go wild.)</div>
+                    <div class="answer">
+                        Moody Victorian forest green, rich espresso brown, fluffy whipped cream.
+                    </div>
+                    
+                    <div class="question">When you're creating, do you ever feel like you're in a kind of trance or altered state? What does that space feel like?</div>
+                    <div class="answer">
+                        Absolutely, I forget anything exists when I'm in a flow state.
+                    </div>
+                    
+                    <div class="question">What's one brutal, honest truth about being a self-employed indie creative that no one warns you about?</div>
+                    <div class="answer">
+                        You have to do everything yourself - it's not just the fun of creating you have to be; customer service, photographer, web developer, social media, designer, seamstress, pattern maker, illustrator, packing and shipping, I wish I could skip the rest and just sew, and somehow it magically get sold.
+                    </div>
+                    
+                    <div class="question">Safety pins, torn fabrics, canvas patches — your work feels beautifully scrappy, like it's rebelling against polish. Is that intentional, or just what happens when you follow your gut?</div>
+                    <div class="answer">
+                        When I work with second-hand bases you've got to work with the imperfections and not against them.
+                    </div>
+                    
+                    <div class="question">What's your relationship with imperfection — in your work, your body, your life? Is it something you embrace, battle with, or both?</div>
+                    <div class="answer">
+                        Definitely both - I struggle with feeling the need to keep outdoing myself on every single item I put out - it's impossible and unhealthy and definitely a recipe for burnout. I had to make peace with putting out pieces I wasn't obsessed with. I also struggle with imperfection in my life, I have a weird structure in my head of where I feel I "should" be in my life and business - my therapist warned me to avoid "should" statements so that's been a really helpful thing to remind myself - there is no "should" thats just my brain trying to conform which is not what I want so I have to sit with it but not let it affect my decision making.
+                    </div>
+                </div>
+            </div>
+            
+            
+            
+            <div class="single-column">
+                <div>
+                    <div class="question">If your clothes could talk, what kind of sh*t would they say about you?</div>
+                    <div class="answer">
+                        Whenever I finish a piece, I hang it up and stare at it from a distance for a while to make sure it's where I want it to be so it would probably ask if I've got a staring problem.
+                    </div>
+                    
+                    <div class="question">Who or what do you make your pieces for — is it for yourself, the people like you, or a version of yourself you're still chasing?</div>
+                    <div class="answer">
+                        It's always for myself, as selfish as that sounds - this is the only job I've ever had because autism, panic disorder, and jobs often don't mix well, at least for me. I always felt like I had so much to contribute, but couldn't because of the extra hurdles, so when I was able to accommodate better for myself and able to do this job, everything I make is proof that I can have mental health problems and autism and simultaneously contribute.
+                    </div>
+                    
+                    <div class="question">Do you believe that creative people are naturally a little broken, or do we just learn how to turn the cracks into art?</div>
+                    <div class="answer">
+                        It does seem to have an overlap, when you've had to problem solve in your personal life, I think it creates a wiring in your brain that translates over to creative problem solving too.
+                    </div>
+                </div>
+                
+                <div>
+                    <div class="question">What's a small, strange, personal ritual you have when you're working? (Like blasting weird playlists, talking to your scissors, sewing in your pajamas at 2AM...)</div>
+                    <div class="answer">
+                        I always sew in pyjamas - perks of working from home, if I can get away with it, I will do so. Now my partner works with me, we have created our language which is basically just me quoting Drew Gooden videos and Jason quoting Fast and Furious.
+                    </div>
+
+
+                    
+                    <div class="question">The fashion world loves perfection, gloss, status. You're working with secondhand fabrics and dirtbag patches. What do you think that says about the kind of world you want to live in?</div>
+                    <div class="answer">
+                        I have no interest in the gloss. It's never been for me. I think the fashion world is big enough for all styles.
+                    </div>
+                    
+                    <div class="question">When you were 25, in a psychiatric hospital, did you have any idea you'd end up here, running your own creative business and building a community?</div>
+                    <div class="answer">
+                        I don't think anyone would have seen that one coming, honestly.
+                    </div>
+                </div>
+            </div>
+            
+            <div class="single-column">
+                <div class="question">What's something you've unlearned in the process of becoming this version of yourself?</div>
+                <div class="answer">
+                    I am not worthless, I am not alone in my struggles, and I am not an embarrassment.
+                </div>
+                
+                <div class="question">If you could collaborate with any dead or living artist, fashion designer, or outsider figure — who's on your fantasy list?</div>
+                <div class="answer">
+                    Meadham Kirchhoff, Simone Rocha, Chopova Lowena, Dilara Findikoglu.
+                </div>
+                
+                <div class="question">What's a misconception people have about indie fashion designers or creatives like you?</div>
+                <div class="answer">
+                    That we have a whole team of people working for us.
+                </div>
+                
+                <div class="question">What's something you'd tell your 15-year-old self if you could drop into their world for five minutes?</div>
+                <div class="answer">
+                    Deep breath.
+                </div>
+                
+                <div class="question">Last one — What's the thing you want people to feel when they wear something you made?</div>
+                <div class="answer">
+                    Powerful, protected, comforted.
+                </div>
+
+                <div class= "pull-quote">
+                    "I am not worthless, I am not alone in my struggles, and I am not an embarrassment."
+                </div>
+
+            </div>
+        </div>
+
+
+        <!-- Interview 04: Princy Mthombeni -->
+        <div class="spread">
+            <div class="page-number"></div>
+            <div class="spread-header">
+                <div class="spread-meta">Interview 04 — @princymthombeni</div>
+                <h2 class="spread-title">The Architect<br>of Atomic<br>Sovereignty</h2>
+                <p class="spread-intro">
+ Energy infrastructure shapes political possibility. Princy approaches nuclear technology not as 
+engineering problem but as liberation vector—a means of architecting uncompressed agency at 
+continental scale. Where systems produce darkness through misinformation chain reactions, she 
+deploys facts as control rods. Her practice confronts the architecture of power itself, treating energy 
+grids as frameworks for dignity, development, and self-determination for 600 million Africans.
+ </p>
+ 
+            </div>
+            
+            <div class="hero-image">
+                
+                 <img src="images/princy1.jpg" alt="Princy Mthombeni"> 
+            </div>
+            
+            <div class="single-column">
+                <div>
+                    <div class="question">You've called yourself an "African nuclear advocate" — not just an energy activist, but a voice rooted in place. What does it mean to localize a global technology like nuclear power within the South African story?</div>
+                    <div class="answer">
+                        I identify as an energy activist, but my focus is on nuclear energy because it's the field I know best and also one of the most misunderstood. Being an "African nuclear advocate" means more than supporting a technology, it means grounding that support in local realities, histories, and ambitions. Localising a global technology like nuclear power in the South African context involves steering our own course in research, innovation, and development. We made a bold attempt with the Pebble Bed Modular Reactor (PBMR) project, which could have led us to a home-grown nuclear solution. Unfortunately, political dynamics cut that journey short. Still, the principle remains: any country choosing to build a nuclear power plant here must align with our localisation policies – requiring technology vendors to collaborate with South African companies. This ensures that nuclear development not only powers our grid but also builds our economy and expertise.
+                    </div>
+                    
+                    <div class="question">When you speak about nuclear energy, it's not just technical — it feels like you're defending a future. What future are you really fighting for?</div>
+                    <div class="answer">
+                        When I speak about nuclear energy, I'm not just talking about technology but I'm standing up for a different future. One where energy poverty no longer holds Africa back. Today, over 600 million Africans still live without electricity. That's not just a statistic – it's a crisis that affects every aspect of life. Without reliable energy, children can't study at night, clinics can't store life-saving medicine, businesses can't scale, and women are forced to spend hours collecting firewood instead of pursuing opportunity. This is about dignity, development, and self-determination. The developed world was built on consistent, abundant power. For them, energy has always meant progress and independence. I'm fighting for a future where Africa claims that same power—literally and figuratively. A future where we are not left in the dark while the rest of the world moves forward in the light.
+                    </div>
+                    
+                    <div class="question">In a world saturated with greenwashing and half-hearted climate pledges, what does true energy justice look like?</div>
+                    <div class="answer">
+                        In a world full of greenwashing and empty climate promises, true energy justice means giving African nations the same foundation for prosperity that the developed world enjoys: reliable, abundant power. It's not just about generating electricity – it's about building the infrastructure for thriving industries, modern economies, and dignified lives. Energy is more than fuel; it's leverage, it's agency, it's sovereignty. True justice means Africa is no longer side-lined in the global energy conversation or left in the shadows while others thrive in the light. It means empowering the continent to lead its own development on its own terms.
+                    </div>
+                </div>
+                
+                <div>
+                    <div class="question">You've faced intense public scrutiny and political opposition. How do you hold your ground in a landscape where narratives are engineered and silence is rewarded?</div>
+                    <div class="answer">
+                        I wouldn't say I've faced intense public scrutiny or political opposition. On the contrary, I've received far more support than resistance. Of course, there are a few individuals who disagree, but their reasons are their own. What has helped me hold my ground is staying rooted in facts, not politics. I speak from a place of evidence, not emotion. My advocacy is grounded in science – what I say is not just opinion, but what can be proven. In a space where narratives are often manipulated and silence can feel safer, I choose to speak truth with integrity. That's how I continue to stand firm.
+                    </div>
+                    
+                    
+                    
+                    <div class="question">What's the most misunderstood thing about nuclear energy in Africa — not just the science, but the story?</div>
+                    <div class="answer">
+                        One of the most misunderstood things about nuclear energy in Africa is not just the science, but it is the story we tell ourselves, or rather, the story told about us. There's a persistent myth that we are not capable of operating nuclear power safely or effectively. Critics say the South African government can't manage basic infrastructure, so how could it possibly handle something as complex as nuclear? However, that narrative ignores the reality. We have been safely operating the Koeberg Nuclear Power Station for 40 years. It's not only among the safest of its kind in the world, but also the most reliable power station in the Eskom fleet and delivers some of the cheapest electricity, according to Eskom itself. We absolutely have the skills. In fact, over 140 South African nuclear professionals are currently working at the Barakah Nuclear Power Plant in the UAE. Our talent is recognised globally, even if it's sometimes overlooked at home.
+                    </div>
+                </div>
+                
+                
+                
+                <div>
+                    <div class="question">Some people treat nuclear energy as a symbol of control. Others see it as liberation. Where do you stand in that tension?</div>
+                    <div class="answer">
+                        I see nuclear energy as a symbol of liberation. It represents the power to take control of our own development – clean, abundant, and sustainable energy that can fuel entire economies. For Africa, that means strengthening our sovereignty, unlocking prosperity, and positioning ourselves to compete on a global stage. While some view nuclear through the lens of control, I see it as the key to freedom – freedom from energy poverty, from dependence, and from the limitations that have held us back for too long.
+                    </div>
+                    
+                    <div class="question">How do you navigate being both a woman in STEM and a disruptor in a male-dominated policy space — without being reduced to either?</div>
+                    <div class="answer">
+                        I navigate it by staying true to who I am. I don't try to be liked but I focus on being authentic and grounded in my purpose. I have learned not to let other people's opinions define me or distract me. Being a woman in STEM and a disruptor in a male-dominated policy space comes with challenges, but I've also come to understand something important: patriarchy isn't upheld by men alone, sometimes it's reinforced by women too. But even in the noise, there are always those – both men and women – who see me, support me, and have helped shape the woman I am today. I choose to focus on that and to keep showing up unapologetically.
+                    </div>
+                </div>
+                
+                <div>
+                    <div class="question">If you could rewrite the African energy curriculum from scratch, what would you include that's never been taught?</div>
+                    <div class="answer">
+                        I would start by telling the full story – one that's often left out. I would teach that Africa is not just resource-rich in a general sense, but specifically holds vast reserves of strategic minerals like uranium, which powers nuclear energy around the world. I would also include a critical lens on the global climate change agenda – highlighting how the politics behind it often are not neutral. Too often, climate policy becomes a backdoor tool used to keep underdeveloped nations locked in cycles of dependence and poverty, restricting their path to industrialisation. We need a curriculum that empowers Africans with truth, context and the confidence to define our own energy future.
+                    </div>
+                    
+                    
+                </div>
+            </div>
+            
+            
+            
+            <div class="single-column">
+                <div class="question">What role does mythology play in shaping public fear around nuclear tech — and how do you counter myth with truth?</div>
+                <div class="answer">
+                    Mythology plays a powerful role in shaping public fear around nuclear energy – often cloaked in moral or even spiritual arguments. People are told that only renewable energy sources are "God-given," and that embracing nuclear is somehow unethical or unnatural. These narratives may sound righteous, but they overlook the real human cost of energy poverty. The truth is; morality loses its meaning when it denies people access to opportunity, health, and dignity. What is ethical about leaving millions without electricity? What is just about holding back progress for the sake of ideology? I counter myth with facts but also with empathy. Because this conversation is not just about watts and reactors. It is about lives. It is about empowering people with the full truth, so we can make choices that are both just and informed.
+                </div>
+                
+                <div class="question">You've said that energy is a human right. In that case, what would it mean to reframe electricity not as a utility, but as a form of freedom?</div>
+                <div class="answer">
+                    Yes energy is a human right and that makes electricity more than just a utility – it's freedom. It enables education, healthcare, business and dignity. Reframing it this way means recognising electricity as essential to opportunity and development, not a luxury. It is a catalyst for empowering people and unlocking Africa's full potential.
+                </div>
+                
+                <div class="question">If a young girl in a rural village discovered your work online, what do you hope she feels before she even understands the science?</div>
+                <div class="answer">
+                    I hope she sees a reflection of herself – someone who looks like her, comes from a place like hers and feels an immediate sense of belonging. Even before she understands the science, I want her to feel seen, inspired and reminded that she doesn't have to wait to be perfect or have all the answers to start dreaming big. I hope it quiets any imposter syndrome and plants the seed that she, too, can contribute to shaping the world.
+                </div>
+                
+                <div class="question">What's your relationship with the word "power" — not just electrical, but political, personal, symbolic?</div>
+                <div class="answer">
+                    To me, power is the ability to create change. It's about agency – personally, politically and symbolically. It means having the strength to speak up, take action and reclaim space, especially as an African woman. True power is possibility in motion.
+                </div>
+                
+                <div class="question">As someone shaping the future of the continent, how do you avoid being co-opted by old systems dressed in new buzzwords?</div>
+                <div class="answer">
+                    I avoid being co-opted by questioning who truly benefits from new ideas. I look beyond buzzwords and stay grounded in Africa's realities, committed to solutions that serve our people – not recycled systems in disguise. Real change means building frameworks that reflect our own vision and values.
+                </div>
+                
+                <div class="question">You're not just promoting a technology — you're rewriting a narrative. How do you resist becoming a "brand" in the age of performative activism?</div>
+                <div class="answer">
+                    I don't resist becoming a brand because I already am one. When people talk about nuclear energy in Africa and my name comes to mind, that's what a brand means to me: recognition rooted in credibility and purpose. But I'm not here for performance – I'm here for impact. I respect both the truth and my audience, and I never compromise on facts. My work is grounded in evidence, not trends, and I let the integrity of that work speak louder than any label.
+                </div>
+                
+                <div class="question">What part of yourself do you protect the most — and what part do you intentionally leave raw, visible, unpolished?</div>
+                <div class="answer">
+                    The part of myself I protect the most is my inner peace – my sense of clarity and purpose. In a world full of noise, criticism and distractions, I guard the space that keeps me grounded and aligned with why I do this work. However, the part I intentionally leave raw and visible is my passion. I don't hide how deeply I care about Africa's future or how emotional I can get when talking about energy justice. I believe there is strength in being unpolished – because it reminds people that I'm not a symbol, I'm a human being fighting for something real.
+                </div>
+                
+                <div class="question">If the current global energy system were a crumbling empire, what role would Africa play in the rewrite?</div>
+                <div class="answer">
+                    If the current global energy system were a crumbling empire, Africa has the potential to play a much more powerful role than it currently does. Right now, given our energy challenges, we are often cast in a servant role – supplying resources but not fully benefitting from them.
+                </div>
+                
+                <div class="question">What's one moment in your advocacy journey that nearly broke you — and what rebuilt you after that?</div>
+                <div class="answer">
+                    One of the toughest moments in my advocacy journey was when my own employer turned against me, trying everything to silence me and stop my nuclear advocacy. I can handle opposition from outsiders, but it hurts deeply when those you expect to support you instead use their power to hold you down. What rebuilt me was the incredible support that came from my colleagues and people outside my immediate circle – those who stood by me, lifted me up, and reminded me why my voice matters. Their solidarity gave me the strength to keep going.
+                </div>
+                
+                <div class="question">If we fast forward 50 years, what signal do you hope is still echoing from the work you've done today?</div>
+                <div class="answer">
+                    I hope the signal echoing from my work is clear: that energy poverty has become a thing of the past – something people only read about in history books. Where everyone enjoys a better quality of life, powered by reliable, clean and accessible energy that fuels opportunity and dignity across Africa.
+                </div>
+                
+                <div class="question">We often speak of light as metaphor — but in your work, literal light (electricity) is metaphor. What does it illuminate about the world we're building?</div>
+                <div class="answer">
+                    Yes, in my work, literal light (electricity) is more than just power. It is a powerful metaphor for possibility and progress. It illuminates the path toward a world where every African has the chance to thrive, learn and contribute. This light reveals our potential to overcome darkness – not just the absence of electricity, but also the absence of opportunity, equality and hope. The world we're building is one where energy lights up more than homes. It lights up futures, freedoms and dreams. It shows a vision of Africa stepping confidently into its own power and leading on its own terms.
+                </div>
+                
+                <div class="question">Last transmission: What's the message you'd leave behind for the next generation of African energy visionaries — the ones who will take this torch and run beyond what we've even dared to imagine?</div>
+                <div class="answer">
+                    To the next generation of energy leaders: own your power and never be afraid to dream bigger than anyone else thinks you should. Africa doesn't need permission but we need respect and true partnerships that let us decide our path. Nuclear energy is more than a tool. It is a chance to bring justice and dignity to millions. It shows what happens when Africa takes charge of its future. So take the torch and run. The possibilities are endless.
+                </div>
+
+                <div class="pull-quote">
+                    "Energy is more than fuel; it's leverage, it's agency, it's sovereignty."
+                </div>
+
+            </div>
+        </div>
+
+        
+        <!-- Interview 05: Batsheva Dueck -->
+        <div class="interview-separator"></div>
+        <div class="spread">
+            <div class="page-number"></div>
+            <div class="spread-header">
+                <div class="spread-meta">Interview 05 — @batshevadueck</div>
+                <h2 class="spread-title">Identity as<br>Cryptographic<br>Protocol</h2>
+ <p class="spread-intro">
+ Displacement, when properly encoded, becomes navigation key. Bathsheva transforms ancestral 
+wandering into cryptographic systems for contemporary existence. Operating as digital nomad, Jewish 
+storyteller, and cultural cryptographer, she develops protocols for identity that refuse optimization 
+algorithms. Her work is recursive encryption—turning alienation into access codes, transforming 
+displacement into frameworks for navigating systems designed for legibility. The self becomes living 
+cipher.
+ </p>
+            </div>
+            
+            <div class="hero-image"> 
+                
+                <img src="images/batsheva-window.jpg" alt="">
+            </div>
+            
+            <div class="single-column">
+                <div>
+                    <div class="question">Do you believe some people are born outside of systems — or are we all conditioned into a false sense of belonging we secretly resent?</div>
+                    <div class="answer">
+                        I think all of us are born outside of systems. We are all unique, and there is no human that is a clone of another. I actually believe we all crave belonging, and so look for systems or groups in which our unique set of characteristics may mesh well. I think it only becomes toxic once those systems develop rigid rules that exclude other people, and make those who haven't found their family yet feel like they belong no where. But we all belong somewhere, and that doesn't take away from how different we all are, in the best way.
+                    </div>
+                </div>
+                
+                <div>
+                    <div class="question">If identity is a construct we inherit and remix, what parts of your inherited self have you deliberately uninstalled? What code do you refuse to run?</div>
+                    <div class="answer">
+                        The code I refuse to run is that of a cultural algorithm that tells me that I must deny a part of my identity in order to belong somewhere. In the Orthodox Jewish world where I come from, that might mean toning down my YouTube / social media escapades on my dating profile, in order to sound more 'normal'. In College that might have meant arguing with my media professor that I can, in fact, make it as a mainstream content creator just the way I am. Without toning down ANY part of my cultural identity.
+                    </div>
+                    
+                    
+                </div>
+            </div>
+            
+                       <div class="single-column">
+ <div>
+ <div class="question">The internet promised to liberate misfits. Has it? Or has it simply created 
+new, invisible prisons dressed up as "communities"?</div>
+ <div class="answer">
+ Do you think the internet promised to liberate misfits? I don't think it ever did such a thing. I think 
+all the 'cores' that have erupted from TikTok like a fungus are a double edged sword. On the one hand, 
+it's introduced younger people to a swath of media, fashion and culture that they may never have come 
+across otherwise. On the other hand, have you noticed that everyone is now reading the same thing, 
+wearing the same thing, and increasingly...thinking the same thing? It's like all the 'book girlies' are 
+reading the same Mhairi McFarlane novel on their same Ikea Billy white bookshelf, and I can't seem to 
+discover a fresh new read anywhere on this internet. The internet is still one giant echo chamber in my 
+opinion, all the 'cores' have simply divided said chamber into smaller sub-rooms.
+ </div>
+ 
+ <div class="question">When you walk through cities like Berlin, Tokyo, or New York — do you sense 
+different frequencies of alienation? How does one city's digital ghost differ from another's?</div>
+ <div class="answer">
+ Ooooh I love this question. Every city has its own unique frequency. Los Angeles feels like a 
+perfect day that's decaying, and full of anger. That's why punk rock and Doc Martens just look so good 
+against its dusty yellow backdrop. Tokyo feels like an aging exotic dancer — all glittery lights from far 
+away, but you can see the lines and despair etched into the atmosphere the closer you get. That's why I 
+think their fashion subcultures like to play with Kawaii and darkness. Berlin feels like a city who's trying 
+to move on from her secrets. Some parts are just too pretty, just too new, making you wonder what was 
+there before. Other parts still feel raw, like the wound hasn't closed yet. The Kreuzbrug neighborhood 
+felt that way for me. A lot of graffiti and expression on those walls.
+ </div>
+ </div>
+ 
+ <div>
+ <div class="question">If the concept of 'home' is more about where you aren't misunderstood than 
+where you belong — have you found it yet? Or is it something you build moment by moment?</div>
+ <div class="answer">
+ I like that idea - that home is where they understand you. I think I've finally found that, thank G-d. 
+I have an amazing host family in Boston that roots for my journey, every step of the way. My friends in 
+my neighborhood as well, are phenomenal. They are Orthodox Jewish women who are creative and 
+driven, and are there for me in a way I struggled to find for many years of my life. I also have creator 
+friends who aren't Jewish who see me and my story and believe in me wholeheartedly. When I think of 
+these friends I honestly want to cry, wondering what I did to deserve such humans. It took so long to 
+find them though. I first had to come into my own, accept myself for who I was, and only then did I 
+finally start attracting people who resonated with who I truly am, and not the identity I had put on to 
+impress other people.
+ </div>
+ 
+ <div class="question">In your videos, there's a sense of documenting the residue of places, like 
+digital fossils. What do you think future misfits will misinterpret about our era?</div>
+ <div class="answer">
+ I think they'll misinterpret how much we really cared about humanity. I think History will look 
+back on this time as a time of darkness, division, and an inability to listen to our neighbor. But 
+underneath that, I hope they realize that this is a society that's slowly changing, slowly trying to become 
+better people, even if we are doing it in such a misguided way currently. We'll learn. We always do.
+ </div>
+ </div>
+</div>
+<div class="single-column">
+ <div class="question">Is being a misfit a choice, a glitch, or a form of encrypted rebellion passed down 
+through cultural DNA?</div>
+ <div class="answer">
+ I think they can be all three. When you come into your identity fully, you become a misfit by choice, 
+as you realize no one will ever be exactly like you — and that's a good thing. When you slip away from 
+society, usually through a paused mental health, I wouldn't call it a glitch, but that is a part of being a 
+misfit that needs care and healing. We want everyone to recover from this kind of misfit (read: 
+alienation). And the last one? Being Jewish for me feels EXACTLY like encrypted rebellion. Think of all the 
+Jewish coded media that plays to this — Superman, Alice Hoffman's 'Practical magic', Bob Dylan's 
+'Neighborhood Bully'. These all play to that encrypted rebellion I think we all collectively feel. I cannot 
+speak for any other cultural identity but I can imagine that you may get similar feelings among many 
+cultural groups.
+ </div>
+ 
+ <div class="question">How does your Jewish experience in America function as a double displacement 
+— one ancestral, one cultural, one personal?</div>
+ <div class="answer">
+ This is a difficult question, and one I'm not sure I want to get into fully in this format. My history is 
+etched into the many many countries I've traversed throughout millennia. I'm American, and I speak 
+Yeshivish, which is a mixture of English, Yiddish and Hebrew. My grandmother is from Syria, and speaks 
+Judeo-Arabic, a mixture of Hebrew and Arabic. My Great Grandmother's last name was Laniado, a 
+Spanish-Jewish last name, even though she was from Syria. She spoke Ladino, which is a mixture of 
+Hebrew and Spanish. Wherever I live, I know that my roots stem from the country whose language 
+keeps showing up in every creole I stumble into. That is both alienating, and comforting.
+ </div>
+ 
+ <div class="question">If we stripped away language, nation, family, labels — what sensory or 
+instinctual part of you would still remain intact, and what would that self look like?</div>
+ <div class="answer">
+ I think you would simply see my soul.
+ </div>
+ 
+ <div class="question">Have you ever felt that even in so-called outsider spaces, there's an invisible 
+algorithm policing what counts as "cool rebellion" and what's too far?</div>
+ <div class="answer">
+ Yes. A lot of our culture and counter culture today is driven by ideas. I think we're allowed to rebel 
+in any way we want to today, except when it comes to our ideas. Ironically, such a policing of thought 
+always leads to rebellion.
+ </div>
+ 
+ <div class="question">What's one idea, question, or taboo you've held back from exploring publicly —
+and why?</div>
+ <div class="answer">
+ There is one idea that I am excited to explore very publicly, but I need to build up my new channel 
+that I pivoted to this year first. I'm not going to tell you what it is, because it's not the time nor place. I'm 
+going to slip it into my channel in a way that's fun and natural. It's going to be an adventure that should 
+G-d willing be a lot of fun to make.
+ </div>
+ 
+ <div class="question">If you could permanently delete one inherited belief from the collective 
+Western consciousness, what would it be — and what would you replace it with?</div>
+ <div class="answer">
+ This idea that we have to save everyone from themselves. I think I would replace it with humility 
+and a willingness to listen. As much as so many of us post on our stories that we're 'Listening and 
+Learning', I don't think we are. I think there's still so much ego in a lot of conversations that we have 
+with each other. We're so sure we're right, and we refuse to engage our narratives with things that 
+make us uncomfortable. We might be 'listening' to perspectives that affirm our narratives, but I'd like to 
+see more people engage in conversations that are hard. I want them to be quiet, and listen. I want them 
+to ask questions. Though I do believe there are people out there who are making this happen. Among 
+my friend group, this is definitely happening.
+ </div>
+ 
+ <div class="question">Is loneliness an inevitable side effect of choosing to live without a mask, or is it 
+an illusion programmed into the system to discourage nonconformity?</div>
+ <div class="answer">
+ I think loneliness is a risk you take when you live without a mask, but it isn't permanent. Once you 
+live your truth long enough, people who resonate with you will be drawn to you — because as I said 
+earlier, we all crave belonging. I actually think living your truth is the best way to find family. But 
+choosing to 'come out' so to speak can cost you people who never fully understood you, and that can 
+feel lonely until you find your groove again.
+ </div>
+ 
+ <div class="question">What do you think is the misfit's true role in the social ecosystem? Are we 
+meant to disrupt, observe, or leave breadcrumbs for the next generation?</div>
+ <div class="answer">
+ If you truly embrace your misfit, then you're meant to lead and inspire in some way. That can simply 
+mean being the most wonderful parent to your children, or a teacher that pushes their students to think 
+beyond their limits. But it can also mean inventing something no one ever thought of, wearing 
+something no one ever thought to wear, or publicly saying something so many of us have been bursting 
+to say out loud. This is how you shift the culture.
+ </div>
+ 
+ <div class="question">You document cities, spaces, identities — but have you ever encountered a 
+place so alien, digital or physical, that it made you question whether human life is a simulation?</div>
+ <div class="answer">
+ Lol. Online. The instagram comments section can be repulsive. I often wonder if those are really 
+human beings, or a few sickos decided to send bots out to depress the populace. Either way, I think we 
+as a society are aware of this, and those around me at least, are making sure to change this.
+ </div>
+ 
+ <div class="question">If the Misfit Manifesto was encoded into a piece of subversive software, what 
+command would run first when it booted up?</div>
+ <div class="answer">
+ Go look in the mirror, and confess your love. And then go eat a pickle.
+ </div>
+ 
+ <div class="question">How does humor, absurdity, or satire protect you from the psychic weight of 
+living outside consensus reality? Or does it blur the line between rebellion and entertainment?</div>
+ <div class="answer">
+ Humor is the ONLY way I deal with things. It lets you look at a world that's gone insane, realize you 
+are the last sane person standing, and allows you to laugh about it. Laughter makes everything better. 
+Have you ever compiled a list of your favorite haters — people who have wronged your people in the 
+most heinous way, and then tier ranked who looks most like a horse? It's great fun.
+ </div>
+ 
+ <div class="question">When did you last feel like you completely disappeared — not physically, but 
+ideologically, existentially — in a good way?</div>
+ <div class="answer">
+ When I pray to G-d. I feel less corporeal and more in touch with my spiritual essence — which isn't 
+physical.
+ </div>
+ 
+ <div class="question">Do you think humans were ever meant to belong to groups, or is the herd 
+instinct a glitch that's outlived its evolutionary usefulness?</div>
+ <div class="answer">
+ Yes. We are meant to live in groups. Family is good. Community is what we should strive for. I don't 
+think any of us can successfully function alone. The trick however, is to embrace everyone's unique role 
+within the group, not strive to be the same person.
+ </div>
+ 
+ <div class="question">If all systems collapsed tomorrow — language, nations, economies, media —
+what surviving fragment of your worldview would you want scrawled on a wall in the ruins?</div>
+ <div class="answer">
+ The Torah. I mean, I'm a religious Jew hehe. Destruction to me, always precedes healing. If I was 
+standing among this wreckage I'd simply look around for signs of G-d putting up little shoots among the 
+cracks. There's a shorts creator I love that animates such a concept. He has this comic about the end of 
+the world, and all the different people banding together to survive, and help the world heal. I'd simply 
+just see G-d scrawled on every wall.
+ </div>
+</div>
+            
+            <div class="single-column">
+                <div class="pull-quote">
+                    "I think all of us are born outside of systems. We are all unique, and there is no human that is a clone of another."
+                </div>
+            </div>
+        </div>
+        
+        <!-- Back Cover -->
+        <section class="retro-cover" id="back-cover">
+    <div class="folder-tab">
+        <div class="tab-hole"></div>
+    </div>
+    <div class="cover-header">
+        <div class="logo">
+            <a href="zine.html">
+                <img src="images/1heavy0.png" alt="1heavy0 Logo" class="logo-img">
+            </a>
+        </div>
+        <div class="issue">
+            LOG ENTRY 01
+        </div>
+    </div>
+    <div class="cover-title">
+        <div class="cover-subtitle">
+            ARCHIVED
+        </div>
+    </div>
+    <div class="cover-footer">
+        <div class="classification">
+            ISSUE 01<br>
+            ACCESS LEVEL 3
+        </div>
+        <div class="date">
+            DEC 2025
+        </div>
+    </div>
+</section>
+
+    </div>
+
+    <script>
+        // Simple script for smooth scrolling to sections
+        document.querySelectorAll('.toc-item').forEach(item => {
+            item.addEventListener('click', function() {
+                const interviewNumber = this.querySelector('.toc-number').textContent.trim();
+                let targetSection;
+                
+                switch(interviewNumber) {
+                    case '01':
+                        targetSection = document.querySelectorAll('.spread')[0];
+                        break;
+                    case '02':
+                        targetSection = document.querySelectorAll('.spread')[1];
+                        break;
+                    case '03':
+                        targetSection = document.querySelectorAll('.spread')[2];
+                        break;
+                    case '04':
+                        targetSection = document.querySelectorAll('.spread')[3];
+                        break;
+                    case '05':
+                        targetSection = document.querySelectorAll('.spread')[4];
+                        break;
+                }
+                
+                if(targetSection) {
+                    targetSection.scrollIntoView({ behavior: 'smooth' });
+                }
+            });
+        });
+    </script>
+</body>
+</html>

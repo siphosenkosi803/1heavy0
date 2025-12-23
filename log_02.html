@@ -1,0 +1,772 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>1heavy0 - Log Entry 02</title>
+<link 
+href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400&display=sw
+ap" rel="stylesheet">
+<style>
+* {
+margin: 0;
+padding: 0;
+box-sizing: border-box;
+}
+body {
+font-family: 'Space Mono', monospace;
+text-transform: uppercase;
+background: #ffffff;
+color: #000000;
+overflow-x: hidden;
+line-height: 1.6;
+scroll-behavior: smooth;
+}
+/* Log container */
+.log-container {
+position: relative;
+width: 100%;
+counter-reset: page;
+}
+.log-section {
+min-height: 100vh;
+width: 100%;
+padding: 80px 60px;
+display: flex;
+flex-direction: column;
+justify-content: space-between;
+position: relative;
+border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+}
+.log-section::before {
+content: "";
+position: absolute;
+top: 0;
+left: 0;
+width: 100%;
+height: 100%;
+background: repeating-linear-gradient(
+0deg,
+transparent,
+transparent 2px,
+rgba(0, 0, 0, 0.015) 2px,
+rgba(0, 0, 0, 0.015) 4px
+);
+pointer-events: none;
+z-index: -1;
+}
+.section-border {
+position: absolute;
+top: 30px;
+left: 30px;
+right: 30px;
+bottom: 30px;
+border: 1px solid rgba(0, 0, 0, 0.1);
+pointer-events: none;
+}
+/* RETRO FOLDER COVER */
+.retro-cover {
+height: 100vh;
+display: flex;
+flex-direction: column;
+justify-content: space-between;
+padding: 60px;
+position: relative;
+overflow: hidden;
+background: #f5f5f3;
+border: 1px solid #333;
+box-shadow: 8px 8px 0px rgba(0, 0, 0, 0.1);
+}
+.retro-cover::before {
+content: '';
+position: absolute;
+top: 0;
+left: 0;
+right: 0;
+bottom: 0;
+background: repeating-linear-gradient(
+0deg,
+transparent,
+transparent 3px,
+rgba(0, 0, 0, 0.03) 3px,
+rgba(0, 0, 0, 0.03) 4px
+);
+pointer-events: none;
+z-index: 1;
+}
+/* Folder tab */
+.folder-tab {
+position: absolute;
+top: -1px;
+right: 40px;
+width: 80px;
+height: 30px;
+background: #e8e8e6;
+border: 1px solid #333;
+border-bottom: 1px solid #e8e8e6;
+border-radius: 4px 4px 0 0;
+z-index: 2;
+display: flex;
+align-items: center;
+justify-content: center;
+}
+.tab-hole {
+width: 10px;
+height: 10px;
+background: #333;
+border-radius: 50%;
+}
+/* Corner fold effect */
+.retro-cover::after {
+content: '';
+position: absolute;
+top: 0;
+right: 0;
+width: 0;
+height: 0;
+border-style: solid;
+border-width: 0 30px 30px 0;
+border-color: transparent #ddd transparent transparent;
+z-index: 2;
+}
+/* Cover header */
+.cover-header {
+display: flex;
+justify-content: space-between;
+align-items: start;
+position: relative;
+z-index: 3;
+}
+.logo-img {
+height: 85px;
+width: auto;
+filter: brightness(0.9);
+}
+.issue {
+text-align: right;
+color: rgba(0, 0, 0, 0.6);
+font-size: 14px;
+font-weight: 400;
+letter-spacing: 2px;
+text-transform: uppercase;
+}
+/* Cover title area */
+.cover-title {
+position: relative;
+z-index: 3;
+margin: auto 0;
+text-align: center;
+padding: 2rem 0;
+}
+.cover-subtitle {
+font-size: 2.5rem;
+color: #333;
+font-weight: 700;
+max-width: 600px;
+margin: 0 auto;
+line-height: 1.2;
+text-transform: uppercase;
+letter-spacing: 1px;
+font-family: 'Space Mono', monospace;
+position: relative;
+padding: 2rem 0;
+}
+.cover-subtitle::before {
+content: "";
+position: absolute;
+top: 0;
+left: 50%;
+transform: translateX(-50%);
+width: 100px;
+height: 2px;
+background: #333;
+}
+.cover-subtitle::after {
+content: "";
+position: absolute;
+bottom: 0;
+left: 50%;
+transform: translateX(-50%);
+width: 100px;
+height: 2px;
+background: #333;
+}
+/* Cover footer */
+.cover-footer {
+display: flex;
+justify-content: space-between;
+align-items: end;
+position: relative;
+z-index: 3;
+padding-top: 2rem;
+border-top: 1px solid rgba(0, 0, 0, 0.1);
+}
+.date {
+text-align: right;
+color: #333;
+font-size: 18px;
+font-weight: 600;
+letter-spacing: 1px;
+}
+/* Classification stamp */
+.classification {
+position: absolute;
+bottom: 60px;
+left: 60px;
+font-size: 12px;
+letter-spacing: 1px;
+color: rgba(0, 0, 0, 0.4);
+text-transform: uppercase;
+}
+.classification::before {
+content: "CLASSIFIED";
+display: block;
+font-size: 10px;
+letter-spacing: 2px;
+margin-bottom: 5px;
+color: rgba(0, 0, 0, 0.3);
+}
+/* Responsive for retro cover */
+@media (max-width: 1024px) {
+.cover-subtitle {
+font-size: 2rem;
+}
+.logo-img {
+height: 70px;
+}
+}
+@media (max-width: 768px) {
+.retro-cover {
+padding: 40px 30px;
+}
+.folder-tab {
+right: 30px;
+width: 70px;
+height: 25px;
+}
+.logo-img {
+height: 60px;
+}
+.issue {
+font-size: 12px;
+}
+.cover-subtitle {
+font-size: 1.8rem;
+}
+.date {
+font-size: 16px;
+}
+.classification {
+left: 30px;
+bottom: 40px;
+}
+}
+@media (max-width: 480px) {
+.retro-cover {
+padding: 30px 20px;
+}
+.folder-tab {
+right: 20px;
+width: 60px;
+height: 20px;
+}
+.tab-hole {
+width: 8px;
+height: 8px;
+}
+.logo-img {
+height: 50px;
+}
+.cover-subtitle {
+font-size: 1.4rem;
+}
+.cover-subtitle::before,
+.cover-subtitle::after {
+width: 60px;
+}
+.date {
+font-size: 14px;
+}
+.classification {
+font-size: 10px;
+left: 20px;
+bottom: 30px;
+}
+}
+/* Typography */
+.log-header {
+margin-bottom: 60px;
+}
+.log-title {
+font-size: 72px;
+font-weight: 700;
+line-height: 1;
+margin-bottom: 20px;
+letter-spacing: -2px;
+}
+.log-subtitle {
+font-size: 14px;
+letter-spacing: 2px;
+color: rgba(0, 0, 0, 0.6);
+margin-bottom: 10px;
+}
+.section-title {
+font-size: 18px;
+letter-spacing: 2px;
+color: rgba(0, 0, 0, 0.9);
+margin-bottom: 40px;
+border-bottom: 1px solid rgba(0, 0, 0, 0.3);
+padding-bottom: 10px;
+font-weight: 700;
+}
+.content-block {
+font-size: 18px;
+line-height: 1.8;
+max-width: 800px;
+margin: 0 auto;
+}
+.content-block p {
+margin-bottom: 24px;
+}
+.protocol-definition {
+font-size: 16px;
+line-height: 1.8;
+max-width: 600px;
+margin: 0 auto;
+}
+.definition-item {
+margin-bottom: 30px;
+position: relative;
+padding-left: 20px;
+}
+.definition-item::before {
+content: "—";
+position: absolute;
+left: 0;
+color: rgba(0, 0, 0, 0.6);
+}
+.system-notes {
+list-style: none;
+padding: 0;
+max-width: 600px;
+margin: 0 auto;
+}
+.system-notes li {
+margin-bottom: 16px;
+font-size: 16px;
+line-height: 1.6;
+position: relative;
+padding-left: 20px;
+}
+.system-notes li::before {
+content: "•";
+position: absolute;
+left: 0;
+color: rgba(0, 0, 0, 0.6);
+}
+/* Status indicators */
+.status-line {
+font-size: 11px;
+letter-spacing: 1px;
+color: rgba(0, 0, 0, 0.5);
+position: absolute;
+bottom: 30px;
+left: 60px;
+}
+.access-tag {
+font-size: 11px;
+letter-spacing: 1px;
+color: rgba(0, 0, 0, 0.5);
+position: absolute;
+bottom: 30px;
+right: 60px;
+}
+/* Section footer */
+.section-footer {
+margin-top: 60px;
+text-align: center;
+font-size: 12px;
+color: rgba(0, 0, 0, 0.5);
+letter-spacing: 1px;
+}
+/* Back cover */
+.back-cover {
+background: #000000;
+color: #ffffff;
+text-align: center;
+padding: 100px 60px;
+}
+.back-cover .section-border {
+border-color: rgba(255, 255, 255, 0.2);
+}
+.back-cover::before {
+background: repeating-linear-gradient(
+0deg,
+transparent,
+transparent 2px,
+rgba(255, 255, 255, 0.03) 2px,
+rgba(255, 255, 255, 0.03) 4px
+);
+}
+.back-logo {
+height: 120px;
+width: auto;
+margin-bottom: 40px;
+opacity: 0.9;
+}
+.archive-seal {
+font-size: 24px;
+font-weight: 700;
+letter-spacing: 2px;
+margin-bottom: 20px;
+color: rgba(255, 255, 255, 0.9);
+}
+.micro-text {
+font-size: 9px;
+letter-spacing: 1px;
+color: rgba(255, 255, 255, 0.4);
+max-width: 400px;
+margin: 0 auto;
+line-height: 1.4;
+}
+.back-cover-text {
+font-size: 14px;
+letter-spacing: 2px;
+line-height: 1.8;
+color: rgba(255, 255, 255, 0.7);
+margin: 40px 0;
+}
+/* Page numbering */
+.page-number {
+position: absolute;
+bottom: 30px;
+right: 60px;
+font-size: 12px;
+color: rgba(0, 0, 0, 0.4);
+letter-spacing: 1px;
+}
+/* Responsive */
+@media (max-width: 768px) {
+.log-section {
+padding: 60px 30px;
+min-height: auto;
+padding-bottom: 80px;
+}
+.log-title {
+font-size: 48px;
+}
+.section-title {
+font-size: 16px;
+}
+.content-block {
+font-size: 16px;
+}
+.protocol-definition {
+font-size: 14px;
+}
+.logo {
+height: 60px;
+}
+.back-logo {
+height: 80px;
+}
+.cover-main {
+padding: 40px 0;
+}
+.status-line,
+.access-tag,
+.page-number {
+position: relative;
+bottom: auto;
+left: auto;
+right: auto;
+text-align: center;
+margin-top: 30px;
+}
+.cover-footer {
+flex-direction: column;
+align-items: center;
+gap: 20px;
+text-align: center;
+}
+.cover-header {
+flex-direction: column;
+gap: 20px;
+align-items: center;
+text-align: center;
+}
+.issue-info {
+text-align: center;
+}
+}
+@media (max-width: 480px) {
+.log-section {
+padding: 40px 20px;
+padding-bottom: 60px;
+}
+.log-title {
+font-size: 36px;
+}
+.section-title {
+font-size: 14px;
+}
+.content-block {
+font-size: 14px;
+}
+.logo {
+height: 50px;
+}
+.back-logo {
+height: 60px;
+}
+}
+</style>
+</head>
+<body>
+<div class="log-container">
+<!-- RETRO FOLDER COVER -->
+<section class="retro-cover" id="cover">
+<div class="folder-tab">
+ <div class="tab-hole"></div>
+</div>
+<div class="cover-header">
+<div class="logo">
+	<a href= "zine.html">
+		<img src="images/1heavy0.png" alt="1heavy0 Logo" class="logo-img">
+	</a>
+</div>
+<div class="issue">
+LOG ENTRY 02
+</div>
+</div>
+<div class="cover-title">
+<div class="cover-subtitle">
+THE SOBUKWE<br>PROTOCOL
+</div>
+</div>
+<div class="cover-footer">
+<div class="classification">
+ISSUE 02<br>
+ACCESS LEVEL 3
+</div>
+<div class="date">
+DEC 2026
+</div>
+</div>
+</section>
+<!-- PAGE 2 — PROTOCOL DEFINITION -->
+<section class="log-section" id="protocol-definition">
+<div class="section-border"></div>
+<div>
+<h2 class="section-title">PROTOCOL DEFINITION</h2>
+<div class="protocol-definition">
+<div class="definition-item">
+<strong>THE SOBUKWE PROTOCOL</strong><br>
+A system-level response activated when an individual demonstrates:
+</div>
+<div class="definition-item">
+high intellectual coherence<br>
+low susceptibility to co-option<br>
+moral clarity incompatible with institutional compromise
+</div>
+<div class="definition-item">
+<strong>Primary objective:</strong><br>
+Remove the subject from public cognition without generating martyrdom.
+</div>
+<div class="definition-item">
+<strong>Preferred methods:</strong><br>
+Administrative isolation.<br>
+Rule exception.<br>
+Temporal containment.<br>
+Visibility suppression.
+</div>
+<div class="definition-item">
+<strong>Outcome:</strong><br>
+The subject remains alive, functional, and neutralized.<br>
+The system remains intact.
+</div>
+</div>
+</div>
+<div class="page-number">02</div>
+</section>
+<!-- PAGE 3 — INTAKE -->
+<section class="log-section" id="intake">
+<div class="section-border"></div>
+<div>
+<h2 class="section-title">INTAKE</h2>
+<div class="content-block">
+<p>Robert Sobukwe entered the system through its approved channels.</p>
+<p>He was formally educated, institutionally fluent, and capable of operating within the 
+dominant intellectual frameworks of his time. His training did not position him as an outsider. It 
+positioned him as an asset.</p>
+<p>The system recognized competence.</p>
+<p>It did not anticipate refusal.</p>
+<p>At intake, Sobukwe met every visible requirement for legitimacy. Language, discipline, 
+and institutional literacy were not barriers. They were tools he already possessed.</p>
+<p>This made early detection difficult.</p>
+</div>
+</div>
+<div class="page-number">03</div>
+</section>
+<!-- PAGE 4 — MISALIGNMENT -->
+<section class="log-section" id="misalignment">
+<div class="section-border"></div>
+<div>
+<h2 class="section-title">MISALIGNMENT</h2>
+<div class="content-block">
+<p>The misalignment was not ideological extremity.</p>
+<p>It was coherence.</p>
+<p>Sobukwe's thinking did not fragment under pressure. It did not dilute itself for access, 
+safety, or legitimacy. He did not negotiate core positions to remain inside institutional boundaries.</p>
+<p>This created a structural problem.</p>
+<p>The system relies on compromise as a stabilizing mechanism. Subjects who can be 
+persuaded, incentivized, or corrected remain governable. Sobukwe demonstrated none of these 
+susceptibilities.</p>
+<p>Negotiation failed.</p>
+<p>Assimilation failed.</p>
+<p>Public confrontation risked amplification.</p>
+<p>At this point, the subject became non-coercible.</p>
+</div>
+</div>
+<div class="page-number">04</div>
+</section>
+<!-- PAGE 5 — SYSTEM RESPONSE -->
+<section class="log-section" id="system-response">
+<div class="section-border"></div>
+<div>
+<h2 class="section-title">SYSTEM RESPONSE</h2>
+<div class="content-block">
+<p>The response was procedural.</p>
+<p>Rules were not broken. They were adjusted.</p>
+<p>Exceptions were created without explanation.</p>
+<p>The subject was isolated administratively rather than publicly opposed. Legal 
+mechanisms were extended beyond their intended scope. Duration replaced verdict.</p>
+<p>This response minimized attention while maximizing control.</p>
+<p>No spectacle.</p>
+<p>No public trial.</p>
+<p>No symbolic violence.</p>
+<p>Only sustained removal from circulation.</p>
+</div>
+</div>
+<div class="page-number">05</div>
+</section>
+<!-- PAGE 6 — PRESSURE ESCALATION -->
+<section class="log-section" id="pressure-escalation">
+<div class="section-border"></div>
+<div>
+<h2 class="section-title">PRESSURE ESCALATION</h2>
+<div class="content-block">
+<p>Isolation was not temporary.</p>
+<p>It was indefinite.</p>
+<p>Time became the primary instrument.</p>
+<p>The system applied duration without endpoint, allowing attention to decay naturally. The 
+subject remained alive, intellectually intact, and increasingly invisible.</p>
+<p>This phase required maintenance, not force.</p>
+<p>Silence proved sufficient.</p>
+</div>
+</div>
+<div class="page-number">06</div>
+</section>
+<!-- PAGE 7 — FAILURE MODE -->
+<section class="log-section" id="failure-mode">
+<div class="section-border"></div>
+<div>
+<h2 class="section-title">FAILURE MODE</h2>
+<div class="content-block">
+<p>The Sobukwe Protocol does not indicate system weakness.</p>
+<p>It reveals system limits.</p>
+<p>The system could not metabolize intelligence that refused compromise. It could not 
+neutralize the subject through participation. It could not eliminate him without consequence.</p>
+<p>Isolation became the only viable outcome.</p>
+<p>This is not failure in the conventional sense.</p>
+<p>It is containment.</p>
+</div>
+</div>
+<div class="page-number">07</div>
+</section>
+<!-- PAGE 8 — SYSTEM NOTES -->
+<section class="log-section" id="system-notes">
+<div class="section-border"></div>
+<div>
+<h2 class="section-title">SYSTEM NOTES</h2>
+<ul class="system-notes">
+<li>Systems isolate what they cannot corrupt.</li>
+<li>Moral clarity accelerates administrative violence.</li>
+<li>Silence outperforms spectacle.</li>
+<li>Time is a neutralized weapon.</li>
+<li>Neutralization does not require death.</li>
+<li>History reframes containment as inevitability.</li>
+</ul>
+</div>
+<div class="page-number">08</div>
+</section>
+<!-- PAGE 09 — ARCHIVAL NOTES -->
+<section class="log-section" id="archival-notes">
+<div class="section-border"></div>
+<div>
+<h2 class="section-title">ARCHIVAL NOTES</h2>
+<div class="content-block">
+<p>Subject records are incomplete by design.</p>
+<p>Primary documentation related to Robert Sobukwe exists across multiple jurisdictions, 
+departments, and administrative categories. No single continuous archive was permitted to form.</p>
+<p>Known conditions of record degradation include:</p>
+<ul class="system-notes">
+<li>prolonged administrative isolation under special statutory exemption</li>
+<li>restricted correspondence with external parties</li>
+<li>controlled access to writing materials</li>
+<li>absence of public trial transcripts</li>
+<li>deliberate fragmentation of legal, medical, and political records</li>
+</ul>
+<p>During containment, the subject was physically separated from both adversaries and allies. 
+Interaction was minimized to prevent ideological transmission and symbolic escalation.</p>
+<p>The residence allocated during isolation functioned as a containment buffer rather than a 
+correctional facility. Surveillance was continuous. Visibility was limited. Duration was undefined.</p>
+<p>Several primary materials remain unavailable:</p>
+<ul class="system-notes">
+<li>personal writings produced during isolation</li>
+<li>internal memoranda justifying rule exceptions</li>
+<li>full medical documentation</li>
+<li>unedited correspondence logs</li>
+</ul>
+<p>Existing records prioritize administrative compliance over intellectual content.</p>
+<p>Historical summaries retroactively normalize these conditions as procedural necessity.</p>
+<p>This log does not attempt reconstruction.</p>
+<p>It records the absence.</p>
+</div>
+</div>
+<div class="page-number">09</div>
+</section>
+<!-- BACK COVER -->
+<section class="retro-cover" id="back-cover">
+    <div class="folder-tab">
+        <div class="tab-hole"></div>
+    </div>
+    <div class="cover-header">
+        <div class="logo">
+            <a href="zine.html">
+                <img src="images/1heavy0.png" alt="1heavy0 Logo" class="logo-img">
+            </a>
+        </div>
+        <div class="issue">
+            LOG ENTRY 02
+        </div>
+    </div>
+    <div class="cover-title">
+        <div class="cover-subtitle">
+            ARCHIVED
+        </div>
+    </div>
+    <div class="cover-footer">
+        <div class="classification">
+            ISSUE 02<br>
+            ACCESS LEVEL 3
+        </div>
+        <div class="date">
+            DEC 2025
+        </div>
+    </div>
+</section>
+
+</div>
+</body>
+</html>
