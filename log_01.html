@@ -1065,6 +1065,184 @@
     color: 000000;
 }
         }
+
+
+@media (max-width: 768px) {
+    /* Fix Faisa interview margins */
+    .spread .dossier-container {
+        width: calc(100% + 60px);
+        margin-left: -30px;
+    }
+    
+    /* Ensure interview text has proper padding */
+    .spread .single-column {
+        padding: 0 30px;
+    }
+    
+    /* Make dossier content responsive on mobile */
+    .dossier-content .info-section {
+        padding: 20px 30px;
+    }
+}
+
+
+/* Classified Dossier Styles */
+.classified-dossier {
+    margin: 40px 0;
+    position: relative;
+    background: rgba(255, 255, 255, 0.05);
+    border: 2px solid #000000;
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.classified-photo {
+    width: 220px;
+    height: 280px;
+    background: #0a0a0a;
+    position: relative;
+    overflow: hidden;
+    margin: 0 auto;
+    border: 1px solid #333;
+}
+
+@media (max-width: 768px) {
+    .classified-photo {
+        width: 180px;
+        height: 240px;
+    }
+}
+
+.redacted-overlay {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+.redaction-bars {
+    width: 100%;
+    margin-bottom: 30px;
+}
+
+.redact-bar {
+    height: 12px;
+    background: #000000;
+    margin-bottom: 8px;
+    position: relative;
+    overflow: hidden;
+}
+
+.redact-bar::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 0, 0, 0.1), transparent);
+    animation: redactScan 2s ease-in-out infinite;
+}
+
+@keyframes redactScan {
+    0% { left: -100%; }
+    100% { left: 100%; }
+}
+
+.redact-bar:nth-child(1) { width: 100%; animation-delay: 0s; }
+.redact-bar:nth-child(2) { width: 85%; animation-delay: 0.3s; }
+.redact-bar:nth-child(3) { width: 90%; animation-delay: 0.6s; }
+.redact-bar:nth-child(4) { width: 75%; animation-delay: 0.9s; }
+
+.classified-text {
+    text-align: center;
+    margin: 20px 0;
+}
+
+.classified-label {
+    display: block;
+    color: #ffffff;
+    font-size: 14px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+    font-weight: 700;
+    animation: textFlicker 3s infinite;
+}
+
+@keyframes textFlicker {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.7; }
+}
+
+.classified-sub {
+    display: block;
+    color: #999;
+    font-size: 9px;
+    letter-spacing: 1px;
+}
+
+.pixel-grid {
+    position: absolute;
+    bottom: 20px;
+    width: 80%;
+    opacity: 0.3;
+}
+
+.pixel-row {
+    height: 1px;
+    background: #ffffff;
+    margin-bottom: 2px;
+    animation: pixelGlitch 4s infinite;
+}
+
+.pixel-row:nth-child(1) { width: 100%; animation-delay: 0s; }
+.pixel-row:nth-child(2) { width: 95%; animation-delay: 0.2s; }
+.pixel-row:nth-child(3) { width: 88%; animation-delay: 0.4s; }
+
+@keyframes pixelGlitch {
+    0%, 100% { opacity: 0.3; }
+    50% { opacity: 0.1; }
+}
+
+.encryption-note {
+    margin-top: 20px;
+    padding: 10px;
+    background: rgba(0, 0, 0, 0.3);
+    border: 1px dashed #666;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.encryption-icon {
+    color: #ff0000;
+    font-weight: 700;
+    font-size: 14px;
+    animation: blink 1s infinite;
+}
+
+@keyframes blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.3; }
+}
+
+.encryption-text {
+    color: #ffffff;
+    font-size: 9px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+
+
+
+
+
+
     </style>
 </head>
 <body>
@@ -1255,83 +1433,124 @@ at the threshold, where the buffer between medium and message becomes the messag
  
             </div>
             
-            <!--<div class="hero-image">
-                <div class="hero-placeholder">Faisa's Digital Art</div>
-            </div> -->
+            
 
-          <!--  <div class="dossier-container"> -->
- <!--<div class="scanline"></div>
- <div class="glitch-overlay"></div> -->
- 
- <!--<div class="corner-markers corner-tl"></div>
- <div class="corner-markers corner-tr"></div>
- <div class="corner-markers corner-bl"></div>
- <div class="corner-markers corner-br"></div> -->
- <div class="dossier-header">
- <div class="header-left">
- <div class="status-indicator"></div>
- <span class="header-title">CLASSIFIED DATABASE ACCESS</span>
- </div>
- <div class="header-right"> UNAUTHORIZED ACCESS DETECTED </div>
- </div>
- <div class="dossier-content">
- <div class="photo-section">
- <div class="photo-frame">
- <!-- PLACE YOUR GRAINY FAISA IMAGE HERE -->
- <img src="images/faisa.png" alt="Subject Photo">
- </div>
- <div class="photo-id">
- SUBJECT ID: FSA-4172<br>
- CAPTURE: 2025-12-14
- </div>
- </div>
- <div class="info-section">
- <div class="classified-banner">
- TOP SECRET 
- </div>
- <div class="data-row">
- <div class="data-label">CODENAME:</div>
- <div class="data-value">FAISA.WEBP</div>
- </div>
- <div class="data-row">
- <div class="data-label">CLASSIFICATION:</div>
- <div class="data-value">DIGITAL INSURGENT</div>
- </div>
- <div class="data-row">
- <div class="data-label">SPECIALIZATION:</div>
- <div class="data-value">CODE / CANVAS HYBRID</div>
- </div>
- <div class="data-row">
- <div class="data-label">THREAT LEVEL:</div>
- <div class="data-value">CREATIVE DISRUPTOR</div>
- </div>
- <div class="data-row">
- <div class="data-label">LOCATION STATUS:</div>
- <div class="data-value">NOMADIC // UNTRACEABLE</div>
- </div>
- <!--<div class="data-row">
- <div class="data-label">KNOWN ALIASES:</div>
- <div class="data-value">@FAISA.WEBP</div>
- </div> -->
- <div class="data-row">
- <div class="data-label">OPERATIONAL MODE:</div>
- <div class="data-value">ANALOG/DIGITAL FUSION</div>
- </div>
- <div class="notes-section">
- <div class="notes-header"> INTELLIGENCE BRIEFING </div>
- <div class="notes-text">
- Subject operates at the intersection of systematic logic and chaotic expression. 
- Exhibits resistance to algorithmic predictability. Known to traverse between 
- physical and digital art spaces, leaving minimal traceable pattern. 
- <!--Approaches creation through cycles of deep immersion—alternating between 
- technical precision and raw emotional output. Status: UNCONTAINABLE. -->
- </div>
- </div>
- 
- </div>
- </div>
- </div>
 
+
+            <div class="classified-dossier">
+    <div class="scanline"></div>
+    <div class="glitch-overlay"></div>
+    
+    <div class="corner-markers corner-tl"></div>
+    <div class="corner-markers corner-tr"></div>
+    <div class="corner-markers corner-bl"></div>
+    <div class="corner-markers corner-br"></div>
+    
+    <div class="dossier-header">
+        <div class="header-left">
+            <div class="status-indicator"></div>
+            <span class="header-title">CLASSIFIED PROFILE // NO VISUAL ID</span>
+        </div>
+        <div class="header-right">[IDENTITY REDACTED]</div>
+    </div>
+    
+    <div class="dossier-content">
+        <div class="photo-section">
+            <!-- Classified Photo Placeholder -->
+            <div class="classified-photo">
+                <div class="redacted-overlay">
+                    <div class="redaction-bars">
+                        <div class="redact-bar"></div>
+                        <div class="redact-bar"></div>
+                        <div class="redact-bar"></div>
+                        <div class="redact-bar"></div>
+                    </div>
+                    <div class="classified-text">
+                        <span class="classified-label">[IMAGE REDACTED]</span>
+                        <span class="classified-sub">NO VISUAL RECORD FOUND</span>
+                    </div>
+                    <div class="pixel-grid">
+                        <div class="pixel-row"></div>
+                        <div class="pixel-row"></div>
+                        <div class="pixel-row"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="photo-id">
+                SUBJECT ID: FSA-4172<br>
+                VISUAL STATUS: [REDACTED]<br>
+                TRACE STATUS: DIGITAL GHOST
+            </div>
+        </div>
+        
+        <div class="info-section">
+            <div class="classified-banner">
+                TOP SECRET // EYES ONLY
+            </div>
+            
+            <div class="data-row">
+                <div class="data-label">CODENAME:</div>
+                <div class="data-value">FAISA.WEBP</div>
+            </div>
+            
+            <div class="data-row">
+                <div class="data-label">CLASSIFICATION:</div>
+                <div class="data-value">DIGITAL PHANTOM</div>
+            </div>
+            
+            <div class="data-row">
+                <div class="data-label">VISUAL STATUS:</div>
+                <div class="data-value">NO TRACE IMAGERY</div>
+            </div>
+            
+            <div class="data-row">
+                <div class="data-label">OPERATIONAL MODE:</div>
+                <div class="data-value">BUFFER STATE OPERATOR</div>
+            </div>
+            
+            <div class="data-row">
+                <div class="data-label">DIGITAL SIGNATURE:</div>
+                <div class="data-value">PIXEL/ANALOG HYBRID</div>
+            </div>
+            
+            <div class="data-row">
+                <div class="data-label">TRACKING STATUS:</div>
+                <div class="data-value">UNTRACEABLE</div>
+            </div>
+            
+            <div class="notes-section">
+                <div class="notes-header">SECURITY BRIEFING</div>
+                <div class="notes-text">
+                    Subject operates in visual null space. No photographic records exist in any 
+                    accessible database. Digital footprint suggests intentional erasure of visual 
+                    identity. Operates exclusively through proxy artifacts: code, canvas, and 
+                    buffer state transmissions. Analysis suggests this is not evasion but 
+                    operational methodology—identity expressed through absence, presence 
+                    defined through creative residue. All attempts at facial recognition 
+                    have returned null. Status: VISUALLY ENCRYPTED.
+                </div>
+            </div>
+            
+            <div class="encryption-note">
+                <div class="encryption-icon">[X]</div>
+                <div class="encryption-text">
+                    IDENTITY PROTECTED UNDER BUFFER STATE PROTOCOL
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="timestamp">
+        LAST UPDATE: [REDACTED] | ACCESS LEVEL: 9
+    </div>
+</div>
+
+
+
+
+
+
+            
             
             <div class="single-column">
                 <div>
