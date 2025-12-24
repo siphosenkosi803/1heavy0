@@ -109,30 +109,207 @@ href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;
  width: 100%;
  }
 
- /* HERO SECTION - ADJUSTED FOR NAV PADDING */
- .hero {
- min-height: calc(100vh - 120px); /* Account for nav height */
- display: flex;
- flex-direction: column;
- justify-content: center;
- padding: 0 3rem;
- position: relative;
- margin-top: -40px; /* Pull up slightly to compensate for body padding */
- }
+ /* HERO SECTION - UPDATED FOR LANDSCAPE SUPPORT */
+.hero {
+    min-height: calc(100vh - 120px);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 0 3rem;
+    position: relative;
+    margin-top: -40px;
+}
 
- .hero-main {
- max-width: 800px;
- margin: 0 auto;
- text-align: center;
- }
+.hero-main {
+    max-width: 800px;
+    margin: 0 auto;
+    text-align: center;
+}
 
- .hero-subtitle {
- margin-top: 1.5rem;
- font-size: 1.2rem;
- color: #666;
- text-transform: uppercase;
- letter-spacing: 2px;
- }
+.hero-main h1 {
+    font-size: clamp(2.5rem, 5vw, 4rem); /* Responsive font size */
+    font-weight: 700;
+    letter-spacing: -1px;
+    line-height: 1.1; /* Tighter line height */
+    text-transform: uppercase;
+    margin-bottom: 1rem;
+    hyphens: auto; /* Allow word breaking */
+    overflow-wrap: break-word; /* Prevent overflow */
+}
+
+.hero-subtitle {
+    margin-top: 1.5rem;
+    font-size: clamp(0.9rem, 2vw, 1.2rem); /* Responsive subtitle */
+    color: #666;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    line-height: 1.4;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* FLOATING ELEMENTS - UPDATED FOR LANDSCAPE */
+.floating-text {
+    position: absolute;
+    font-size: clamp(4rem, 10vw, 12rem); /* Responsive floating text */
+    font-weight: 700;
+    color: rgba(0, 0, 0, 0.02);
+    text-transform: uppercase;
+    z-index: -1;
+    user-select: none;
+    pointer-events: none;
+    white-space: nowrap;
+}
+
+.floating-1 {
+    top: 10%;
+    left: -5%;
+    transform: rotate(-90deg);
+}
+
+.floating-2 {
+    bottom: 10%;
+    right: -5%;
+    transform: rotate(90deg);
+}
+
+/* LANDSCAPE-SPECIFIC ADJUSTMENTS */
+@media (orientation: landscape) and (max-height: 600px) {
+    .hero {
+        min-height: auto;
+        padding: 3rem 2rem;
+        margin-top: 0;
+    }
+    
+    .hero-main h1 {
+        font-size: 2.8rem;
+        line-height: 1;
+        margin-bottom: 0.8rem;
+    }
+    
+    .hero-subtitle {
+        font-size: 0.9rem;
+        margin-top: 1rem;
+        letter-spacing: 1px;
+    }
+    
+    .floating-text {
+        font-size: 5rem;
+    }
+    
+    .floating-1 {
+        left: -8%;
+        top: 5%;
+    }
+    
+    .floating-2 {
+        right: -8%;
+        bottom: 5%;
+    }
+}
+
+/* TABLET AND SMALLER DESKTOP */
+@media (max-width: 1024px) and (min-height: 600px) {
+    .hero-main h1 {
+        font-size: 3.2rem;
+    }
+    
+    .floating-text {
+        font-size: 8rem;
+    }
+}
+
+/* MOBILE LANDSCAPE */
+@media (max-width: 768px) and (orientation: landscape) {
+    body {
+        padding-top: 100px; /* Reduce padding for landscape */
+    }
+    
+    .hero {
+        min-height: auto;
+        padding: 2rem 1.5rem;
+        margin-top: -20px;
+    }
+    
+    .hero-main h1 {
+        font-size: 2.2rem;
+        line-height: 1;
+    }
+    
+    .hero-subtitle {
+        font-size: 0.85rem;
+        margin-top: 0.8rem;
+    }
+    
+    .floating-text {
+        font-size: 4rem;
+    }
+    
+    .floating-1 {
+        left: -12%;
+        top: 2%;
+    }
+    
+    .floating-2 {
+        right: -12%;
+        bottom: 2%;
+    }
+}
+
+/* SMALL PHONE LANDSCAPE */
+@media (max-width: 480px) and (orientation: landscape) {
+    body {
+        padding-top: 90px;
+    }
+    
+    .hero {
+        padding: 1.5rem;
+    }
+    
+    .hero-main h1 {
+        font-size: 1.8rem;
+    }
+    
+    .hero-subtitle {
+        font-size: 0.75rem;
+    }
+    
+    .floating-text {
+        font-size: 3rem;
+    }
+    
+    .nav {
+        padding: 0.8rem 1rem;
+    }
+    
+    .logo-image {
+        height: 40px;
+    }
+}
+
+/* SHORT SCREENS (regardless of orientation) */
+@media (max-height: 500px) {
+    .hero {
+        min-height: auto;
+        padding: 2rem;
+    }
+    
+    .hero-main h1 {
+        font-size: 2.2rem;
+        line-height: 1;
+    }
+    
+    .hero-subtitle {
+        font-size: 0.85rem;
+        margin-top: 0.8rem;
+    }
+    
+    .floating-text {
+        font-size: 4rem;
+    }
+}
+
 
  /* VISUAL DIVIDER */
  .divider {
