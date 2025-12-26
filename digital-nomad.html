@@ -1,0 +1,694 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="UTF-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <title>NOMAD™: THE INDUSTRIALIZATION OF ROOTLESSNESS - 1HEAVY0</title>
+ <link href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+ <style>
+ /* GLOBAL STYLES */
+ body {
+ background: white;
+ color: black;
+ font-family: 'Space Mono', monospace;
+ margin: 0;
+ padding: 0;
+ line-height: 1.6;
+ max-width: 1200px;
+ margin: 0 auto;
+ position: relative;
+ padding-top: 100px;
+ padding-bottom: 4rem;
+ text-transform: uppercase;
+ letter-spacing: 0.5px;
+ }
+ 
+ a {
+ color: inherit;
+ text-decoration: none;
+ border-bottom: 1px solid transparent;
+ transition: all 0.2s;
+ }
+ 
+ a:hover { 
+ opacity: 0.7; 
+ border-bottom-color: black;
+ }
+ 
+ /* NAVIGATION */
+ nav {
+ display: flex;
+ justify-content: space-between;
+ align-items: center;
+ padding: 1.5rem 3rem;
+ position: fixed;
+ top: 0;
+ left: 0;
+ right: 0;
+ z-index: 2000;
+ background-color: white;
+ backdrop-filter: blur(5px);
+ border-bottom: 1px solid #333;
+ max-width: 1200px;
+ margin: 0 auto;
+ box-sizing: border-box;
+ }
+ 
+ .logo {
+ display: flex;
+ align-items: center;
+ border-bottom: none;
+ }
+ 
+ .logo-image {
+ height: 80px;
+ width: auto;
+ transition: opacity 0.2s;
+ }
+ 
+ .logo-image:hover {
+ opacity: 0.7;
+ }
+ 
+ .nav-links {
+ display: flex;
+ gap: 2rem;
+ font-size: 0.9rem;
+ }
+ 
+ .nav-links a {
+ border-bottom: 1px solid transparent;
+ transition: all 0.2s;
+ }
+ 
+ .nav-links a:hover {
+ opacity: 0.7;
+ border-bottom-color: black;
+ }
+ 
+ /* ARTICLE HEADER */
+ .article-header {
+ text-align: center;
+ padding: 3rem 2rem 2rem;
+ margin-bottom: 2rem;
+ }
+ 
+ .article-category {
+ font-size: 0.9rem;
+ letter-spacing: 2px;
+ color: #666;
+ margin-bottom: 1rem;
+ }
+ 
+ .article-title {
+ font-size: 2.2rem;
+ font-weight: 700;
+ line-height: 1.2;
+ margin-bottom: 1.5rem;
+ }
+ 
+ .article-subtitle {
+ font-size: 1rem;
+ color: #555;
+ margin-bottom: 2rem;
+ font-style: normal;
+ line-height: 1.4;
+ }
+ 
+ .article-meta {
+ font-size: 0.8rem;
+ color: #888;
+ letter-spacing: 1px;
+ margin-bottom: 2rem;
+ }
+ 
+ /* ARTICLE IMAGE */
+ .article-image {
+ width: 100%;
+ max-width: 800px;
+ margin: 0 auto 3rem;
+ text-align: center;
+ }
+ 
+ .article-image img {
+ width: 100%;
+ height: auto;
+ border: 1px solid #e5e5e5;
+ }
+ 
+ .image-caption {
+ font-size: 0.8rem;
+ color: #666;
+ margin-top: 0.5rem;
+ font-style: italic;
+ text-transform: none;
+ }
+ 
+ /* ARTICLE CONTENT */
+ .article-content {
+ padding: 0 2rem;
+ }
+ 
+ .content-section {
+ margin-bottom: 3rem;
+ }
+ 
+ .section-title {
+ font-size: 1.3rem;
+ font-weight: 700;
+ margin: 3rem 0 1.5rem;
+ padding-bottom: 0.5rem;
+ border-bottom: 1px solid #e5e5e5;
+ }
+ 
+ p {
+ margin-bottom: 1.5rem;
+ font-size: 0.95rem;
+ line-height: 1.7;
+ }
+ 
+ .emphasis {
+ font-weight: 700;
+ margin: 2rem 0;
+ }
+ 
+ .spacer {
+ height: 2rem;
+ }
+ 
+ /* BLOCKQUOTE STYLES */
+ blockquote {
+ border-left: 3px solid #333;
+ padding-left: 1.5rem;
+ margin: 2rem 0;
+ font-style: italic;
+ }
+ 
+ /* COMPARISON TABLE */
+ .comparison-table {
+ width: 100%;
+ border-collapse: collapse;
+ margin: 2rem 0;
+ }
+ 
+ .comparison-table th {
+ border-bottom: 2px solid #333;
+ padding: 1rem;
+ text-align: left;
+ font-weight: 700;
+ background: #fafafa;
+ }
+ 
+ .comparison-table td {
+ border-bottom: 1px solid #e5e5e5;
+ padding: 1rem;
+ vertical-align: top;
+ }
+ 
+ .comparison-table .column-title {
+ font-weight: 700;
+ color: #333;
+ }
+ 
+ /* PRODUCT LAYER BOX */
+ .product-layer {
+ border: 1px solid #e5e5e5;
+ padding: 1.5rem;
+ margin: 2rem 0;
+ background: #fafafa;
+ }
+ 
+ .layer-title {
+ font-weight: 700;
+ margin-bottom: 0.5rem;
+ color: #333;
+ display: flex;
+ align-items: center;
+ gap: 0.5rem;
+ }
+ 
+ .layer-title::before {
+ content: "LAYER";
+ font-size: 0.7rem;
+ color: #888;
+ background: #eee;
+ padding: 0.2rem 0.5rem;
+ letter-spacing: 1px;
+ }
+ 
+ .layer-desc {
+ font-size: 0.9rem;
+ color: #555;
+ text-transform: none;
+ line-height: 1.5;
+ }
+ 
+ .layer-examples {
+ font-size: 0.8rem;
+ color: #666;
+ margin-top: 1rem;
+ font-style: italic;
+ }
+ 
+ /* BUREAUCRACY BOX */
+ .bureaucracy-item {
+ border-left: 2px solid #333;
+ padding-left: 1rem;
+ margin: 1.5rem 0;
+ }
+ 
+ .bureaucracy-title {
+ font-weight: 700;
+ margin-bottom: 0.3rem;
+ }
+ 
+ .bureaucracy-desc {
+ font-size: 0.9rem;
+ color: #555;
+ text-transform: none;
+ line-height: 1.5;
+ }
+ 
+ /* BLOG FOOTER */
+ .blog-footer {
+ text-align: center;
+ padding: 3rem 2rem;
+ margin-top: 4rem;
+ border-top: 1px solid #e5e5e5;
+ }
+ 
+ .next-reading {
+ font-size: 0.9rem;
+ letter-spacing: 2px;
+ color: #666;
+ margin-bottom: 0.5rem;
+ }
+ 
+ .next-title {
+ font-size: 1.2rem;
+ font-weight: 700;
+ color: #333;
+ margin-bottom: 2rem;
+ }
+ 
+ .back-link {
+ display: inline-block;
+ padding: 0.5rem 1.5rem;
+ border: 1px solid #333;
+ letter-spacing: 1px;
+ font-size: 0.9rem;
+ transition: all 0.2s;
+ }
+ 
+ .back-link:hover {
+ background: #333;
+ color: white;
+ }
+ 
+ /* RESPONSIVE */
+ @media (max-width: 768px) {
+ body {
+   padding-top: 140px;
+   padding-left: 1.5rem;
+   padding-right: 1.5rem;
+ }
+ 
+ nav {
+   padding: 1rem 1.5rem;
+   flex-direction: column;
+   gap: 0.5rem;
+   margin: 0;
+   max-width: 100%;
+ }
+ 
+ .article-header {
+   padding: 2rem 0 2rem;
+ }
+ 
+ .article-title {
+   font-size: 1.8rem;
+ }
+ 
+ .article-subtitle {
+   font-size: 0.95rem;
+ }
+ 
+ .article-content {
+   padding: 0;
+ }
+ 
+ .logo-image {
+   height: 60px;
+ }
+ 
+ .nav-links {
+   gap: 1.5rem;
+ }
+ 
+ .article-image {
+   margin: 0 auto 2rem;
+ }
+ 
+ .comparison-table {
+   display: block;
+   overflow-x: auto;
+ }
+ }
+ 
+ @media (max-width: 480px) {
+ body {
+   padding-top: 130px;
+ }
+ 
+ .article-title {
+   font-size: 1.6rem;
+ }
+ 
+ .section-title {
+   font-size: 1.1rem;
+ }
+ 
+ .logo-image {
+   height: 50px;
+ }
+ 
+ .nav-links {
+   gap: 1rem;
+   font-size: 0.85rem;
+ }
+ 
+ p {
+   font-size: 0.9rem;
+ }
+}
+
+ /* FOOTER STYLES */
+.site-footer {
+    text-align: center;
+    padding: 3rem 2rem;
+    margin-top: 4rem;
+    border-top: 1px solid #e5e5e5;
+    max-width: 1200px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.footer-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5rem;
+}
+
+.footer-tagline {
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: #666;
+    margin: 0;
+}
+
+.instagram-link {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    color: black;
+    transition: opacity 0.2s;
+    font-size: 0.9rem;
+    letter-spacing: 1px;
+}
+
+.instagram-link:hover {
+    opacity: 0.7;
+}
+
+.instagram-icon {
+    width: 20px;
+    height: 20px;
+    fill: currentColor;
+}
+
+.copyright {
+    font-size: 0.8rem;
+    color: #888;
+    margin: 0;
+}
+
+/* RESPONSIVE FOOTER */
+@media (max-width: 768px) {
+    .site-footer {
+        padding: 2rem 1.5rem;
+        margin-top: 3rem;
+    }
+    
+    .footer-tagline {
+        font-size: 0.85rem;
+    }
+}
+
+ }
+ </style>
+</head>
+<body>
+ <nav>
+ <a href="index.html" class="logo">
+ <img src="images/1heavy0.png" alt="1heavy0" class="logo-image">
+ </a>
+ <div class="nav-links">
+ <a href="blog.html">BLOG</a>
+ <a href="zine.html">ZINE</a>
+ <a href="signal.html">SIGNAL</a>
+ </div>
+ </nav>
+ 
+ <main>
+ <article>
+ <header class="article-header">
+ <div class="article-category">CULTURAL FORENSICS • LIFESTYLE SYSTEMS</div>
+ <h1 class="article-title">NOMAD™: THE INDUSTRIALIZATION OF ROOTLESSNESS</h1>
+ <div class="article-subtitle">HOW FREEDOM BECAME A LIFESTYLE PRODUCT</div>
+ <div class="article-meta">DECEMBER 26, 2025 • 19 MIN READ</div>
+ 
+ <!-- Article Image -->
+ <div class="article-image">
+   
+   <img src="images/nomad.jpg" alt="Digital nomad product ecosystem diagram">
+   <!--<div class="image-caption">The digital nomad industrial complex: from aspiration to infrastructure</div> -->
+ </div>
+ </header>
+ 
+ <div class="article-content">
+ <div class="content-section">
+ <p>The original promise was simple: location independence. Work from anywhere. Escape the office. Live on your terms. But somewhere between the manifesto and the marketplace, nomadism stopped being about movement and started being about consumption.</p>
+ 
+ <p>Today, "digital nomad" describes not a condition of rootlessness, but a lifestyle package—complete with its own infrastructure, aesthetics, and dependency chains. What began as an escape from system became a system itself.</p>
+ 
+ <p>The product isn't freedom. It's the appearance of freedom, delivered through carefully managed constraints.</p>
+ </div>
+ 
+ <div class="content-section">
+ <h2 class="section-title">THE ORIGINAL PROMISE VS. THE PRODUCT</h2>
+ 
+ <p>Contrasting two definitions reveals the transformation:</p>
+ 
+ <table class="comparison-table">
+ <thead>
+   <tr>
+     <th class="column-title">PHILOSOPHICAL NOMADISM</th>
+     <th class="column-title">PRODUCTIZED NOMADISM</th>
+   </tr>
+ </thead>
+ <tbody>
+   <tr>
+     <td>Dislocation as existential condition</td>
+     <td>Relocation as lifestyle upgrade</td>
+   </tr>
+   <tr>
+     <td>Minimalism by necessity</td>
+     <td>Minimalism as aesthetic choice</td>
+   </tr>
+   <tr>
+     <td>Adaptation to environments</td>
+     <td>Environments adapted to needs</td>
+   </tr>
+   <tr>
+     <td>Uncertainty as constant companion</td>
+     <td>Uncertainty managed through insurance products</td>
+   </tr>
+   <tr>
+     <td>Movement as response to internal state</td>
+     <td>Movement as content generation strategy</td>
+   </tr>
+ </tbody>
+ </table>
+ 
+ <blockquote>
+ "The true nomad leaves no infrastructure behind. The digital nomad requires Wi-Fi, co-working spaces, and a Stripe account."
+ </blockquote>
+ 
+ <p>The shift is fundamental: from navigating existing systems to creating parallel systems that replicate what was supposedly escaped.</p>
+ </div>
+ 
+ <div class="content-section">
+ <h2 class="section-title">SUPPLY CHAIN OF THE AESTHETIC</h2>
+ 
+ <p>The digital nomad lifestyle now has a fully developed industrial base:</p>
+ 
+ <div class="product-layer">
+ <div class="layer-title">INFRASTRUCTURE LAYER</div>
+ <div class="layer-desc">Co-living/co-working spaces function as containment infrastructure—creating controlled environments that mimic home while maintaining revenue streams. These are not public spaces but private clubs with membership fees, creating economic segregation within host communities.</div>
+ <div class="layer-examples">SELINA, OUTSITE, ROAM • MONTHLY FEES: $800-$2,000 • TARGET: "EXPERIENCE" OVER FUNCTION</div>
+ </div>
+ 
+ <div class="product-layer">
+ <div class="layer-title">DEPENDENCY LAYER</div>
+ <div class="layer-desc">"Passive income" gurus and course sellers create dependency cycles. The promise of automated income requires continuous investment in new courses, tools, and strategies—ensuring the nomad remains a consumer, not just a producer.</div>
+ <div class="layer-examples">COURSES: $497-$2,497 • TOOLS: $29-$99/MONTH • LIFETIME VALUE: $5,000+ PER CONVERT</div>
+ </div>
+ 
+ <div class="product-layer">
+ <div class="layer-title">AESTHETIC LAYER</div>
+ <div class="layer-desc">Instagram templates, Lightroom presets, and "workation" photography create experience simulacra. The aesthetic becomes standardized: laptop on beach, sunset coworking, "minimal" workspace. Reality gets cropped to fit the grid.</div>
+ <div class="layer-examples">PRESET PACKS: $19-$49 • TEMPLATES: $27 • CONTENT CALENDARS: $37/MONTH</div>
+ </div>
+ 
+ <div class="product-layer">
+ <div class="layer-title">COMMUNITY LAYER</div>
+ <div class="layer-desc">Facebook groups, Slack channels, and meetups create the illusion of community while functioning as lead generation funnels. Every connection becomes a potential customer or affiliate opportunity.</div>
+ <div class="layer-examples">GROUPS: 50,000+ MEMBERS • MASTERMINDS: $2,000+/QUARTER • RETREATS: $3,000+/WEEK</div>
+ </div>
+ 
+ <p>Each layer extracts value while reinforcing the narrative of freedom. The system is self-perpetuating: to be a digital nomad, you must participate in its economy.</p>
+ </div>
+ 
+ <div class="content-section">
+ <h2 class="section-title">THE BUREAUCRATIC REALITY</h2>
+ 
+ <p>Behind the Instagram aesthetics lies an unseamless backend:</p>
+ 
+ <div class="bureaucracy-item">
+ <div class="bureaucracy-title">VISA ARBITRAGE AS FULL-TIME JOB</div>
+ <div class="bureaucracy-desc">The "visa run" isn't an adventure—it's administrative labor. Digital nomads spend significant time navigating immigration systems, often in legal gray areas. Countries create "digital nomad visas" not to welcome travelers, but to extract fees and stimulate local economies without granting residency rights.</div>
+ </div>
+ 
+ <div class="bureaucracy-item">
+ <div class="bureaucracy-title">TAX COMPLEXITY AS HIDDEN COST</div>
+ <div class="bureaucracy-desc">Maintaining tax compliance across multiple jurisdictions requires specialized accountants. The "tax optimization" promoted by influencers often verges on evasion. Legal residency becomes a strategic game, not a lived reality.</div>
+ </div>
+ 
+ <div class="bureaucracy-item">
+ <div class="bureaucracy-title">HEALTHCARE GAPS AS EXISTENTIAL RISK</div>
+ <div class="bureaucracy-desc">Travel insurance rarely covers chronic conditions or serious illness. Healthcare becomes a patchwork of telemedicine, local clinics, and hope. The young, healthy nomad demographic masks this vulnerability until crisis strikes.</div>
+ </div>
+ 
+ <div class="bureaucracy-item">
+ <div class="bureaucracy-title">DIGITAL INFRASTRUCTURE DEPENDENCY</div>
+ <div class="bureaucracy-desc">The nomad relies on platforms that can disappear overnight: payment processors, cloud services, communication tools. A Stripe account freeze or PayPal limitation can mean instant insolvency. Freedom depends on corporate goodwill.</div>
+ </div>
+ 
+ <p>These realities rarely appear in the lifestyle marketing. They're the unsexy backend that gets cropped out of the photo.</p>
+ </div>
+ 
+ <div class="content-section">
+ <h2 class="section-title">SYSTEM CRITIQUE: REINFORCING GLOBAL INEQUITIES</h2>
+ 
+ <p>The digital nomad movement doesn't escape global systems—it exploits their inequalities:</p>
+ 
+ <p class="emphasis">ECONOMIC ARBITRAGE</p>
+ 
+ <p>Earning in strong currencies while spending in weak ones creates an economic advantage that depends on global inequality. The nomad's "freedom" is subsidized by local economies with lower purchasing power.</p>
+ 
+ <p class="emphasis">GENTRIFICATION TOURISM</p>
+ 
+ <p>Nomad hubs transform neighborhoods: cafes raise prices, rents increase, local businesses get replaced by co-working spaces. The community that attracted nomads gets destroyed by their presence.</p>
+ 
+ <p class="emphasis">EXTRATERRITORIAL PRIVILEGE</p>
+ 
+ <p>Nomads often enjoy services without contributing to local systems (taxes, social security, community infrastructure). They become a privileged class with rights but few responsibilities.</p>
+ 
+ <blockquote>
+ "The digital nomad is the perfect neoliberal subject: globally mobile, economically productive, politically disengaged, personally responsible for all risk."
+ </blockquote>
+ 
+ <p>The movement ultimately reinforces the very systems it claims to escape: capitalism, inequality, extraction.</p>
+ </div>
+ 
+ <div class="content-section">
+ <h2 class="section-title">THE POST-NOMAD EMERGENCE</h2>
+ 
+ <p>Some patterns suggest evolution beyond the productized version:</p>
+ 
+ <p class="emphasis">SLOW TRAVEL REDISCOVERY</p>
+ 
+ <p>A subset of nomads are rejecting constant movement in favor of deeper immersion—staying months or years in one place, learning languages, building local relationships. This looks less like "nomadism" and more like traditional expatriation.</p>
+ 
+ <p class="emphasis">DIGITAL VILLAGES</p>
+ 
+ <p>Intentional communities forming around shared values rather than lifestyle aesthetics. These groups often focus on sustainability, skill-sharing, and local integration rather than consumption.</p>
+ 
+ <p class="emphasis">INFRASTRUCTURE COOPERATIVES</p>
+ 
+ <p>Nomads pooling resources to create shared infrastructure (housing, internet, workspaces) that benefits local communities rather than extracting from them.</p>
+ 
+ <p>These developments suggest a possible maturation: from lifestyle consumption to genuine alternative living.</p>
+ </div>
+ 
+ <div class="content-section">
+ <h2 class="section-title">DIAGNOSTIC FRAMEWORK: REAL VS. PERFORMATIVE NOMADISM</h2>
+ 
+ <p>How to distinguish the condition from the product:</p>
+ 
+ <p><strong>Real nomadism:</strong> Systems adapt to environment. <strong>Product nomadism:</strong> Environment adapts to systems.</p>
+ 
+ <p><strong>Real nomadism:</strong> Movement follows internal rhythm. <strong>Product nomadism:</strong> Movement follows content calendar.</p>
+ 
+ <p><strong>Real nomadism:</strong> Community emerges from shared experience. <strong>Product nomadism:</strong> Community functions as sales funnel.</p>
+ 
+ <p><strong>Real nomadism:</strong> Infrastructure is temporary, minimal. <strong>Product nomadism:</strong> Infrastructure is replicated, comprehensive.</p>
+ 
+ <p><strong>Real nomadism:</strong> Uncertainty is managed, not eliminated. <strong>Product nomadism:</strong> Uncertainty is productized, sold as "coaching."</p>
+ 
+ <p>The distinction matters because one represents genuine alternative living, while the other represents market capture of that alternative.</p>
+ </div>
+ 
+ <div class="content-section">
+ <h2 class="section-title">SYSTEM NOTES</h2>
+ 
+ <p>• Digital nomadism industrialized the desire for freedom</p>
+ <p>• The movement's infrastructure replicates what it claims to escape</p>
+ <p>• Lifestyle marketing crops out bureaucratic reality</p>
+ <p>• Economic advantage depends on global inequality</p>
+ <p>• True dislocation resists productization</p>
+ <p>• Community often functions as disguised sales funnel</p>
+ <p>• The most successful "nomads" sell the dream, not live it</p>
+ <p>• Post-nomad movements suggest possible maturation beyond consumption</p>
+ </div>
+ 
+ <div class="content-section">
+ <p style="font-style: italic; text-align: center; margin-top: 3rem;">
+ Freedom cannot be purchased as a lifestyle package. It emerges from the willingness to be uncomfortable.
+ </p>
+ </div>
+ </div>
+ 
+ <div class="blog-footer">
+ <!--<div class="next-reading">NEXT IN SYSTEMS ANALYSIS</div>
+ <div class="next-title">THE FULL STACK COLLAPSE: WHEN SURFACE AREA REPLACES DEPTH</div> -->
+ <a href="blog.html" class="back-link">BACK TO ALL ARTICLES</a>
+ </div>
+ </article>
+ </main>
+ 
+ <footer class="site-footer">
+    <div class="footer-container">
+        <a href="https://instagram.com/1heavy0" target="_blank" class="instagram-link">
+            <svg class="instagram-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20" height="20">
+                <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zM5.838 12a6.162 6.162 0 1112.324 0 6.162 6.162 0 01-12.324 0zM12 16a4 4 0 110-8 4 4 0 010 8zm4.965-10.405a1.44 1.44 0 112.881.001 1.44 1.44 0 01-2.881-.001z"/>
+            </svg>
+        </a>
+        <p class="copyright">© 2026 1HEAVY0 MEDIA</p>
+    </div>
+</footer>
+</body>
+</html>
