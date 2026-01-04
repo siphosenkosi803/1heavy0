@@ -120,6 +120,84 @@ href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;
     margin-top: -40px;
 }
 
+
+/* HERO BUTTON STYLES */
+.hero-button-container {
+  margin-top: 3rem;
+  text-align: center;
+}
+
+.hero-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.8rem;
+  padding: 0.9rem 2rem;
+  border: 1px solid #000;
+  background: transparent;
+  color: #000;
+  text-decoration: none;
+  text-transform: uppercase;
+  font-family: 'Space Mono', monospace;
+  font-size: 0.85rem;
+  letter-spacing: 1px;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.hero-button::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: #000;
+  transition: left 0.3s ease;
+  z-index: -1;
+}
+
+.hero-button:hover::before {
+  left: 0;
+}
+
+.hero-button:hover {
+  color: #fff;
+}
+
+.button-arrow {
+  font-size: 1.2rem;
+  transition: transform 0.3s ease;
+}
+
+.hero-button:hover .button-arrow {
+  transform: translateX(4px);
+}
+
+/* Responsive adjustments for button */
+@media (max-width: 768px) {
+  .hero-button {
+    padding: 0.8rem 1.5rem;
+    font-size: 0.8rem;
+  }
+  
+  .hero-button-container {
+    margin-top: 2.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero-button {
+    padding: 0.7rem 1.2rem;
+    font-size: 0.75rem;
+  }
+  
+  .hero-button-container {
+    margin-top: 2rem;
+  }
+}
+
+
 .hero-main {
     max-width: 800px;
     margin: 0 auto;
@@ -350,94 +428,391 @@ href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;
  letter-spacing: 2px;
  }
 
- /* IMPROVED CONTENT CARDS */
- .content-grid {
- display: grid;
- grid-template-columns: 1fr;
- gap: 2rem;
- max-width: 800px;
- margin: 0 auto;
- }
 
- .content-card {
- display: flex;
- border: 1px solid #e5e5e5;
- background: #fafafa;
- transition: all 0.4s ease;
- text-decoration: none;
- color: inherit;
- overflow: hidden;
- height: 160px;
- }
 
- .content-card:hover {
- transform: translateY(-2px);
- box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
- border-color: #000;
- }
+/* REDESIGNED CONTENT CARDS WITH IMAGES */
+.content-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2.5rem;
+  max-width: 900px;
+  margin: 0 auto;
+}
 
- .card-meta {
- width: 140px;
- background: #f0f0f0;
- display: flex;
- flex-direction: column;
- justify-content: center;
- align-items: center;
- padding: 1.5rem;
- border-right: 1px solid #e5e5e5;
- transition: all 0.3s ease;
- }
+.content-card {
+  display: grid;
+  grid-template-columns: 180px 1fr;
+  border: 1px solid #e5e5e5;
+  background: #fafafa;
+  transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+  text-decoration: none;
+  color: inherit;
+  overflow: hidden;
+  height: 200px;
+  position: relative;
+  text-transform: uppercase;
+}
 
- .content-card:hover .card-meta {
- background: #000;
- }
+.content-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.08);
+  border-color: #000;
+}
 
- .card-type {
- font-size: 0.8rem;
- color: #666;
- text-transform: uppercase;
- letter-spacing: 2px;
- margin-bottom: 0.5rem;
- transition: color 0.3s ease;
- }
+/* Card Image */
+.card-image {
+  background: #1a1a1a;
+  background-size: cover;
+  background-position: center;
+  position: relative;
+  overflow: hidden;
+}
 
- .content-card:hover .card-type {
- color: #999;
- }
+.card-image::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(45deg, rgba(0,0,0,0.1) 0%, transparent 100%);
+  z-index: 1;
+}
 
- .card-issue {
- font-size: 2.5rem;
- font-weight: 700;
- color: #000;
- transition: color 0.3s ease;
- }
+.content-card:hover .card-image {
+  transform: scale(1.05);
+  transition: transform 0.6s ease;
+}
 
- .content-card:hover .card-issue {
- color: #fff;
- }
+/* Card Content Wrapper */
+.card-content-wrapper {
+  display: flex;
+  flex-direction: column;
+  padding: 1.8rem;
+}
 
- .card-content {
- flex: 1;
- padding: 2rem;
- display: flex;
- flex-direction: column;
- justify-content: center;
- }
+.card-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.2rem;
+  padding-bottom: 0.8rem;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+}
 
- .card-title {
- font-size: 1.5rem;
- font-weight: 700;
- text-transform: uppercase;
- margin-bottom: 0.8rem;
- letter-spacing: -0.5px;
- }
+.card-type {
+  font-size: 0.75rem;
+  color: #666;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  font-weight: 400;
+}
 
- .card-description {
- color: #333;
- font-size: 0.95rem;
- line-height: 1.6;
- }
+.card-issue {
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: #000;
+  opacity: 0.9;
+}
 
+.card-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.card-title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  margin-bottom: 0.8rem;
+  letter-spacing: -0.5px;
+  line-height: 1.2;
+}
+
+.card-description {
+  color: #444;
+  font-size: 0.9rem;
+  line-height: 1.6;
+  margin-bottom: 1.5rem;
+  flex: 1;
+}
+
+/* Card Indicator */
+.card-indicator {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  margin-top: auto;
+}
+
+.indicator-line {
+  width: 30px;
+  height: 1px;
+  background: #000;
+  transition: width 0.3s ease;
+}
+
+.indicator-text {
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: #666;
+  transition: color 0.3s ease;
+}
+
+.content-card:hover .indicator-line {
+  width: 50px;
+}
+
+.content-card:hover .indicator-text {
+  color: #000;
+}
+
+/* REDESIGNED PUBLICATIONS SECTION */
+.publications-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.publication-card {
+  border: 1px solid #e5e5e5;
+  background: #fafafa;
+  transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+  position: relative;
+  overflow: hidden;
+}
+
+.publication-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.08);
+  border-color: #000;
+}
+
+.card-link {
+  display: block;
+  color: inherit;
+  text-decoration: none;
+  height: 100%;
+}
+
+/* Card Interface (Top section with image) */
+.card-interface {
+  position: relative;
+  height: 200px;
+  overflow: hidden;
+  background: #0a0a0a;
+}
+
+.card-label {
+  position: absolute;
+  top: 1.2rem;
+  left: 1.2rem;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.label-type {
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: rgba(255, 255, 255, 0.9);
+  background: rgba(0, 0, 0, 0.7);
+  padding: 0.3rem 0.8rem;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.label-issue {
+  font-size: 1rem;
+  font-weight: 700;
+  color: rgba(255, 255, 255, 0.9);
+  background: rgba(0, 0, 0, 0.7);
+  padding: 0.3rem 0.6rem;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.card-preview {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.preview-image {
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-position: center;
+  transition: transform 0.6s ease;
+}
+
+.preview-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.overlay-text {
+  color: #fff;
+  text-transform: uppercase;
+  font-size: 0.8rem;
+  letter-spacing: 2px;
+  padding: 0.8rem 1.5rem;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.publication-card:hover .preview-image {
+  transform: scale(1.05);
+}
+
+.publication-card:hover .preview-overlay {
+  opacity: 1;
+}
+
+/* Card Content (Bottom section) */
+.card-content {
+  padding: 2rem;
+  background: #fff;
+}
+
+.content-header {
+  margin-bottom: 1.2rem;
+}
+
+.content-title {
+  font-size: 1.4rem;
+  font-weight: 700;
+  line-height: 1.3;
+  margin-bottom: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: -0.5px;
+}
+
+.content-meta {
+  display: flex;
+  gap: 0.5rem;
+  font-size: 0.8rem;
+  color: #666;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.content-excerpt {
+  margin-bottom: 1.5rem;
+}
+
+.content-excerpt p {
+  font-size: 0.95rem;
+  line-height: 1.7;
+  color: #444;
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
+}
+
+.content-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  padding-top: 1.2rem;
+  border-top: 1px solid #e5e5e5;
+}
+
+.tag {
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: #666;
+  padding: 0.2rem 0.6rem;
+  background: #f5f5f5;
+  border: 1px solid #e5e5e5;
+  transition: all 0.2s ease;
+}
+
+.publication-card:hover .tag {
+  background: #000;
+  color: #fff;
+  border-color: #000;
+}
+
+/* RESPONSIVE DESIGN */
+@media (max-width: 1024px) {
+  .publications-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+  }
+  
+  .card-interface {
+    height: 180px;
+  }
+  
+  .content-title {
+    font-size: 1.2rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .publications-grid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+    max-width: 500px;
+  }
+  
+  .card-interface {
+    height: 220px; /* Taller on mobile for better visibility */
+  }
+  
+  .content-title {
+    font-size: 1.3rem;
+  }
+  
+  .card-content {
+    padding: 1.8rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .publications-grid {
+    gap: 1.2rem;
+  }
+  
+  .card-interface {
+    height: 200px;
+  }
+  
+  .content-title {
+    font-size: 1.1rem;
+  }
+  
+  .card-content {
+    padding: 1.5rem;
+  }
+  
+  .content-excerpt p {
+    font-size: 0.9rem;
+  }
+}
+
+/* Landscape orientation adjustments */
+@media (orientation: landscape) and (max-height: 600px) {
+  .card-interface {
+    height: 160px;
+  }
+}
+
+
+ 
  /* FLOATING ELEMENTS */
  .floating-text {
  position: absolute;
@@ -619,6 +994,8 @@ href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;
 
 
 
+
+
  }
 
  /* FOOTER STYLES */
@@ -717,89 +1094,154 @@ href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;
  </h2> 
 
 
+ 
 
 
 
  </div>
  </section>
+
+
+ <!--  BUTTON -->
+    <div class="hero-button-container">
+      <a href="about.html" class="hero-button">
+        <span class="button-text">System Manifesto</span>
+        <span class="button-arrow">→</span>
+      </a>
+    </div>
+    <!-- END BUTTON -->
+
+
 
  <!-- Divider -->
  <div class="divider"></div>
 
  <!-- Featured Content Section -->
- <section class="content-section">
- <div class="section-header">
- <h2 class="section-title">Recent Publications</h2>
- <p class="section-subtitle"></p>
- </div>
- 
- <div class="content-grid">
+<section class="content-section">
+  <div class="section-header">
+    <h2 class="section-title">Recent Publications</h2>
+    <p class="section-subtitle">SYSTEM ANALYSIS ARCHIVE</p>
+  </div>
+  
+  <div class="publications-grid">
+    
+    <!-- Publication 1 -->
+    <article class="publication-card">
+      <a href="error-451.html" class="card-link">
+        <div class="card-interface">
+          <div class="card-label">
+            <span class="label-type">ANALYSIS</span>
+            <span class="label-issue"></span>
+          </div>
+          <div class="card-preview">
+            <div class="preview-image" style="background-image: url('images/error.jpg');"></div>
+            <div class="preview-overlay">
+              <span class="overlay-text">→ ACCESS DOCUMENT</span>
+            </div>
+          </div>
+        </div>
+        
+        <div class="card-content">
+          <div class="content-header">
+            <h3 class="content-title">ERROR 451: LEGAL WARFARE AS A SYSTEM LAYER</h3>
+            <div class="content-meta">
+              <span class="meta-date">DEC 2025</span>
+              <span class="meta-readtime">• 18 MIN READ</span>
+            </div>
+          </div>
+          
+          <div class="content-excerpt">
+            <p>How institutions weaponize legal frameworks to control digital infrastructure and enforce systemic compliance through code-as-law.</p>
+          </div>
+          
+          <!--<div class="content-tags">
+            <span class="tag">LEGAL SYSTEMS</span>
+            <span class="tag">INFRASTRUCTURE</span>
+            <span class="tag">GOVERNANCE</span>
+          </div> -->
+        </div>
+      </a>
+    </article>
+    
+    <!-- Publication 2 -->
+    <article class="publication-card">
+      <a href="log_03.html" class="card-link">
+        <div class="card-interface">
+          <div class="card-label">
+            <span class="label-type">INVESTIGATION</span>
+            <span class="label-issue"></span>
+          </div>
+          <div class="card-preview">
+            <div class="preview-image" style="background-image: url('images/root.jpg');"></div>
+            <div class="preview-overlay">
+              <span class="overlay-text">→ ACCESS LOG</span>
+            </div>
+          </div>
+        </div>
+        
+        <div class="card-content">
+          <div class="content-header">
+            <h3 class="content-title">ROOT ACCESS: HACKING AS SYSTEM LITERACY</h3>
+            <div class="content-meta">
+              <span class="meta-date">DEC 2025</span>
+              <span class="meta-readtime">• 22 MIN READ</span>
+            </div>
+          </div>
+          
+          <div class="content-excerpt">
+            <p>Examining how power moves through code and infrastructure, tracing the knowledge gaps between surface tools and deep system understanding.</p>
+          </div>
+          
+         <!-- <div class="content-tags">
+            <span class="tag">SECURITY</span>
+            <span class="tag">SYSTEMS</span>
+            <span class="tag">POWER</span>
+          </div> -->
+        </div>
+      </a>
+    </article>
+    
+    <!-- Publication 3 -->
+    <article class="publication-card">
+      <a href="signal-2025-report.html" class="card-link">
+        <div class="card-interface">
+          <div class="card-label">
+            <span class="label-type">SIGNAL</span>
+            <span class="label-issue"></span>
+          </div>
+          <div class="card-preview">
+            <div class="preview-image" style="background-image: url('images/neuro.jpg');"></div>
+            <div class="preview-overlay">
+              <span class="overlay-text">→ ACCESS REPORT</span>
+            </div>
+          </div>
+        </div>
+        
+        <div class="card-content">
+          <div class="content-header">
+            <h3 class="content-title">2025: A STATE OF REALITY REPORT</h3>
+            <div class="content-meta">
+              <span class="meta-date">DEC 2025</span>
+              <span class="meta-readtime">• 25 MIN READ</span>
+            </div>
+          </div>
+          
+          <div class="content-excerpt">
+            <p>Across physics, biology, astronomy, and AI—2025 revealed a shared pattern: reality behaves less like a fixed stage and more like an ongoing conversation.</p>
+          </div>
+          
+          <!--<div class="content-tags">
+            <span class="tag">SCIENCE</span>
+            <span class="tag">REALITY</span>
+            <span class="tag">SYSTEMS</span> -->
+          </div>
+        </div>
+      </a>
+    </article>
+    
+  </div>
+</section>
 
-
-<!-- Content Card 1 -->
- <a href="error-451.html" class="content-card">
- <div class="card-meta">
- <div class="card-type">ANALYSIS</div>
- <div class="card-issue">01</div>
- </div>
- <div class="card-content">
- <div class="card-title">ERROR 451: LEGAL WARFARE AS A SYSTEM LAYER</div>
- <div class="card-description">
- HOW INSTITUTIONS HACK THE LEGAL STACK
- </div>
- </div>
- </a>
-
-
-
-  <!-- Content Card 2 -->
- <a href="log_03.html" class="content-card">
- <div class="card-meta">
- <div class="card-type">INVESTIGATIONS</div>
- <div class="card-issue">02</div>
- </div>
- <div class="card-content">
- <div class="card-title">ROOT ACCESS</div>
- <div class="card-description">
- an examination of hacking as system literacy. tracing how power moves through code, infrastructure, and the people who understand both.
- </div>
- </div>
- </a> 
-
-
- 
- 
-
- 
- <!-- Content Card 2 -->
- <!--<a href="log_01.html" class="content-card">
- <div class="card-meta">
- <div class="card-type">Zine</div>
- <div class="card-issue">01</div>
- </div>
- <div class="card-content">
- <div class="card-title">Unseen Conversations</div>
- <div class="card-description">
- Interviews with creators operating outside optimization loops. Signal that refuses algorithmic parsing.
- </div>
- </div>
- </a> -->
- 
- <!-- Content Card 3 -->
- <a href="signal-2025-report.html" class="content-card">
- <div class="card-meta">
- <div class="card-type">Signal</div>
- <div class="card-issue">03</div>
- </div>
- <div class="card-content">
- <div class="card-title">2025: A State of Reality Report</div>
- <div class="card-description">
- across, physics, biology, astronomy, and ai, 2025 revealed a shared pattern: reality behaves less like a fixed stage and more like an ongoing conversation we're only beginning to understand.
- </div>
- </div>
- </a>
- </div>
- </section>
 
  <!-- Divider -->
  <div class="divider"></div>
@@ -848,3 +1290,4 @@ href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;
 
 
 
+    
