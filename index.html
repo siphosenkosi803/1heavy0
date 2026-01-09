@@ -46,7 +46,7 @@ href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;
  line-height: 1.8;
  }
 
- /* NAVIGATION - UPDATED TO MATCH BLOG PAGE */
+ /* NAVIGATION */
  .nav {
  position: fixed;
  top: 0;
@@ -109,240 +109,299 @@ href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;
  width: 100%;
  }
 
- /* HERO SECTION - UPDATED FOR LANDSCAPE SUPPORT */
+ /* REDESIGNED HERO SECTION - SPLIT SCREEN DESIGN */
 .hero {
     min-height: calc(100vh - 120px);
+    display: grid;
+    grid-template-columns: 1fr 1fr; /* Split screen */
+    margin-top: -40px;
+    position: relative;
+    background: white;
+}
+
+/* Left side - Image Panel with white background */
+.hero-image {
+    position: relative;
+    overflow: hidden;
+    background: white; /* Changed to white to match page */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+}
+
+.hero-image-inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    max-height: 500px;
+    background: url('images/neuromancer.png') no-repeat center center; /* Using PNG for transparency */
+    background-size: contain; /* Changed to contain for transparent images */
+    background-position: center;
+    border: 1px solid #e5e5e5; /* Subtle border for definition */
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+}
+
+/* Add a subtle texture to the image container */
+.hero-image-inner::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: 
+        linear-gradient(transparent 98%, rgba(0, 0, 0, 0.02) 98%),
+        linear-gradient(90deg, transparent 98%, rgba(0, 0, 0, 0.02) 98%);
+    background-size: 40px 40px, 40px 40px;
+    opacity: 0.3;
+    pointer-events: none;
+}
+
+/* Image title overlay */
+.image-title {
+    position: absolute;
+    bottom: 2rem;
+    left: 2rem;
+    z-index: 2;
+}
+
+.image-title-text {
+    font-size: 3.5rem;
+    font-weight: 700;
+    color: rgba(0, 0, 0, 0.9); /* Changed to black for white background */
+    text-transform: uppercase;
+    letter-spacing: -2px;
+    line-height: 1;
+    text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.8); /* White shadow for contrast */
+}
+
+/* Right side - Text Panel */
+.hero-text {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    padding: 0 3rem;
+    padding: 3rem;
+    background: white;
     position: relative;
-    margin-top: -40px;
 }
 
-
-/* HERO BUTTON STYLES */
-.hero-button-container {
-  margin-top: 3rem;
-  text-align: center;
+/* Decorative vertical line between panels */
+.hero-text::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 2px;
+    height: 80%;
+    background: black;
 }
 
-.hero-button {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.8rem;
-  padding: 0.9rem 2rem;
-  border: 1px solid #000;
-  background: transparent;
-  color: #000;
-  text-decoration: none;
-  text-transform: uppercase;
-  font-family: 'Space Mono', monospace;
-  font-size: 0.85rem;
-  letter-spacing: 1px;
-  transition: all 0.3s ease;
-  position: relative;
-  overflow: hidden;
-}
-
-.hero-button::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: -100%;
-  width: 100%;
-  height: 100%;
-  background: #000;
-  transition: left 0.3s ease;
-  z-index: -1;
-}
-
-.hero-button:hover::before {
-  left: 0;
-}
-
-.hero-button:hover {
-  color: #fff;
-}
-
-.button-arrow {
-  font-size: 1.2rem;
-  transition: transform 0.3s ease;
-}
-
-.hero-button:hover .button-arrow {
-  transform: translateX(4px);
-}
-
-/* Responsive adjustments for button */
-@media (max-width: 768px) {
-  .hero-button {
-    padding: 0.8rem 1.5rem;
-    font-size: 0.8rem;
-  }
-  
-  .hero-button-container {
-    margin-top: 2.5rem;
-  }
-}
-
-@media (max-width: 480px) {
-  .hero-button {
-    padding: 0.7rem 1.2rem;
-    font-size: 0.75rem;
-  }
-  
-  .hero-button-container {
-    margin-top: 2rem;
-  }
-}
-
-
-.hero-main {
-    max-width: 800px;
-    margin: 0 auto;
-    text-align: center;
-}
-
+/* Main heading with creative typography */
 .hero-main h1 {
-    font-size: clamp(2.5rem, 5vw, 4rem); /* Responsive font size */
+    font-size: clamp(2.5rem, 4vw, 3.5rem);
     font-weight: 700;
-    letter-spacing: -1px;
-    line-height: 1.1; /* Tighter line height */
-    text-transform: uppercase;
-    margin-bottom: 1rem;
-    hyphens: auto; /* Allow word breaking */
-    overflow-wrap: break-word; /* Prevent overflow */
+    letter-spacing: -1.5px;
+    line-height: 1.1;
+    margin-bottom: 2rem;
+    position: relative;
+    display: inline-block;
 }
 
+.hero-main h1::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 0;
+    width: 100px;
+    height: 3px;
+    background: black;
+}
+
+/* Subtitle with better readability */
 .hero-subtitle {
-    margin-top: 1.5rem;
-    font-size: clamp(0.9rem, 2vw, 1.2rem); /* Responsive subtitle */
-    color: #666;
+    font-size: clamp(1rem, 1.5vw, 1.2rem);
+    color: #333;
     text-transform: uppercase;
     letter-spacing: 1.5px;
-    line-height: 1.4;
-    max-width: 600px;
-    margin-left: auto;
-    margin-right: auto;
+    line-height: 1.6;
+    margin-bottom: 3rem;
+    max-width: 500px;
 }
 
-/* FLOATING ELEMENTS - UPDATED FOR LANDSCAPE */
-.floating-text {
+/* Creative section labels */
+.section-label {
     position: absolute;
-    font-size: clamp(4rem, 10vw, 12rem); /* Responsive floating text */
+    font-size: 0.8rem;
     font-weight: 700;
-    color: rgba(0, 0, 0, 0.02);
+    letter-spacing: 2px;
     text-transform: uppercase;
-    z-index: -1;
-    user-select: none;
-    pointer-events: none;
+    color: #666;
+    transform: rotate(-90deg);
+    transform-origin: left top;
     white-space: nowrap;
 }
 
-.floating-1 {
-    top: 10%;
-    left: -5%;
-    transform: rotate(-90deg);
+.label-image {
+    top: 3rem;
+    left: 3rem;
 }
 
-.floating-2 {
-    bottom: 10%;
-    right: -5%;
-    transform: rotate(90deg);
+.label-text {
+    top: 3rem;
+    right: -2rem;
+    color: #333;
 }
 
-/* LANDSCAPE-SPECIFIC ADJUSTMENTS */
-@media (orientation: landscape) and (max-height: 600px) {
+/* HERO BUTTON STYLES */
+.hero-button-container {
+    margin-top: 2rem;
+}
+
+.hero-button {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.8rem;
+    padding: 0.9rem 2rem;
+    border: 2px solid #000;
+    background: transparent;
+    color: #000;
+    text-decoration: none;
+    text-transform: uppercase;
+    font-family: 'Space Mono', monospace;
+    font-size: 0.85rem;
+    letter-spacing: 1px;
+    font-weight: 700;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.hero-button::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: #000;
+    transition: left 0.3s ease;
+    z-index: -1;
+}
+
+.hero-button:hover::before {
+    left: 0;
+}
+
+.hero-button:hover {
+    color: #fff;
+    transform: translateX(5px);
+}
+
+.button-arrow {
+    font-size: 1.2rem;
+    transition: transform 0.3s ease;
+}
+
+.hero-button:hover .button-arrow {
+    transform: translateX(8px);
+}
+
+/* RESPONSIVE DESIGN FOR SPLIT SCREEN */
+@media (max-width: 1024px) {
     .hero {
+        grid-template-columns: 1fr;
+        grid-template-rows: 50vh auto;
         min-height: auto;
-        padding: 3rem 2rem;
-        margin-top: 0;
     }
     
-    .hero-main h1 {
-        font-size: 2.8rem;
-        line-height: 1;
-        margin-bottom: 0.8rem;
+    .hero-image-inner {
+        max-height: 400px;
+        background-size: contain;
     }
     
-    .hero-subtitle {
-        font-size: 0.9rem;
-        margin-top: 1rem;
-        letter-spacing: 1px;
+    .image-title-text {
+        font-size: 2.5rem;
+        bottom: 1.5rem;
+        left: 1.5rem;
     }
     
-    .floating-text {
-        font-size: 5rem;
+    .hero-text {
+        padding: 2rem;
     }
     
-    .floating-1 {
-        left: -8%;
-        top: 5%;
+    .hero-text::before {
+        display: none;
     }
     
-    .floating-2 {
-        right: -8%;
-        bottom: 5%;
+    .section-label {
+        font-size: 0.7rem;
+    }
+    
+    .label-image {
+        top: 1.5rem;
+        left: 1.5rem;
+    }
+    
+    .label-text {
+        top: 1.5rem;
+        right: 1.5rem;
+        transform: none;
+        color: #666;
     }
 }
 
-/* TABLET AND SMALLER DESKTOP */
-@media (max-width: 1024px) and (min-height: 600px) {
-    .hero-main h1 {
-        font-size: 3.2rem;
-    }
-    
-    .floating-text {
-        font-size: 8rem;
-    }
-}
-
-/* MOBILE LANDSCAPE */
-@media (max-width: 768px) and (orientation: landscape) {
+@media (max-width: 768px) {
     body {
-        padding-top: 100px; /* Reduce padding for landscape */
+        padding-top: 140px;
+    }
+    
+    .nav {
+        padding: 1rem 1.5rem;
+        flex-direction: column;
+        gap: 0.5rem;
+        margin: 0;
+        max-width: 100%;
+    }
+    
+    .logo-image {
+        height: 60px;
+    }
+    
+    .nav-links {
+        gap: 1.5rem;
     }
     
     .hero {
-        min-height: auto;
-        padding: 2rem 1.5rem;
         margin-top: -20px;
     }
     
     .hero-main h1 {
-        font-size: 2.2rem;
-        line-height: 1;
+        font-size: 2rem;
     }
     
     .hero-subtitle {
-        font-size: 0.85rem;
-        margin-top: 0.8rem;
+        font-size: 0.9rem;
+        letter-spacing: 1px;
     }
     
-    .floating-text {
-        font-size: 4rem;
+    .image-title-text {
+        font-size: 1.8rem;
     }
     
-    .floating-1 {
-        left: -12%;
-        top: 2%;
-    }
-    
-    .floating-2 {
-        right: -12%;
-        bottom: 2%;
+    .hero-image {
+        padding: 1rem;
     }
 }
 
-/* SMALL PHONE LANDSCAPE */
-@media (max-width: 480px) and (orientation: landscape) {
+@media (max-width: 480px) {
     body {
-        padding-top: 90px;
+        padding-top: 130px;
     }
     
     .hero {
-        padding: 1.5rem;
+        grid-template-rows: 40vh auto;
     }
     
     .hero-main h1 {
@@ -350,660 +409,456 @@ href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;
     }
     
     .hero-subtitle {
-        font-size: 0.75rem;
+        font-size: 0.8rem;
     }
     
-    .floating-text {
-        font-size: 3rem;
-    }
-    
-    .nav {
-        padding: 0.8rem 1rem;
+    .image-title-text {
+        font-size: 1.5rem;
+        bottom: 1rem;
+        left: 1rem;
     }
     
     .logo-image {
-        height: 40px;
-    }
-}
-
-/* SHORT SCREENS (regardless of orientation) */
-@media (max-height: 500px) {
-    .hero {
-        min-height: auto;
-        padding: 2rem;
+        height: 50px;
     }
     
-    .hero-main h1 {
-        font-size: 2.2rem;
-        line-height: 1;
+    .nav-links {
+        gap: 1rem;
+        font-size: 0.8rem;
     }
     
-    .hero-subtitle {
-        font-size: 0.85rem;
-        margin-top: 0.8rem;
-    }
-    
-    .floating-text {
-        font-size: 4rem;
+    .hero-button {
+        padding: 0.7rem 1.5rem;
+        font-size: 0.8rem;
     }
 }
 
-
- /* VISUAL DIVIDER */
- .divider {
- height: 1px;
- background: linear-gradient(
- to right,
- transparent 0%,
- #e5e5e5 20%,
- #e5e5e5 80%,
- transparent 100%
- );
- margin: 4rem auto;
- width: 80%;
- max-width: 600px;
- }
-
- /* CONTENT SECTIONS */
- .content-section {
- padding: 6rem 3rem;
- }
-
- .section-header {
- text-align: center;
- margin-bottom: 4rem;
- }
-
- .section-title {
- font-size: 2.5rem;
- font-weight: 700;
- text-transform: uppercase;
- letter-spacing: -1px;
- margin-bottom: 1rem;
- }
-
- .section-subtitle {
- color: #666;
- text-transform: uppercase;
- letter-spacing: 2px;
- }
-
-
-
-/* REDESIGNED CONTENT CARDS WITH IMAGES */
-.content-grid {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 2.5rem;
-  max-width: 900px;
-  margin: 0 auto;
+/* VISUAL DIVIDER */
+.divider {
+    height: 1px;
+    background: linear-gradient(
+        to right,
+        transparent 0%,
+        #e5e5e5 20%,
+        #e5e5e5 80%,
+        transparent 100%
+    );
+    margin: 4rem auto;
+    width: 80%;
+    max-width: 600px;
 }
 
-.content-card {
-  display: grid;
-  grid-template-columns: 180px 1fr;
-  border: 1px solid #e5e5e5;
-  background: #fafafa;
-  transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
-  text-decoration: none;
-  color: inherit;
-  overflow: hidden;
-  height: 200px;
-  position: relative;
-  text-transform: uppercase;
+/* CONTENT SECTIONS */
+.content-section {
+    padding: 6rem 3rem;
 }
 
-.content-card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.08);
-  border-color: #000;
+.section-header {
+    text-align: center;
+    margin-bottom: 4rem;
 }
 
-/* Card Image */
-.card-image {
-  background: #1a1a1a;
-  background-size: cover;
-  background-position: center;
-  position: relative;
-  overflow: hidden;
+.section-title {
+    font-size: 2.5rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: -1px;
+    margin-bottom: 1rem;
 }
 
-.card-image::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: linear-gradient(45deg, rgba(0,0,0,0.1) 0%, transparent 100%);
-  z-index: 1;
+.section-subtitle {
+    color: #666;
+    text-transform: uppercase;
+    letter-spacing: 2px;
 }
 
-.content-card:hover .card-image {
-  transform: scale(1.05);
-  transition: transform 0.6s ease;
+/* REVISED MINIMALIST MANIFESTO SECTION */
+.manifesto-section {
+    padding: 6rem 3rem;
+    max-width: 1200px;
+    margin: 0 auto;
 }
 
-/* Card Content Wrapper */
-.card-content-wrapper {
-  display: flex;
-  flex-direction: column;
-  padding: 1.8rem;
+/* Manifesto Content - Using About Text */
+.manifesto-content {
+    max-width: 800px;
+    margin: 0 auto;
 }
 
-.card-meta {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 1.2rem;
-  padding-bottom: 0.8rem;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+.manifesto-content p {
+    font-size: 0.95rem;
+    line-height: 1.8;
+    margin-bottom: 1.5rem;
+    color: #333;
+    text-transform: uppercase;
 }
 
-.card-type {
-  font-size: 0.75rem;
-  color: #666;
-  text-transform: uppercase;
-  letter-spacing: 2px;
-  font-weight: 400;
+.manifesto-content p:last-child {
+    margin-top: 2rem;
+    font-weight: 700;
 }
 
-.card-issue {
-  font-size: 1.8rem;
-  font-weight: 700;
-  color: #000;
-  opacity: 0.9;
+/* VIDEO FOOTER SECTION */
+.video-footer {
+    padding: 6rem 3rem 3rem;
+    max-width: 1200px;
+    margin: 0 auto;
+    position: relative;
 }
 
-.card-content {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
+.video-section-header {
+    text-align: center;
+    margin-bottom: 3rem;
 }
 
-.card-title {
-  font-size: 1.5rem;
-  font-weight: 700;
-  text-transform: uppercase;
-  margin-bottom: 0.8rem;
-  letter-spacing: -0.5px;
-  line-height: 1.2;
+.video-footer h2 {
+    font-size: 2.5rem; /* Same size as RECENT PUBLICATIONS title */
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: -1px;
+    margin-bottom: 1rem;
 }
 
-.card-description {
-  color: #444;
-  font-size: 0.9rem;
-  line-height: 1.6;
-  margin-bottom: 1.5rem;
-  flex: 1;
+.video-container {
+    position: relative;
+    width: 100%;
+    height: 500px;
+    overflow: hidden;
+    background: #000;
 }
 
-/* Card Indicator */
-.card-indicator {
-  display: flex;
-  align-items: center;
-  gap: 0.8rem;
-  margin-top: auto;
+.video-container video {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    min-width: 100%;
+    min-height: 100%;
+    width: auto;
+    height: auto;
+    object-fit: cover;
+    z-index: 0;
 }
 
-.indicator-line {
-  width: 30px;
-  height: 1px;
-  background: #000;
-  transition: width 0.3s ease;
+.video-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.3);
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    pointer-events: none;
 }
 
-.indicator-text {
-  font-size: 0.7rem;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  color: #666;
-  transition: color 0.3s ease;
+.video-caption {
+    color: white;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    padding: 0.5rem 1.5rem;
+    background: rgba(0, 0, 0, 0.7);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    z-index: 2;
 }
 
-.content-card:hover .indicator-line {
-  width: 50px;
-}
-
-.content-card:hover .indicator-text {
-  color: #000;
-}
+/* REST OF YOUR CSS FOR PUBLICATIONS SECTION */
+/* Publications grid and other styles remain unchanged */
 
 /* REDESIGNED PUBLICATIONS SECTION */
 .publications-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 2rem;
-  max-width: 1200px;
-  margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
 }
 
 .publication-card {
-  border: 1px solid #e5e5e5;
-  background: #fafafa;
-  transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
-  position: relative;
-  overflow: hidden;
+    border: 1px solid #e5e5e5;
+    background: #fafafa;
+    transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+    position: relative;
+    overflow: hidden;
 }
 
 .publication-card:hover {
-  transform: translateY(-6px);
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.08);
-  border-color: #000;
+    transform: translateY(-6px);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.08);
+    border-color: #000;
 }
 
 .card-link {
-  display: block;
-  color: inherit;
-  text-decoration: none;
-  height: 100%;
+    display: block;
+    color: inherit;
+    text-decoration: none;
+    height: 100%;
 }
 
 /* Card Interface (Top section with image) */
 .card-interface {
-  position: relative;
-  height: 200px;
-  overflow: hidden;
-  background: #0a0a0a;
+    position: relative;
+    height: 200px;
+    overflow: hidden;
+    background: #0a0a0a;
 }
 
 .card-label {
-  position: absolute;
-  top: 1.2rem;
-  left: 1.2rem;
-  z-index: 2;
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
+    position: absolute;
+    top: 1.2rem;
+    left: 1.2rem;
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
 }
 
 .label-type {
-  font-size: 0.7rem;
-  text-transform: uppercase;
-  letter-spacing: 2px;
-  color: rgba(255, 255, 255, 0.9);
-  background: rgba(0, 0, 0, 0.7);
-  padding: 0.3rem 0.8rem;
-  border: 1px solid rgba(255, 255, 255, 0.2);
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: rgba(255, 255, 255, 0.9);
+    background: rgba(0, 0, 0, 0.7);
+    padding: 0.3rem 0.8rem;
+    border: 1px solid rgba(255, 255, 255, 0.2);
 }
 
 .label-issue {
-  font-size: 1rem;
-  font-weight: 700;
-  color: rgba(255, 255, 255, 0.9);
-  background: rgba(0, 0, 0, 0.7);
-  padding: 0.3rem 0.6rem;
-  border: 1px solid rgba(255, 255, 255, 0.2);
+    font-size: 1rem;
+    font-weight: 700;
+    color: rgba(255, 255, 255, 0.9);
+    background: rgba(0, 0, 0, 0.7);
+    padding: 0.3rem 0.6rem;
+    border: 1px solid rgba(255, 255, 255, 0.2);
 }
 
 .card-preview {
-  position: relative;
-  width: 100%;
-  height: 100%;
+    position: relative;
+    width: 100%;
+    height: 100%;
 }
 
 .preview-image {
-  width: 100%;
-  height: 100%;
-  background-size: cover;
-  background-position: center;
-  transition: transform 0.6s ease;
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+    transition: transform 0.6s ease;
 }
 
 .preview-overlay {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.7);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  opacity: 0;
-  transition: opacity 0.3s ease;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.3s ease;
 }
 
 .overlay-text {
-  color: #fff;
-  text-transform: uppercase;
-  font-size: 0.8rem;
-  letter-spacing: 2px;
-  padding: 0.8rem 1.5rem;
-  border: 1px solid rgba(255, 255, 255, 0.3);
+    color: #fff;
+    text-transform: uppercase;
+    font-size: 0.8rem;
+    letter-spacing: 2px;
+    padding: 0.8rem 1.5rem;
+    border: 1px solid rgba(255, 255, 255, 0.3);
 }
 
 .publication-card:hover .preview-image {
-  transform: scale(1.05);
+    transform: scale(1.05);
 }
 
 .publication-card:hover .preview-overlay {
-  opacity: 1;
+    opacity: 1;
 }
 
 /* Card Content (Bottom section) */
 .card-content {
-  padding: 2rem;
-  background: #fff;
+    padding: 2rem;
+    background: #fff;
 }
 
 .content-header {
-  margin-bottom: 1.2rem;
+    margin-bottom: 1.2rem;
 }
 
 .content-title {
-  font-size: 1.4rem;
-  font-weight: 700;
-  line-height: 1.3;
-  margin-bottom: 0.8rem;
-  text-transform: uppercase;
-  letter-spacing: -0.5px;
+    font-size: 1.4rem;
+    font-weight: 700;
+    line-height: 1.3;
+    margin-bottom: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: -0.5px;
 }
 
 .content-meta {
-  display: flex;
-  gap: 0.5rem;
-  font-size: 0.8rem;
-  color: #666;
-  text-transform: uppercase;
-  letter-spacing: 1px;
+    display: flex;
+    gap: 0.5rem;
+    font-size: 0.8rem;
+    color: #666;
+    text-transform: uppercase;
+    letter-spacing: 1px;
 }
 
 .content-excerpt {
-  margin-bottom: 1.5rem;
+    margin-bottom: 1.5rem;
 }
 
 .content-excerpt p {
-  font-size: 0.95rem;
-  line-height: 1.7;
-  color: #444;
-  text-transform: uppercase;
-  letter-spacing: 0.3px;
+    font-size: 0.95rem;
+    line-height: 1.7;
+    color: #444;
+    text-transform: uppercase;
+    letter-spacing: 0.3px;
 }
 
 .content-tags {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.5rem;
-  padding-top: 1.2rem;
-  border-top: 1px solid #e5e5e5;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    padding-top: 1.2rem;
+    border-top: 1px solid #e5e5e5;
 }
 
 .tag {
-  font-size: 0.7rem;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  color: #666;
-  padding: 0.2rem 0.6rem;
-  background: #f5f5f5;
-  border: 1px solid #e5e5e5;
-  transition: all 0.2s ease;
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: #666;
+    padding: 0.2rem 0.6rem;
+    background: #f5f5f5;
+    border: 1px solid #e5e5e5;
+    transition: all 0.2s ease;
 }
 
 .publication-card:hover .tag {
-  background: #000;
-  color: #fff;
-  border-color: #000;
+    background: #000;
+    color: #fff;
+    border-color: #000;
 }
 
-/* RESPONSIVE DESIGN */
+/* RESPONSIVE DESIGN FOR PUBLICATIONS */
 @media (max-width: 1024px) {
-  .publications-grid {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 1.5rem;
-  }
-  
-  .card-interface {
-    height: 180px;
-  }
-  
-  .content-title {
-    font-size: 1.2rem;
-  }
+    .publications-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1.5rem;
+    }
+    
+    .card-interface {
+        height: 180px;
+    }
+    
+    .content-title {
+        font-size: 1.2rem;
+    }
 }
 
 @media (max-width: 768px) {
-  .publications-grid {
-    grid-template-columns: 1fr;
-    gap: 1.5rem;
-    max-width: 500px;
-  }
-  
-  .card-interface {
-    height: 220px; /* Taller on mobile for better visibility */
-  }
-  
-  .content-title {
-    font-size: 1.3rem;
-  }
-  
-  .card-content {
-    padding: 1.8rem;
-  }
+    .content-section {
+        padding: 4rem 1.5rem;
+    }
+    
+    .publications-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+        max-width: 500px;
+    }
+    
+    .card-interface {
+        height: 220px;
+    }
+    
+    .content-title {
+        font-size: 1.3rem;
+    }
+    
+    .card-content {
+        padding: 1.8rem;
+    }
 }
 
 @media (max-width: 480px) {
-  .publications-grid {
-    gap: 1.2rem;
-  }
-  
-  .card-interface {
-    height: 200px;
-  }
-  
-  .content-title {
-    font-size: 1.1rem;
-  }
-  
-  .card-content {
-    padding: 1.5rem;
-  }
-  
-  .content-excerpt p {
-    font-size: 0.9rem;
-  }
+    .publications-grid {
+        gap: 1.2rem;
+    }
+    
+    .card-interface {
+        height: 200px;
+    }
+    
+    .content-title {
+        font-size: 1.1rem;
+    }
+    
+    .card-content {
+        padding: 1.5rem;
+    }
+    
+    .content-excerpt p {
+        font-size: 0.9rem;
+    }
 }
 
-/* Landscape orientation adjustments */
-@media (orientation: landscape) and (max-height: 600px) {
-  .card-interface {
-    height: 160px;
-  }
+/* RESPONSIVE DESIGN FOR MANIFESTO SECTION */
+@media (max-width: 768px) {
+    .manifesto-section {
+        padding: 4rem 1.5rem;
+    }
+    
+    .video-footer {
+        padding: 4rem 1.5rem 2rem;
+    }
+    
+    .video-container {
+        height: 400px;
+    }
+    
+    .video-footer h2 {
+        font-size: 2rem;
+    }
 }
 
+@media (max-width: 480px) {
+    .manifesto-section {
+        padding: 3rem 1rem;
+    }
+    
+    .video-footer {
+        padding: 3rem 1rem 2rem;
+    }
+    
+    .video-container {
+        height: 300px;
+    }
+    
+    .video-footer h2 {
+        font-size: 1.8rem;
+    }
+    
+    .manifesto-content p {
+        font-size: 0.9rem;
+        line-height: 1.7;
+    }
+    
+    .video-caption {
+        font-size: 0.8rem;
+        padding: 0.4rem 1rem;
+    }
+}
 
- 
- /* FLOATING ELEMENTS */
- .floating-text {
- position: absolute;
- font-size: 12rem;
- font-weight: 700;
- color: rgba(0, 0, 0, 0.02);
- text-transform: uppercase;
- z-index: -1;
- user-select: none;
- pointer-events: none;
- }
-
- .floating-1 {
- top: 10%;
- left: -10%;
- transform: rotate(-90deg);
- }
-
- .floating-2 {
- bottom: 10%;
- right: -5%;
- transform: rotate(90deg);
- }
-
- 
-
- /* RESPONSIVE */
- @media (max-width: 1200px) {
- .nav {
-   margin: 0 1.5rem;
-   max-width: calc(100% - 3rem);
- }
- }
-
- @media (max-width: 1024px) {
- h1 {
- font-size: 3rem;
- }
- 
- .section-title {
- font-size: 2rem;
- }
- 
- .content-card {
- height: 140px;
- }
- 
- .card-meta {
- width: 120px;
- }
- 
- .card-issue {
- font-size: 2rem;
- }
- }
-
- @media (max-width: 768px) {
- body {
-   padding-top: 140px; /* Adjust for mobile nav height */
- }
- 
- .nav {
- padding: 1rem 1.5rem;
- flex-direction: column;
- gap: 0.5rem;
- margin: 0;
- max-width: 100%;
- }
- 
- .logo-image {
- height: 60px;
- }
- 
- .nav-links {
- gap: 1.5rem;
- }
- 
- .hero {
- padding: 0 1.5rem;
- min-height: calc(90vh - 140px); /* Adjust for mobile */
- margin-top: -20px; /* Smaller adjustment on mobile */
- }
- 
- .content-section {
- padding: 4rem 1.5rem;
- }
- 
- .section-header {
- margin-bottom: 3rem;
- }
- 
- .content-card {
- flex-direction: column;
- height: auto;
- }
- 
- .card-meta {
- width: 100%;
- flex-direction: row;
- justify-content: space-between;
- padding: 1rem;
- border-right: none;
- border-bottom: 1px solid #e5e5e5;
- }
- 
- .card-type {
- margin-bottom: 0;
- }
- 
- .card-issue {
- font-size: 1.5rem;
- }
- 
- .card-content {
- padding: 1.5rem;
- }
- 
- .card-title {
- font-size: 1.3rem;
- }
- 
- .floating-text {
- font-size: 8rem;
- }
- 
- .floating-1 {
- left: -15%;
- }
- 
- .floating-2 {
- right: -10%;
- }
- }
-
- @media (max-width: 480px) {
- body {
-   padding-top: 130px; /* Adjust for smallest screens */
- }
- 
- h1 {
- font-size: 2.2rem;
- }
- 
- h2 {
- font-size: 1.2rem;
- }
- 
- .hero {
-   min-height: calc(80vh - 130px);
-   margin-top: 0; /* Remove margin on smallest screens */
- }
- 
- .hero-subtitle {
- font-size: 1rem;
- }
- 
- .card-title {
- font-size: 1.1rem;
- }
- 
- .card-description {
- font-size: 0.9rem;
- }
- 
- .floating-text {
- font-size: 6rem;
- display: none;
- }
- 
- .nav-links {
- gap: 1rem;
- font-size: 0.8rem;
- }
-
- .logo-image{
-    height: 50px;
- }
-
-
-
-
-
-
- }
-
- /* FOOTER STYLES */
+/* SITE FOOTER STYLES (Now above the video) */
 .site-footer {
     text-align: center;
-    padding: 3rem 2rem;
+    padding: 3rem 2rem 0;
     margin-top: 4rem;
-    border-top: 1px solid #e5e5e5;
     max-width: 1200px;
     margin-left: auto;
     margin-right: auto;
@@ -1054,7 +909,7 @@ href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;
 /* RESPONSIVE FOOTER */
 @media (max-width: 768px) {
     .site-footer {
-        padding: 2rem 1.5rem;
+        padding: 2rem 1.5rem 0;
         margin-top: 3rem;
     }
     
@@ -1077,41 +932,39 @@ href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;
  <a href="blog.html">ANALYSIS</a>
 <a href="zine.html">INVESTIGATIONS</a>
 <a href="signal.html">SIGNAL</a>
-
  </div>
  </nav>
 
- <!-- Hero Section -->
+ <!-- Redesigned Hero Section -->
  <section class="hero">
- <!-- Floating Background Elements -->
- <div class="floating-text floating-1">Archive</div>
- <div class="floating-text floating-2">System</div>
- 
- <div class="hero-main">
- <h1>systems analysis for the design, governance, and critique of technology.</h1>
- <h2 class="hero-subtitle">
- we examine how infrastructure shapes power. We document the layers beneath interfaces, the politics embedded in protocols, and the humans maintaining systems while innovation moves on.
- </h2> 
-
-
- 
-
-
-
- </div>
- </section>
-
-
- <!--  BUTTON -->
-    <div class="hero-button-container">
-      <a href="about.html" class="hero-button">
-        <span class="button-text">System Manifesto</span>
-        <span class="button-arrow">→</span>
-      </a>
+    <!-- Left Panel: Image with white background -->
+    <div class="hero-image">
+        <div class="section-label label-image">VISUAL ARCHIVE</div>
+        <div class="hero-image-inner">
+            <div class="image-title">
+                <div class="image-title-text"><br></div>
+            </div>
+        </div>
     </div>
-    <!-- END BUTTON -->
-
-
+    
+    <!-- Right Panel: Text Content -->
+    <div class="hero-text">
+        <div class="section-label label-text">TEXTUAL INTERFACE</div>
+        <div class="hero-main">
+            <h1>systems analysis for the design, governance, and critique of technology.</h1>
+            <h2 class="hero-subtitle">
+                we examine how infrastructure shapes power. We document the layers beneath interfaces, the politics embedded in protocols, and the humans maintaining systems while innovation moves on.
+            </h2>
+        </div>
+        
+        <div class="hero-button-container">
+            <a href="#manifesto" class="hero-button">
+                <span class="button-text">System Manifesto</span>
+                <span class="button-arrow">→</span>
+            </a>
+        </div>
+    </div>
+ </section>
 
  <!-- Divider -->
  <div class="divider"></div>
@@ -1153,12 +1006,6 @@ href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;
           <div class="content-excerpt">
             <p>How institutions weaponize legal frameworks to control digital infrastructure and enforce systemic compliance through code-as-law.</p>
           </div>
-          
-          <!--<div class="content-tags">
-            <span class="tag">LEGAL SYSTEMS</span>
-            <span class="tag">INFRASTRUCTURE</span>
-            <span class="tag">GOVERNANCE</span>
-          </div> -->
         </div>
       </a>
     </article>
@@ -1191,26 +1038,20 @@ href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;
           <div class="content-excerpt">
             <p>Examining how power moves through code and infrastructure, tracing the knowledge gaps between surface tools and deep system understanding.</p>
           </div>
-          
-         <!-- <div class="content-tags">
-            <span class="tag">SECURITY</span>
-            <span class="tag">SYSTEMS</span>
-            <span class="tag">POWER</span>
-          </div> -->
         </div>
       </a>
     </article>
     
-    <!-- Publication 3 -->
+    <!-- Publication 3 - UPDATED TO JANUARY 2026 REPORT -->
     <article class="publication-card">
-      <a href="signal-2025-report.html" class="card-link">
+      <a href="signal-january-2026.html" class="card-link">
         <div class="card-interface">
           <div class="card-label">
             <span class="label-type">SIGNAL</span>
             <span class="label-issue"></span>
           </div>
           <div class="card-preview">
-            <div class="preview-image" style="background-image: url('images/neuro.jpg');"></div>
+            <div class="preview-image" style="background-image: url('images/Tech-.jpeg');"></div>
             <div class="preview-overlay">
               <span class="overlay-text">→ ACCESS REPORT</span>
             </div>
@@ -1219,60 +1060,108 @@ href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;
         
         <div class="card-content">
           <div class="content-header">
-            <h3 class="content-title">2025: A STATE OF REALITY REPORT</h3>
+            <h3 class="content-title">JANUARY 2026: THE MEASUREMENT CRISIS</h3>
             <div class="content-meta">
-              <span class="meta-date">DEC 2025</span>
-              <span class="meta-readtime">• 25 MIN READ</span>
+              <span class="meta-date">JAN 2026</span>
+              <span class="meta-readtime">• 18 MIN READ</span>
             </div>
           </div>
           
           <div class="content-excerpt">
-            <p>Across physics, biology, astronomy, and AI—2025 revealed a shared pattern: reality behaves less like a fixed stage and more like an ongoing conversation.</p>
-          </div>
-          
-          <!--<div class="content-tags">
-            <span class="tag">SCIENCE</span>
-            <span class="tag">REALITY</span>
-            <span class="tag">SYSTEMS</span> -->
+            <p> expanded sensing, continuous observation, and AI-mediated analysis is reshaping astronomy, physics, biology, and scientific practice itself. </p>
           </div>
         </div>
       </a>
     </article>
-    
   </div>
 </section>
-
 
  <!-- Divider -->
  <div class="divider"></div>
 
- 
- <!-- Footer -->
+
+<!-- Video Footer Section -->
+<section class="video-footer">
+    <div class="video-section-header">
+        <h2>OPERATING FRAMEWORK</h2>
+    </div>
+    
+    <div class="video-container">
+        <!-- Replace 'your-video.mp4' with your actual video file -->
+        <video autoplay muted loop playsinline>
+            <source src="images/radical_edd.mp4" type="video/mp4">
+            <!-- Add fallback for browsers that don't support video -->
+            Your browser does not support the video tag.
+        </video>
+        <div class="video-overlay">
+            <div class="video-caption"></div>
+        </div>
+    </div>
+</section>
+
+
+
+ <!-- REVISED MINIMALIST MANIFESTO SECTION -->
+<section id="manifesto" class="manifesto-section">
+    <!-- About Text Content -->
+    <div class="manifesto-content">
+        <p>
+            1heavy0 is a systems analysis project examining how technical infrastructure concentrates power, defers maintenance, and fails.
+            We study the layers beneath interfaces—where architecture becomes governance, protocols become politics, and operational decisions shape long-term outcomes. 
+        </p>
+
+        <p>
+            Our work focuses on cloud platforms, payment systems, identity infrastructure, AI stacks, protocol governance, and maintenance regimes. Technology is treated as infrastructure: layered, institutional, and inseparable from power. 
+        </p>
+
+        <p>
+            We publish long-form analysis and periodic investigations grounded in technical documentation, historical context, and institutional analysis. Each piece stress-tests real systems by examining incentives, dependencies, and failure modes over time. We prioritize clarity, evidence, and structural understanding over speed or commentary. 
+        </p>
+
+        <p>
+            This work is written for engineers, researchers, policymakers, and high-agency technologists who need to understand the systems they build, govern, or rely on—beyond vendor narratives and surface abstractions. 
+        </p>
+
+        <p>
+            We are not first. We are thorough.
+        </p>
+    </div>
+</section>
+
+ <!-- Divider -->
+ <div class="divider"></div>
+
+ <!-- Footer (Above Video) -->
  <footer class="site-footer">
     <div class="footer-container">
-        <p class="footer-tagline">ARCHIVE ACTIVE • TRANSMISSION CONTINUES</p>
+        <p class="footer-tagline"></p>
         <a href="https://instagram.com/1heavy0" target="_blank" class="instagram-link">
             <svg class="instagram-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20" height="20">
                 <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zM5.838 12a6.162 6.162 0 1112.324 0 6.162 6.162 0 01-12.324 0zM12 16a4 4 0 110-8 4 4 0 010 8zm4.965-10.405a1.44 1.44 0 112.881.001 1.44 1.44 0 01-2.881-.001z"/>
             </svg>
-            
         </a>
         <p class="copyright">© 2026 1HEAVY0 MEDIA</p>
     </div>
 </footer>
 
-
-
- <!-- Minimal interaction script -->
- <script>
- // Add scroll effect to floating text
- window.addEventListener('scroll', function() {
- const scrolled = window.pageYOffset;
- const rate = scrolled * -0.2;
  
- document.querySelectorAll('.floating-text').forEach(text => {
- text.style.transform = `translateY(${rate}px) rotate(${text.classList.contains('floating-1') ? '-90deg' : '90deg'})`;
- });
+
+ <!-- Smooth scroll script for anchor link -->
+ <script>
+ document.addEventListener('DOMContentLoaded', function() {
+     const manifestoLink = document.querySelector('a[href="#manifesto"]');
+     if (manifestoLink) {
+         manifestoLink.addEventListener('click', function(e) {
+             e.preventDefault();
+             const manifestoSection = document.getElementById('manifesto');
+             if (manifestoSection) {
+                 window.scrollTo({
+                     top: manifestoSection.offsetTop - 100,
+                     behavior: 'smooth'
+                 });
+             }
+         });
+     }
  });
  </script>
 </body>
@@ -1281,13 +1170,3 @@ href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;
 
 
 
-
-
-
-
-
-
-
-
-
-    
