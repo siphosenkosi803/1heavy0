@@ -499,6 +499,7 @@ href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;
 }
 
 /* VIDEO FOOTER SECTION */
+/* UPDATED VIDEO SECTION - NO CROPPING */
 .video-footer {
     padding: 6rem 3rem 3rem;
     max-width: 1200px;
@@ -512,7 +513,7 @@ href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;
 }
 
 .video-footer h2 {
-    font-size: 2.5rem; /* Same size as RECENT PUBLICATIONS title */
+    font-size: 2.5rem;
     font-weight: 700;
     text-transform: uppercase;
     letter-spacing: -1px;
@@ -522,22 +523,21 @@ href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;
 .video-container {
     position: relative;
     width: 100%;
-    height: 500px;
     overflow: hidden;
     background: #000;
+    /* Container will adapt to video's aspect ratio */
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .video-container video {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    min-width: 100%;
-    min-height: 100%;
-    width: auto;
+    width: 100%;
     height: auto;
-    object-fit: cover;
-    z-index: 0;
+    max-width: 100%;
+    display: block;
+    object-fit: contain; /* Changed from cover to contain */
+    background: #000;
 }
 
 .video-overlay {
@@ -564,6 +564,50 @@ href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;
     border: 1px solid rgba(255, 255, 255, 0.2);
     z-index: 2;
 }
+
+/* RESPONSIVE DESIGN FOR VIDEO */
+@media (max-width: 1024px) {
+    .video-container {
+        /* For tablets and smaller desktops */
+        max-height: 80vh;
+    }
+}
+
+@media (max-width: 768px) {
+    .video-footer {
+        padding: 4rem 1.5rem 2rem;
+    }
+    
+    .video-footer h2 {
+        font-size: 2rem;
+    }
+    
+    .video-container {
+        /* Maintain aspect ratio on mobile */
+        max-height: 70vh;
+    }
+}
+
+@media (max-width: 480px) {
+    .video-footer {
+        padding: 3rem 1rem 2rem;
+    }
+    
+    .video-footer h2 {
+        font-size: 1.8rem;
+    }
+    
+    .video-container {
+        /* Full width on mobile */
+        max-height: 60vh;
+    }
+    
+    .video-caption {
+        font-size: 0.8rem;
+        padding: 0.4rem 1rem;
+    }
+}
+
 
 /* REST OF YOUR CSS FOR PUBLICATIONS SECTION */
 /* Publications grid and other styles remain unchanged */
@@ -1239,7 +1283,7 @@ href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;
 </section>
 
  <!-- Divider -->
- <div class="divider"></div>
+<!-- <div class="divider"></div> -->
 
  <!-- Footer (Above Video) -->
  <footer class="site-footer">
@@ -1276,3 +1320,5 @@ href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;
  </script>
 </body>
 </html>
+
+
