@@ -254,9 +254,12 @@ href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;
     color: #333;
 }
 
-/* HERO BUTTON STYLES */
+/* NEW: TWO BUTTONS INSTEAD OF ONE */
 .hero-button-container {
     margin-top: 2rem;
+    display: flex;
+    gap: 1.5rem;
+    flex-wrap: wrap;
 }
 
 .hero-button {
@@ -278,6 +281,16 @@ href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;
     overflow: hidden;
 }
 
+.hero-button.primary {
+    background: #000;
+    color: #fff;
+}
+
+.hero-button.secondary {
+    background: transparent;
+    color: #000;
+}
+
 .hero-button::before {
     content: '';
     position: absolute;
@@ -290,12 +303,17 @@ href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;
     z-index: -1;
 }
 
-.hero-button:hover::before {
+.hero-button.secondary:hover::before {
     left: 0;
 }
 
-.hero-button:hover {
+.hero-button.secondary:hover {
     color: #fff;
+    transform: translateX(5px);
+}
+
+.hero-button.primary:hover {
+    background: #333;
     transform: translateX(5px);
 }
 
@@ -350,6 +368,11 @@ href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;
         transform: none;
         color: #666;
     }
+    
+    .hero-button-container {
+        flex-direction: column;
+        gap: 1rem;
+    }
 }
 
 @media (max-width: 768px) {
@@ -392,6 +415,11 @@ href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;
     
     .hero-image {
         padding: 1rem;
+    }
+    
+    .hero-button {
+        width: 100%;
+        justify-content: center;
     }
 }
 
@@ -448,6 +476,40 @@ href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;
     max-width: 600px;
 }
 
+/* NEW: QUICK MANIFESTO TEASER SECTION */
+.manifesto-teaser {
+    padding: 4rem 3rem;
+    max-width: 800px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.teaser-content {
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.teaser-title {
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 1.5rem;
+    letter-spacing: -1px;
+}
+
+.teaser-text {
+    font-size: 1rem;
+    line-height: 1.8;
+    color: #333;
+    margin-bottom: 2rem;
+}
+
+.teaser-cta {
+    font-size: 0.9rem;
+    color: #666;
+    letter-spacing: 1px;
+    margin-top: 2rem;
+}
+
 /* CONTENT SECTIONS */
 .content-section {
     padding: 6rem 3rem;
@@ -472,7 +534,7 @@ href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;
     letter-spacing: 2px;
 }
 
-/* REVISED MINIMALIST MANIFESTO SECTION */
+/* FULL MANIFESTO SECTION (MOVED AFTER PUBLICATIONS) */
 .manifesto-section {
     padding: 6rem 3rem;
     max-width: 1200px;
@@ -1102,7 +1164,11 @@ href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;
         </div>
         
         <div class="hero-button-container">
-            <a href="#manifesto" class="hero-button">
+            <a href="#publications" class="hero-button primary">
+                <span class="button-text">Explore Analysis</span>
+                <span class="button-arrow">→</span>
+            </a>
+            <a href="#manifesto" class="hero-button secondary">
                 <span class="button-text">System Manifesto</span>
                 <span class="button-arrow">→</span>
             </a>
@@ -1113,8 +1179,22 @@ href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;
  <!-- Divider -->
  <div class="divider"></div>
 
+ <!-- Quick Manifesto Teaser -->
+ <section class="manifesto-teaser">
+    <div class="teaser-content">
+        <h2 class="teaser-title">Systems Over Interfaces</h2>
+        <p class="teaser-text">
+            1heavy0 examines the infrastructure beneath innovation—where architecture becomes governance, protocols become politics, and maintenance becomes institutional memory. We analyze cloud platforms, payment systems, AI stacks, and protocol governance through technical documentation, historical context, and institutional analysis.
+        </p>
+        <p class="teaser-cta">Continue reading our framework below →</p>
+    </div>
+ </section>
+
+ <!-- Divider -->
+ <div class="divider"></div>
+
  <!-- Featured Content Section -->
-<section class="content-section">
+<section id="publications" class="content-section">
   <div class="section-header">
     <h2 class="section-title">Recent Publications</h2>
     <p class="section-subtitle">SYSTEM ANALYSIS ARCHIVE</p>
@@ -1402,7 +1482,6 @@ href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;
 
 
 
-
     
     <!-- Publication 1 -->
     <article class="publication-card">
@@ -1571,7 +1650,6 @@ href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;
     </article>
 
 
-
   </div>
 </section>
 
@@ -1653,27 +1731,31 @@ href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;
     </div>
 </footer>
 
- 
 
  <!-- Smooth scroll script for anchor link -->
  <script>
  document.addEventListener('DOMContentLoaded', function() {
-     const manifestoLink = document.querySelector('a[href="#manifesto"]');
-     if (manifestoLink) {
-         manifestoLink.addEventListener('click', function(e) {
+     // Function to handle all anchor links
+     function handleAnchorClick(e) {
+         const href = this.getAttribute('href');
+         if (href.startsWith('#')) {
              e.preventDefault();
-             const manifestoSection = document.getElementById('manifesto');
-             if (manifestoSection) {
+             const targetId = href.substring(1);
+             const targetSection = document.getElementById(targetId);
+             if (targetSection) {
                  window.scrollTo({
-                     top: manifestoSection.offsetTop - 100,
+                     top: targetSection.offsetTop - 120, // Adjust for fixed nav
                      behavior: 'smooth'
                  });
              }
-         });
+         }
      }
+     
+     // Apply to all anchor links with hash
+     document.querySelectorAll('a[href^="#"]').forEach(link => {
+         link.addEventListener('click', handleAnchorClick);
+     });
  });
  </script>
 </body>
 </html>
-
-
