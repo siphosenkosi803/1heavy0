@@ -1,1761 +1,887 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
- <meta charset="UTF-8">
- <meta name="viewport" content="width=device-width, initial-scale=1.0">
- <title>1heavy0</title>
- <link 
-href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
- <style>
- /* GLOBAL RESET */
- * {
- margin: 0;
- padding: 0;
- box-sizing: border-box;
- }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>1heavy0 · systems analysis</title>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+  <style>
+    /* === GLOBAL RESET === */
+    * { margin: 0; padding: 0; box-sizing: border-box; }
 
- /* BASE STYLES - ADDED PADDING FOR FIXED NAV */
- body {
- font-family: 'Space Mono', monospace;
- background: white;
- text-transform: uppercase;
- color: black;
- line-height: 1.6;
- overflow-x: hidden;
- padding-top: 120px; /* Added for fixed nav */
- }
-
- /* TYPOGRAPHY */
- h1 {
- font-size: 4rem;
- font-weight: 700;
- letter-spacing: -2px;
- line-height: 1;
- text-transform: uppercase;
- }
-
- h2 {
- font-size: 1.5rem;
- font-weight: 400;
- letter-spacing: 1px;
- text-transform: uppercase;
- }
-
- p {
- font-size: 1rem;
- line-height: 1.8;
- }
-
- /* NAVIGATION */
- .nav {
- position: fixed;
- top: 0;
- left: 0;
- right: 0;
- z-index: 2000;
- background-color: white;
- backdrop-filter: blur(5px);
- border-bottom: 1px solid #333;
- padding: 1.5rem 3rem;
- display: flex;
- justify-content: space-between;
- align-items: center;
- max-width: 1200px;
- margin: 0 auto;
- box-sizing: border-box;
- }
-
- .logo-container {
- display: flex;
- align-items: center;
- }
-
- .logo-image {
- height: 80px;
- width: auto;
- transition: opacity 0.2s ease;
- }
-
- .logo-image:hover {
- opacity: 0.7;
- }
-
- .nav-links {
- display: flex;
- gap: 2rem;
- }
-
- .nav-links a {
- text-decoration: none;
- color: black;
- font-size: 0.9rem;
- text-transform: uppercase;
- letter-spacing: 1px;
- position: relative;
- }
-
- .nav-links a::after {
- content: '';
- position: absolute;
- bottom: -2px;
- left: 0;
- width: 0;
- height: 1px;
- background: black;
- transition: width 0.3s ease;
- }
-
- .nav-links a:hover::after {
- width: 100%;
- }
-
- /* REDESIGNED HERO SECTION - SPLIT SCREEN DESIGN */
-.hero {
-    min-height: calc(100vh - 120px);
-    display: grid;
-    grid-template-columns: 1fr 1fr; /* Split screen */
-    margin-top: -40px;
-    position: relative;
-    background: white;
-}
-
-/* Left side - Image Panel with white background */
-.hero-image {
-    position: relative;
-    overflow: hidden;
-    background: white; /* Changed to white to match page */
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 2rem;
-}
-
-.hero-image-inner {
-    position: relative;
-    width: 100%;
-    height: 100%;
-    max-height: 500px;
-    background: url('images/neuromancer.png') no-repeat center center; /* Using PNG for transparency */
-    background-size: contain; /* Changed to contain for transparent images */
-    background-position: center;
-    border: 1px solid #e5e5e5; /* Subtle border for definition */
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
-}
-
-/* Add a subtle texture to the image container */
-.hero-image-inner::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: 
-        linear-gradient(transparent 98%, rgba(0, 0, 0, 0.02) 98%),
-        linear-gradient(90deg, transparent 98%, rgba(0, 0, 0, 0.02) 98%);
-    background-size: 40px 40px, 40px 40px;
-    opacity: 0.3;
-    pointer-events: none;
-}
-
-/* Image title overlay */
-.image-title {
-    position: absolute;
-    bottom: 2rem;
-    left: 2rem;
-    z-index: 2;
-}
-
-.image-title-text {
-    font-size: 3.5rem;
-    font-weight: 700;
-    color: rgba(0, 0, 0, 0.9); /* Changed to black for white background */
-    text-transform: uppercase;
-    letter-spacing: -2px;
-    line-height: 1;
-    text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.8); /* White shadow for contrast */
-}
-
-/* Right side - Text Panel */
-.hero-text {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    padding: 3rem;
-    background: white;
-    position: relative;
-}
-
-/* Decorative vertical line between panels */
-.hero-text::before {
-    content: '';
-    position: absolute;
-    left: 0;
-    top: 50%;
-    transform: translateY(-50%);
-    width: 2px;
-    height: 80%;
-    background: black;
-}
-
-/* Main heading with creative typography */
-.hero-main h1 {
-    font-size: clamp(2.5rem, 4vw, 3.5rem);
-    font-weight: 700;
-    letter-spacing: -1.5px;
-    line-height: 1.1;
-    margin-bottom: 2rem;
-    position: relative;
-    display: inline-block;
-}
-
-.hero-main h1::after {
-    content: '';
-    position: absolute;
-    bottom: -10px;
-    left: 0;
-    width: 100px;
-    height: 3px;
-    background: black;
-}
-
-/* Subtitle with better readability */
-.hero-subtitle {
-    font-size: clamp(1rem, 1.5vw, 1.2rem);
-    color: #333;
-    text-transform: uppercase;
-    letter-spacing: 1.5px;
-    line-height: 1.6;
-    margin-bottom: 3rem;
-    max-width: 500px;
-}
-
-/* Creative section labels */
-.section-label {
-    position: absolute;
-    font-size: 0.8rem;
-    font-weight: 700;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    color: #666;
-    transform: rotate(-90deg);
-    transform-origin: left top;
-    white-space: nowrap;
-}
-
-.label-image {
-    top: 3rem;
-    left: 3rem;
-}
-
-.label-text {
-    top: 3rem;
-    right: -2rem;
-    color: #333;
-}
-
-/* NEW: TWO BUTTONS INSTEAD OF ONE */
-.hero-button-container {
-    margin-top: 2rem;
-    display: flex;
-    gap: 1.5rem;
-    flex-wrap: wrap;
-}
-
-.hero-button {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.8rem;
-    padding: 0.9rem 2rem;
-    border: 2px solid #000;
-    background: transparent;
-    color: #000;
-    text-decoration: none;
-    text-transform: uppercase;
-    font-family: 'Space Mono', monospace;
-    font-size: 0.85rem;
-    letter-spacing: 1px;
-    font-weight: 700;
-    transition: all 0.3s ease;
-    position: relative;
-    overflow: hidden;
-}
-
-.hero-button.primary {
-    background: #000;
-    color: #fff;
-}
-
-.hero-button.secondary {
-    background: transparent;
-    color: #000;
-}
-
-.hero-button::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: -100%;
-    width: 100%;
-    height: 100%;
-    background: #000;
-    transition: left 0.3s ease;
-    z-index: -1;
-}
-
-.hero-button.secondary:hover::before {
-    left: 0;
-}
-
-.hero-button.secondary:hover {
-    color: #fff;
-    transform: translateX(5px);
-}
-
-.hero-button.primary:hover {
-    background: #333;
-    transform: translateX(5px);
-}
-
-.button-arrow {
-    font-size: 1.2rem;
-    transition: transform 0.3s ease;
-}
-
-.hero-button:hover .button-arrow {
-    transform: translateX(8px);
-}
-
-/* RESPONSIVE DESIGN FOR SPLIT SCREEN */
-@media (max-width: 1024px) {
-    .hero {
-        grid-template-columns: 1fr;
-        grid-template-rows: 50vh auto;
-        min-height: auto;
-    }
-    
-    .hero-image-inner {
-        max-height: 400px;
-        background-size: contain;
-    }
-    
-    .image-title-text {
-        font-size: 2.5rem;
-        bottom: 1.5rem;
-        left: 1.5rem;
-    }
-    
-    .hero-text {
-        padding: 2rem;
-    }
-    
-    .hero-text::before {
-        display: none;
-    }
-    
-    .section-label {
-        font-size: 0.7rem;
-    }
-    
-    .label-image {
-        top: 1.5rem;
-        left: 1.5rem;
-    }
-    
-    .label-text {
-        top: 1.5rem;
-        right: 1.5rem;
-        transform: none;
-        color: #666;
-    }
-    
-    .hero-button-container {
-        flex-direction: column;
-        gap: 1rem;
-    }
-}
-
-@media (max-width: 768px) {
+    /* === BASE === */
     body {
-        padding-top: 140px;
+      font-family: 'Space Mono', monospace;
+      background: white;
+      color: black;
+      line-height: 1.6;
+      overflow-x: hidden;
+      padding-top: 120px;
+      text-transform: uppercase;
+      letter-spacing: 0.3px;
     }
-    
+
+    h1, h2, h3 { font-weight: 700; text-transform: uppercase; }
+    a { color: inherit; text-decoration: none; border-bottom: 1px solid transparent; transition: all 0.2s; }
+    a:hover { opacity: 0.7; border-bottom-color: black; }
+
+    /* === FIXED NAVIGATION === */
     .nav {
-        padding: 1rem 1.5rem;
-        flex-direction: column;
-        gap: 0.5rem;
-        margin: 0;
-        max-width: 100%;
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 2000;
+      background: white;
+      backdrop-filter: blur(5px);
+      border-bottom: 1px solid #333;
+      padding: 1.5rem 3rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      max-width: 1200px;
+      margin: 0 auto;
+      box-sizing: border-box;
     }
-    
+
     .logo-image {
-        height: 60px;
+      height: 80px;
+      width: auto;
+      transition: opacity 0.2s;
     }
-    
+    .logo-image:hover { opacity: 0.7; }
+
     .nav-links {
-        gap: 1.5rem;
+      display: flex;
+      gap: 2rem;
+      align-items: center;
     }
-    
+    .nav-links a {
+      font-size: 0.9rem;
+      letter-spacing: 1px;
+      position: relative;
+    }
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      bottom: -2px;
+      left: 0;
+      width: 0;
+      height: 1px;
+      background: black;
+      transition: width 0.3s;
+    }
+    .nav-links a:hover::after { width: 100%; }
+
+    /* support badge */
+    .support-link {
+      border: 1px solid black;
+      padding: 0.5rem 1.2rem;
+      background: white;
+      transition: all 0.2s;
+    }
+    .support-link:hover {
+      background: black;
+      color: white;
+      border-color: black;
+      opacity: 1;
+    }
+    .support-link:hover::after { width: 0; } /* remove underline effect */
+
+    /* === HERO (split, simplified) === */
     .hero {
-        margin-top: -20px;
+      min-height: calc(100vh - 120px);
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      margin-top: -40px;
+      background: white;
     }
-    
-    .hero-main h1 {
-        font-size: 2rem;
-    }
-    
-    .hero-subtitle {
-        font-size: 0.9rem;
-        letter-spacing: 1px;
-    }
-    
-    .image-title-text {
-        font-size: 1.8rem;
-    }
-    
     .hero-image {
-        padding: 1rem;
+      position: relative;
+      background: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem;
     }
-    
-    .hero-button {
-        width: 100%;
-        justify-content: center;
+    .hero-image-inner {
+      width: 100%;
+      height: 100%;
+      max-height: 500px;
+      background: url('images/neuromancer.png') no-repeat center center;
+      background-size: contain;
+      border: 1px solid #e5e5e5;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.05);
     }
-}
-
-@media (max-width: 480px) {
-    body {
-        padding-top: 130px;
+    .hero-text {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 3rem;
+      background: white;
+      position: relative;
     }
-    
-    .hero {
-        grid-template-rows: 40vh auto;
+    .hero-text::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 2px;
+      height: 80%;
+      background: black;
     }
-    
     .hero-main h1 {
-        font-size: 1.8rem;
+      font-size: clamp(2.2rem, 4vw, 3.2rem);
+      font-weight: 700;
+      letter-spacing: -1.5px;
+      line-height: 1.1;
+      margin-bottom: 2rem;
+      position: relative;
     }
-    
+    .hero-main h1::after {
+      content: '';
+      position: absolute;
+      bottom: -10px;
+      left: 0;
+      width: 100px;
+      height: 3px;
+      background: black;
+    }
     .hero-subtitle {
-        font-size: 0.8rem;
+      font-size: clamp(1rem, 1.5vw, 1.2rem);
+      color: #333;
+      letter-spacing: 1.5px;
+      line-height: 1.6;
+      margin-bottom: 3rem;
+      max-width: 500px;
     }
-    
-    .image-title-text {
-        font-size: 1.5rem;
-        bottom: 1rem;
-        left: 1rem;
+    .hero-button-container {
+      margin-top: 2rem;
+      display: flex;
+      gap: 1.5rem;
+      flex-wrap: wrap;
     }
-    
-    .logo-image {
-        height: 50px;
-    }
-    
-    .nav-links {
-        gap: 1rem;
-        font-size: 0.8rem;
-    }
-    
     .hero-button {
-        padding: 0.7rem 1.5rem;
-        font-size: 0.8rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.8rem;
+      padding: 0.9rem 2rem;
+      border: 2px solid black;
+      background: transparent;
+      color: black;
+      font-family: 'Space Mono', monospace;
+      font-size: 0.85rem;
+      letter-spacing: 1px;
+      font-weight: 700;
+      transition: all 0.3s;
     }
-}
-
-/* VISUAL DIVIDER */
-.divider {
-    height: 1px;
-    background: linear-gradient(
-        to right,
-        transparent 0%,
-        #e5e5e5 20%,
-        #e5e5e5 80%,
-        transparent 100%
-    );
-    margin: 4rem auto;
-    width: 80%;
-    max-width: 600px;
-}
-
-/* NEW: QUICK MANIFESTO TEASER SECTION */
-.manifesto-teaser {
-    padding: 4rem 3rem;
-    max-width: 800px;
-    margin: 0 auto;
-    text-align: center;
-}
-
-.teaser-content {
-    max-width: 600px;
-    margin: 0 auto;
-}
-
-.teaser-title {
-    font-size: 2rem;
-    font-weight: 700;
-    margin-bottom: 1.5rem;
-    letter-spacing: -1px;
-}
-
-.teaser-text {
-    font-size: 1rem;
-    line-height: 1.8;
-    color: #333;
-    margin-bottom: 2rem;
-}
-
-.teaser-cta {
-    font-size: 0.9rem;
-    color: #666;
-    letter-spacing: 1px;
-    margin-top: 2rem;
-}
-
-/* CONTENT SECTIONS */
-.content-section {
-    padding: 6rem 3rem;
-}
-
-.section-header {
-    text-align: center;
-    margin-bottom: 4rem;
-}
-
-.section-title {
-    font-size: 2.5rem;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: -1px;
-    margin-bottom: 1rem;
-}
-
-.section-subtitle {
-    color: #666;
-    text-transform: uppercase;
-    letter-spacing: 2px;
-}
-
-/* FULL MANIFESTO SECTION (MOVED AFTER PUBLICATIONS) */
-.manifesto-section {
-    padding: 6rem 3rem;
-    max-width: 1200px;
-    margin: 0 auto;
-}
-
-/* Manifesto Content - Using About Text */
-.manifesto-content {
-    max-width: 800px;
-    margin: 0 auto;
-}
-
-.manifesto-content p {
-    font-size: 0.95rem;
-    line-height: 1.8;
-    margin-bottom: 1.5rem;
-    color: #333;
-    text-transform: uppercase;
-}
-
-.manifesto-content p:last-child {
-    margin-top: 2rem;
-    font-weight: 700;
-}
-
-
-/* MINIMALIST GRID STATEMENT */
-.grid-statement-container {
-    margin-top: 3rem;
-    display: flex;
-    justify-content: center;
-}
-
-.grid-statement {
-    position: relative;
-    padding: 2rem 2.5rem;
-    max-width: 500px;
-    text-align: center;
-}
-
-.grid-line {
-    position: absolute;
-    background: #000;
-}
-
-.grid-line.top {
-    top: 0;
-    left: 20px;
-    right: 20px;
-    height: 1px;
-}
-
-.grid-line.right {
-    top: 20px;
-    bottom: 20px;
-    right: 0;
-    width: 1px;
-}
-
-.grid-line.bottom {
-    bottom: 0;
-    left: 20px;
-    right: 20px;
-    height: 1px;
-}
-
-.grid-line.left {
-    top: 20px;
-    bottom: 20px;
-    left: 0;
-    width: 1px;
-}
-
-.grid-content {
-    position: relative;
-    z-index: 1;
-}
-
-.grid-text {
-    font-size: 1.2rem;
-    font-weight: 700;
-    letter-spacing: 2px;
-    line-height: 1.3;
-    margin: 0;
-    color: #000;
-    text-transform: uppercase;
-}
-
-/* Responsive grid statement */
-@media (max-width: 768px) {
-    .grid-statement {
-        padding: 1.5rem 2rem;
-        max-width: 400px;
+    .hero-button.primary {
+      background: black;
+      color: white;
     }
-    
-    .grid-text {
-        font-size: 1.1rem;
-        letter-spacing: 1.5px;
+    .hero-button.secondary:hover {
+      background: black;
+      color: white;
+      transform: translateX(5px);
     }
-}
+    .button-arrow { font-size: 1.2rem; transition: transform 0.3s; }
+    .hero-button:hover .button-arrow { transform: translateX(8px); }
 
-@media (max-width: 480px) {
-    .grid-statement {
-        padding: 1.2rem 1.5rem;
-        max-width: 300px;
+    /* === ARTICLE GRID (full archive) === */
+    .archive-section {
+      padding: 6rem 3rem;
+      max-width: 1200px;
+      margin: 0 auto;
     }
-    
-    .grid-line.top,
-    .grid-line.bottom {
-        left: 15px;
-        right: 15px;
+    .section-header {
+      text-align: center;
+      margin-bottom: 4rem;
     }
-    
-    .grid-line.left,
-    .grid-line.right {
-        top: 15px;
-        bottom: 15px;
+    .section-title {
+      font-size: 2.5rem;
+      font-weight: 700;
+      letter-spacing: -1px;
+      margin-bottom: 1rem;
     }
-    
-    .grid-text {
-        font-size: 1rem;
-        letter-spacing: 1px;
+    .section-subtitle {
+      color: #666;
+      letter-spacing: 2px;
     }
-}
-
-/* VIDEO FOOTER SECTION */
-/* UPDATED VIDEO SECTION - NO CROPPING */
-.video-footer {
-    padding: 6rem 3rem 3rem;
-    max-width: 1200px;
-    margin: 0 auto;
-    position: relative;
-}
-
-.video-section-header {
-    text-align: center;
-    margin-bottom: 3rem;
-}
-
-.video-footer h2 {
-    font-size: 2.5rem;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: -1px;
-    margin-bottom: 1rem;
-}
-
-.video-container {
-    position: relative;
-    width: 100%;
-    overflow: hidden;
-    background: #000;
-    /* Container will adapt to video's aspect ratio */
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.video-container video {
-    width: 100%;
-    height: auto;
-    max-width: 100%;
-    display: block;
-    object-fit: contain; /* Changed from cover to contain */
-    background: #000;
-}
-
-.video-overlay {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.3);
-    z-index: 1;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    pointer-events: none;
-}
-
-.video-caption {
-    color: white;
-    font-size: 0.9rem;
-    text-transform: uppercase;
-    letter-spacing: 2px;
-    padding: 0.5rem 1.5rem;
-    background: rgba(0, 0, 0, 0.7);
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    z-index: 2;
-}
-
-/* RESPONSIVE DESIGN FOR VIDEO */
-@media (max-width: 1024px) {
-    .video-container {
-        /* For tablets and smaller desktops */
-        max-height: 80vh;
-    }
-}
-
-@media (max-width: 768px) {
-    .video-footer {
-        padding: 4rem 1.5rem 2rem;
-    }
-    
-    .video-footer h2 {
-        font-size: 2rem;
-    }
-    
-    .video-container {
-        /* Maintain aspect ratio on mobile */
-        max-height: 70vh;
-    }
-}
-
-@media (max-width: 480px) {
-    .video-footer {
-        padding: 3rem 1rem 2rem;
-    }
-    
-    .video-footer h2 {
-        font-size: 1.8rem;
-    }
-    
-    .video-container {
-        /* Full width on mobile */
-        max-height: 60vh;
-    }
-    
-    .video-caption {
-        font-size: 0.8rem;
-        padding: 0.4rem 1rem;
-    }
-}
-
-
-/* REST OF YOUR CSS FOR PUBLICATIONS SECTION */
-/* Publications grid and other styles remain unchanged */
-
-/* REDESIGNED PUBLICATIONS SECTION */
-.publications-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 2rem;
-    max-width: 1200px;
-    margin: 0 auto;
-}
-
-.publication-card {
-    border: 1px solid #e5e5e5;
-    background: #fafafa;
-    transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
-    position: relative;
-    overflow: hidden;
-}
-
-.publication-card:hover {
-    transform: translateY(-6px);
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.08);
-    border-color: #000;
-}
-
-.card-link {
-    display: block;
-    color: inherit;
-    text-decoration: none;
-    height: 100%;
-}
-
-/* Card Interface (Top section with image) */
-.card-interface {
-    position: relative;
-    height: 200px;
-    overflow: hidden;
-    background: #0a0a0a;
-}
-
-.card-label {
-    position: absolute;
-    top: 1.2rem;
-    left: 1.2rem;
-    z-index: 2;
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-}
-
-.label-type {
-    font-size: 0.7rem;
-    text-transform: uppercase;
-    letter-spacing: 2px;
-    color: rgba(255, 255, 255, 0.9);
-    background: rgba(0, 0, 0, 0.7);
-    padding: 0.3rem 0.8rem;
-    border: 1px solid rgba(255, 255, 255, 0.2);
-}
-
-.label-issue {
-    font-size: 1rem;
-    font-weight: 700;
-    color: rgba(255, 255, 255, 0.9);
-    background: rgba(0, 0, 0, 0.7);
-    padding: 0.3rem 0.6rem;
-    border: 1px solid rgba(255, 255, 255, 0.2);
-}
-
-.card-preview {
-    position: relative;
-    width: 100%;
-    height: 100%;
-}
-
-.preview-image {
-    width: 100%;
-    height: 100%;
-    background-size: cover;
-    background-position: center;
-    transition: transform 0.6s ease;
-}
-
-.preview-overlay {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.7);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    opacity: 0;
-    transition: opacity 0.3s ease;
-}
-
-.overlay-text {
-    color: #fff;
-    text-transform: uppercase;
-    font-size: 0.8rem;
-    letter-spacing: 2px;
-    padding: 0.8rem 1.5rem;
-    border: 1px solid rgba(255, 255, 255, 0.3);
-}
-
-.publication-card:hover .preview-image {
-    transform: scale(1.05);
-}
-
-.publication-card:hover .preview-overlay {
-    opacity: 1;
-}
-
-/* Card Content (Bottom section) */
-.card-content {
-    padding: 2rem;
-    background: #fff;
-}
-
-.content-header {
-    margin-bottom: 1.2rem;
-}
-
-.content-title {
-    font-size: 1.4rem;
-    font-weight: 700;
-    line-height: 1.3;
-    margin-bottom: 0.8rem;
-    text-transform: uppercase;
-    letter-spacing: -0.5px;
-}
-
-.content-meta {
-    display: flex;
-    gap: 0.5rem;
-    font-size: 0.8rem;
-    color: #666;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-}
-
-.content-excerpt {
-    margin-bottom: 1.5rem;
-}
-
-.content-excerpt p {
-    font-size: 0.95rem;
-    line-height: 1.7;
-    color: #444;
-    text-transform: uppercase;
-    letter-spacing: 0.3px;
-}
-
-.content-tags {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.5rem;
-    padding-top: 1.2rem;
-    border-top: 1px solid #e5e5e5;
-}
-
-.tag {
-    font-size: 0.7rem;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    color: #666;
-    padding: 0.2rem 0.6rem;
-    background: #f5f5f5;
-    border: 1px solid #e5e5e5;
-    transition: all 0.2s ease;
-}
-
-.publication-card:hover .tag {
-    background: #000;
-    color: #fff;
-    border-color: #000;
-}
-
-/* RESPONSIVE DESIGN FOR PUBLICATIONS */
-@media (max-width: 1024px) {
     .publications-grid {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 1.5rem;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
     }
-    
+    .publication-card {
+      border: 1px solid #e5e5e5;
+      background: #fafafa;
+      transition: transform 0.4s, box-shadow 0.4s, border-color 0.4s;
+      position: relative;
+      overflow: hidden;
+    }
+    .publication-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 20px 40px rgba(0,0,0,0.08);
+      border-color: black;
+    }
+    .card-link { display: block; color: inherit; height: 100%; }
     .card-interface {
-        height: 180px;
+      position: relative;
+      height: 200px;
+      overflow: hidden;
+      background: #0a0a0a;
     }
-    
-    .content-title {
-        font-size: 1.2rem;
+    .card-label {
+      position: absolute;
+      top: 1.2rem; left: 1.2rem;
+      z-index: 2;
+      display: flex;
+      gap: 0.5rem;
     }
-}
+    .label-type, .label-issue {
+      font-size: 0.7rem;
+      letter-spacing: 2px;
+      color: rgba(255,255,255,0.9);
+      background: rgba(0,0,0,0.7);
+      padding: 0.3rem 0.8rem;
+      border: 1px solid rgba(255,255,255,0.2);
+    }
+    .card-preview {
+      position: relative;
+      width: 100%; height: 100%;
+    }
+    .preview-image {
+      width: 100%; height: 100%;
+      background-size: cover;
+      background-position: center;
+      transition: transform 0.6s;
+    }
+    .preview-overlay {
+      position: absolute;
+      top: 0; left: 0; width: 100%; height: 100%;
+      background: rgba(0,0,0,0.7);
+      display: flex; align-items: center; justify-content: center;
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+    .overlay-text { color: white; font-size: 0.8rem; letter-spacing: 2px; padding: 0.8rem 1.5rem; border: 1px solid rgba(255,255,255,0.3); }
+    .publication-card:hover .preview-image { transform: scale(1.05); }
+    .publication-card:hover .preview-overlay { opacity: 1; }
 
-@media (max-width: 768px) {
-    .content-section {
-        padding: 4rem 1.5rem;
-    }
-    
-    .publications-grid {
-        grid-template-columns: 1fr;
-        gap: 1.5rem;
-        max-width: 500px;
-    }
-    
-    .card-interface {
-        height: 220px;
-    }
-    
-    .content-title {
-        font-size: 1.3rem;
-    }
-    
     .card-content {
-        padding: 1.8rem;
+      padding: 2rem;
+      background: white;
     }
-}
-
-@media (max-width: 480px) {
-    .publications-grid {
-        gap: 1.2rem;
-    }
-    
-    .card-interface {
-        height: 200px;
-    }
-    
+    .content-header { margin-bottom: 1.2rem; }
     .content-title {
-        font-size: 1.1rem;
+      font-size: 1.4rem;
+      font-weight: 700;
+      line-height: 1.3;
+      margin-bottom: 0.8rem;
+      letter-spacing: -0.5px;
     }
-    
-    .card-content {
-        padding: 1.5rem;
+    .content-meta {
+      display: flex;
+      gap: 0.5rem;
+      font-size: 0.8rem;
+      color: #666;
+      letter-spacing: 1px;
     }
-    
     .content-excerpt p {
-        font-size: 0.9rem;
+      font-size: 0.95rem;
+      line-height: 1.7;
+      color: #444;
+      margin-bottom: 1.5rem;
     }
-}
+    .content-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      padding-top: 1.2rem;
+      border-top: 1px solid #e5e5e5;
+    }
+    .tag {
+      font-size: 0.7rem;
+      letter-spacing: 1px;
+      color: #666;
+      padding: 0.2rem 0.6rem;
+      background: #f5f5f5;
+      border: 1px solid #e5e5e5;
+      transition: all 0.2s;
+    }
+    .publication-card:hover .tag {
+      background: black;
+      color: white;
+      border-color: black;
+    }
 
-/* RESPONSIVE DESIGN FOR MANIFESTO SECTION */
-@media (max-width: 768px) {
+    /* === MANIFESTO SECTION (unchanged) === */
     .manifesto-section {
-        padding: 4rem 1.5rem;
+      padding: 6rem 3rem;
+      max-width: 1200px;
+      margin: 0 auto;
     }
-    
-    .video-footer {
-        padding: 4rem 1.5rem 2rem;
+    .manifesto-content {
+      max-width: 800px;
+      margin: 0 auto;
     }
-    
-    .video-container {
-        height: 400px;
-    }
-    
-    .video-footer h2 {
-        font-size: 2rem;
-    }
-}
-
-@media (max-width: 480px) {
-    .manifesto-section {
-        padding: 3rem 1rem;
-    }
-    
-    .video-footer {
-        padding: 3rem 1rem 2rem;
-    }
-    
-    .video-container {
-        height: 300px;
-    }
-    
-    .video-footer h2 {
-        font-size: 1.8rem;
-    }
-    
     .manifesto-content p {
-        font-size: 0.9rem;
-        line-height: 1.7;
+      font-size: 0.95rem;
+      line-height: 1.8;
+      margin-bottom: 1.5rem;
+      color: #333;
     }
-    
+    .grid-statement-container { margin-top: 3rem; display: flex; justify-content: center; }
+    .grid-statement {
+      position: relative;
+      padding: 2rem 2.5rem;
+      max-width: 500px;
+      text-align: center;
+    }
+    .grid-line {
+      position: absolute;
+      background: black;
+    }
+    .grid-line.top { top: 0; left: 20px; right: 20px; height: 1px; }
+    .grid-line.right { top: 20px; bottom: 20px; right: 0; width: 1px; }
+    .grid-line.bottom { bottom: 0; left: 20px; right: 20px; height: 1px; }
+    .grid-line.left { top: 20px; bottom: 20px; left: 0; width: 1px; }
+    .grid-text { font-size: 1.2rem; font-weight: 700; letter-spacing: 2px; line-height: 1.3; }
+
+    /* === VIDEO FOOTER (unchanged) === */
+    .video-footer {
+      padding: 6rem 3rem 3rem;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    .video-section-header { text-align: center; margin-bottom: 3rem; }
+    .video-footer h2 { font-size: 2.5rem; font-weight: 700; letter-spacing: -1px; margin-bottom: 1rem; }
+    .video-container {
+      position: relative;
+      width: 100%;
+      background: black;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .video-container video {
+      width: 100%;
+      height: auto;
+      max-width: 100%;
+      object-fit: contain;
+    }
+    .video-overlay {
+      position: absolute;
+      top: 0; left: 0; width: 100%; height: 100%;
+      background: rgba(0,0,0,0.3);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      pointer-events: none;
+    }
     .video-caption {
-        font-size: 0.8rem;
-        padding: 0.4rem 1rem;
+      color: white;
+      font-size: 0.9rem;
+      letter-spacing: 2px;
+      padding: 0.5rem 1.5rem;
+      background: rgba(0,0,0,0.7);
+      border: 1px solid rgba(255,255,255,0.2);
     }
-}
 
-/* SITE FOOTER STYLES (Now above the video) */
-.site-footer {
-    text-align: center;
-    padding: 3rem 2rem 0;
-    margin-top: 4rem;
-    max-width: 1200px;
-    margin-left: auto;
-    margin-right: auto;
-}
-
-.footer-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 1.5rem;
-}
-
-.footer-tagline {
-    font-size: 0.9rem;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    color: #666;
-    margin: 0;
-}
-
-.instagram-link {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    gap: 0.5rem;
-    color: black;
-    transition: opacity 0.2s;
-    font-size: 0.9rem;
-    letter-spacing: 1px;
-}
-
-.instagram-link:hover {
-    opacity: 0.7;
-}
-
-.instagram-icon {
-    width: 20px;
-    height: 20px;
-    fill: currentColor;
-}
-
-.copyright {
-    font-size: 0.8rem;
-    color: #888;
-    margin: 0;
-}
-
-/* RESPONSIVE FOOTER */
-@media (max-width: 768px) {
+    /* === FOOTER (with BMC) === */
     .site-footer {
-        padding: 2rem 1.5rem 0;
-        margin-top: 3rem;
+      text-align: center;
+      padding: 3rem 2rem 2rem;
+      margin-top: 4rem;
+      border-top: 1px solid #e5e5e5;
+      max-width: 1200px;
+      margin-left: auto;
+      margin-right: auto;
     }
-    
-    .footer-tagline {
-        font-size: 0.85rem;
+    .footer-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 2rem;
     }
-}
+    .footer-row {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 2rem;
+      flex-wrap: wrap;
+    }
+    .instagram-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      color: black;
+      font-size: 0.9rem;
+      letter-spacing: 1px;
+    }
+    .instagram-icon { width: 20px; height: 20px; fill: currentColor; }
+    .copyright { font-size: 0.8rem; color: #888; margin: 0; }
+    .bmc-button img { height: 50px; width: auto; } /* slightly smaller */
 
- </style>
+    /* === RESPONSIVE === */
+    @media (max-width: 1024px) {
+      .hero { grid-template-columns: 1fr; grid-template-rows: 40vh auto; }
+      .hero-text::before { display: none; }
+      .publications-grid { grid-template-columns: repeat(2,1fr); }
+    }
+    @media (max-width: 768px) {
+      body { padding-top: 140px; }
+      .nav { padding: 1rem 1.5rem; flex-direction: column; gap: 0.5rem; }
+      .logo-image { height: 60px; }
+      .nav-links { gap: 1.5rem; }
+      .archive-section { padding: 4rem 1.5rem; }
+      .publications-grid { grid-template-columns: 1fr; }
+      .hero-main h1 { font-size: 2rem; }
+      .hero-subtitle { font-size: 0.9rem; }
+    }
+    @media (max-width: 480px) {
+      body { padding-top: 130px; }
+      .logo-image { height: 50px; }
+      .nav-links { gap: 1rem; }
+    }
+  </style>
 </head>
 <body>
- <!-- Navigation -->
- <nav class="nav">
- <div class="logo-container">
- <a href="index.html">
- <img src="images/1heavy0.png" alt="1heavy0" class="logo-image">
- </a>
- </div>
- <div class="nav-links">
- <a href="blog.html">ANALYSIS</a>
-<a href="zine.html">INVESTIGATIONS</a>
-<a href="signal.html">SIGNAL</a>
- </div>
- </nav>
+  <!-- navigation: only home & support -->
+  <nav class="nav">
 
- <!-- Redesigned Hero Section -->
- <section class="hero">
-    <!-- Left Panel: Image with white background -->
+  <a href="index.html" class="logo">
+    <img src="images/1heavy0.png" alt="1heavy0" class="logo-image">
+  </a>
+  <div class="nav-links">
+    <a href="index.html#articles">ARCHIVE</a>
+    <a href="index.html#manifesto">MANIFESTO</a>
+    <a href="support.html" class="support-link">SUPPORT</a>
+  </div>
+</nav>
+
+  <!-- hero (split) -->
+  <section class="hero">
     <div class="hero-image">
-        <div class="section-label label-image"></div>
-        <div class="hero-image-inner">
-            <div class="image-title">
-                <div class="image-title-text"><br></div>
-            </div>
-        </div>
+      <div class="hero-image-inner"></div>
     </div>
-    
-    <!-- Right Panel: Text Content -->
     <div class="hero-text">
-        <div class="section-label label-text"></div>
-        <div class="hero-main">
-            <h1>systems analysis for the design, governance, and critique of technology.</h1>
-            <h2 class="hero-subtitle">
-                we examine how infrastructure shapes power. We document the layers beneath interfaces, the politics embedded in protocols, and the humans maintaining systems while innovation moves on.
-            </h2>
-        </div>
-        
-        <div class="hero-button-container">
-            <a href="#publications" class="hero-button primary">
-                <span class="button-text">Explore Analysis</span>
-                <span class="button-arrow">→</span>
-            </a>
-            <a href="#manifesto" class="hero-button secondary">
-                <span class="button-text">System Manifesto</span>
-                <span class="button-arrow">→</span>
-            </a>
-        </div>
-    </div>
- </section>
-
- <!-- Divider -->
- <div class="divider"></div>
-
- <!-- Quick Manifesto Teaser -->
- <section class="manifesto-teaser">
-    <div class="teaser-content">
-        <h2 class="teaser-title">Systems Over Interfaces</h2>
-        <p class="teaser-text">
-            1heavy0 examines the infrastructure beneath innovation—where architecture becomes governance, protocols become politics, and maintenance becomes institutional memory. We analyze cloud platforms, payment systems, AI stacks, and protocol governance through technical documentation, historical context, and institutional analysis.
-        </p>
-        <p class="teaser-cta">Continue reading our framework below →</p>
-    </div>
- </section>
-
- <!-- Divider -->
- <div class="divider"></div>
-
- <!-- Featured Content Section -->
-<section id="publications" class="content-section">
-  <div class="section-header">
-    <h2 class="section-title">Recent Publications</h2>
-    <p class="section-subtitle">SYSTEM ANALYSIS ARCHIVE</p>
-  </div>
-  
-  <div class="publications-grid">
-
-
-<article class="publication-card">
-  <a href="obsolescence-by-update.html" class="card-link">
-    <div class="card-interface">
-      <div class="card-label">
-        <span class="label-type"></span>
-        <span class="label-issue"></span>
-      </div>
-      <div class="card-preview">
-        <div class="preview-image" style="background-image: url('images/update.jpg');"></div>
-        <div class="preview-overlay">
-          <span class="overlay-text">→ ACCESS DOCUMENT</span>
+      <div class="hero-main">
+        <h1>systems analysis for the design, governance, and critique of technology.</h1>
+        <div class="hero-subtitle">
+          we examine how infrastructure shapes power. the layers beneath interfaces, the politics embedded in protocols, and the humans maintaining systems while innovation moves on.
         </div>
       </div>
-    </div>
-    
-    <div class="card-content">
-      <div class="content-header">
-        <h3 class="content-title">OBSOLESCENCE BY UPDATE: THE MAINTENANCE TRAP</h3>
-        <div class="content-meta">
-          <span class="meta-date">FEB 02, 2026</span>
-          <span class="meta-readtime">• 18 MIN READ</span>
-        </div>
-      </div>
-      
-      <div class="content-excerpt">
-        <p>How iOS, Android, and Windows updates architect hardware depletion through calculated performance degradation, compatibility breakage, and feature dependency—transforming software maintenance into industrial-scale environmental debt accumulation.</p>
-      </div>
-      
-      
-    </div>
-  </a>
-</article>
-
-
-
-
-<article class="publication-card">
-  <a href="certificate-authority-cartel.html" class="card-link">
-    <div class="card-interface">
-      <div class="card-label">
-        <span class="label-type"></span>
-        <span class="label-issue"></span>
-      </div>
-      <div class="card-preview">
-        <div class="preview-image" style="background-image: url('images/ctrl.jpg');"></div>
-        <div class="preview-overlay">
-          <span class="overlay-text">→ ACCESS DOCUMENT</span>
-        </div>
-      </div>
-    </div>
-    
-    <div class="card-content">
-      <div class="content-header">
-        <h3 class="content-title">CERTIFICATE AUTHORITY CARTEL: THE SILENT MONOPOLIZATION OF DIGITAL TRUST</h3>
-        <div class="content-meta">
-          <span class="meta-date">FEB 02, 2026</span>
-          <span class="meta-readtime">• 14 MIN READ</span>
-        </div>
-      </div>
-      
-      <div class="content-excerpt">
-        <p>How DigiCert, Sectigo, and GlobalSign control 94% of global TLS validation through root store gatekeeping, regulatory capture, and economic consolidation—transforming encryption from decentralized trust to permissioned cartel service.</p>
-      </div>
-      
-      
-    </div>
-  </a>
-</article>
-
-
-
-<article class="publication-card">
-  <a href="ai-inference-colonialism.html" class="card-link">
-    <div class="card-interface">
-      <div class="card-label">
-        <span class="label-type"></span>
-        <span class="label-issue"></span>
-      </div>
-      <div class="card-preview">
-        <div class="preview-image" style="background-image: url('images/inference.jpg');"></div>
-        <div class="preview-overlay">
-          <span class="overlay-text">→ ACCESS DOCUMENT</span>
-        </div>
-      </div>
-    </div>
-    
-    <div class="card-content">
-      <div class="content-header">
-        <h3 class="content-title">AI INFERENCE: THE COLONIAL ARCHITECTURE OF INTELLIGENCE EXTRACTION</h3>
-        <div class="content-meta">
-          <span class="meta-date">FEB 02, 2026</span>
-          <span class="meta-readtime">• 20 MIN READ</span>
-        </div>
-      </div>
-      
-      <div class="content-excerpt">
-        <p>How OpenAI, Anthropic, and Google AI recreate colonial economic patterns—extracting raw data and compute from periphery, processing at metropolitan centers, and returning manufactured intelligence at markup while capturing sovereignty and value.</p>
-      </div>
-      
-      
-    </div>
-  </a>
-</article>
-
-
-
-<article class="publication-card">
-  <a href="containerization-amnesia.html" class="card-link">
-    <div class="card-interface">
-      <div class="card-label">
-        <span class="label-type"></span>
-        <span class="label-issue"></span>
-      </div>
-      <div class="card-preview">
-        <div class="preview-image" style="background-image: url('images/contain.jpg');"></div>
-        <div class="preview-overlay">
-          <span class="overlay-text">→ ACCESS DOCUMENT</span>
-        </div>
-      </div>
-    </div>
-    
-    <div class="card-content">
-      <div class="content-header">
-        <h3 class="content-title">CONTAINERIZATION: THE SYSTEMIC AMNESIA OF ABSTRACTION</h3>
-        <div class="content-meta">
-          <span class="meta-date">FEB 02, 2026</span>
-          <span class="meta-readtime">• 15 MIN READ</span>
-        </div>
-      </div>
-      
-      <div class="content-excerpt">
-        <p>How Docker, Kubernetes, and serverless platforms architect institutional memory depletion—each abstraction layer eliminating not complexity but systemic understanding, creating organizations that cannot debug what they cannot see.</p>
-      </div>
-      
-      
-    </div>
-  </a>
-</article>
-
-
-
-<article class="publication-card">
-  <a href="payment-stack-politics.html" class="card-link">
-    <div class="card-interface">
-      <div class="card-label">
-        <span class="label-type"></span>
-        <span class="label-issue"></span>
-      </div>
-      <div class="card-preview">
-        <div class="preview-image" style="background-image: url('images/stack.jpg');"></div>
-        <div class="preview-overlay">
-          <span class="overlay-text">→ ACCESS DOCUMENT</span>
-        </div>
-      </div>
-    </div>
-    
-    <div class="card-content">
-      <div class="content-header">
-        <h3 class="content-title">PAYMENT INFRASTRUCTURE: THE GEOPOLITICS OF TRANSACTION RAILS</h3>
-        <div class="content-meta">
-          <span class="meta-date">FEB 02, 2026</span>
-          <span class="meta-readtime">• 16 MIN READ</span>
-        </div>
-      </div>
-      
-      <div class="content-excerpt">
-        <p>How Visa, Stripe, and SWIFT enforce borders, sanction regimes, and compliance frameworks through API endpoints—transforming payment processing into silent geopolitical instrumentality with every transaction.</p>
-      </div>
-      
-         </div>
-  </a>
-</article>
-
-
-<article class="publication-card">
-  <a href="cloud-exit-strategies.html" class="card-link">
-    <div class="card-interface">
-      <div class="card-label">
-        <span class="label-type"></span>
-        <span class="label-issue"></span>
-      </div>
-      <div class="card-preview">
-        <div class="preview-image" style="background-image: url('images/esc.jpg');"></div>
-        <div class="preview-overlay">
-          <span class="overlay-text">→ ACCESS DOCUMENT</span>
-        </div>
-      </div>
-    </div>
-    
-    <div class="card-content">
-      <div class="content-header">
-        <h3 class="content-title">CLOUD EXIT STRATEGIES</h3>
-        <div class="content-meta">
-          <span class="meta-date">FEB 02, 2026</span>
-          <span class="meta-readtime">• 18 MIN READ</span>
-        </div>
-      </div>
-      
-      <div class="content-excerpt">
-        <p>How AWS, Azure, and GCP architect vendor lock-in through layered technical and operational dependencies—transforming infrastructure into institutional governance with exit costs measured in organizational reconstruction.</p>
-      </div>
-      
-      
-    </div>
-  </a>
-</article>
-
-
-
-
-    <article class="publication-card">
-      <a href="api-deprecation.html" class="card-link">
-        <div class="card-interface">
-          <div class="card-label">
-            <span class="label-type"></span>
-            <span class="label-issue"></span>
-          </div>
-          <div class="card-preview">
-            <div class="preview-image" style="background-image: url('images/api.jpg');"></div>
-            <div class="preview-overlay">
-              <span class="overlay-text">→ ACCESS DOCUMENT</span>
-            </div>
-          </div>
-        </div>
-        
-        <div class="card-content">
-          <div class="content-header">
-            <h3 class="content-title">API DEPRECATION AS CORPORATE POWER MOVE</h3>
-            <div class="content-meta">
-              <span class="meta-date">JAN 10, 2026</span>
-              <span class="meta-readtime">• 24 MIN READ</span>
-            </div>
-          </div>
-          
-          <div class="content-excerpt">
-            <p>How platform providers weaponize interface control to consolidate power and eliminate ecosystem alternatives through strategic API termination </p>
-          </div>
-        </div>
-      </a>
-    </article>
-
-
-
-
-    <article class="publication-card">
-      <a href="dns-filtering.html" class="card-link">
-        <div class="card-interface">
-          <div class="card-label">
-            <span class="label-type"></span>
-            <span class="label-issue"></span>
-          </div>
-          <div class="card-preview">
-            <div class="preview-image" style="background-image: url('images/reality-matrix.jpg');"></div>
-            <div class="preview-overlay">
-              <span class="overlay-text">→ ACCESS DOCUMENT</span>
-            </div>
-          </div>
-        </div>
-        
-        <div class="card-content">
-          <div class="content-header">
-            <h3 class="content-title">THE QUIET WAR OVER DNS FILTERING</h3>
-            <div class="content-meta">
-              <span class="meta-date">JAN 10, 2026</span>
-              <span class="meta-readtime">• 22 MIN READ</span>
-            </div>
-          </div>
-          
-          <div class="content-excerpt">
-            <p>How governments and ISPs weaponize name resolution to control internet reachability through silent infrastructure censorship.</p>
-          </div>
-        </div>
-      </a>
-    </article>
-
-
-
-
-
-    
-    <!-- Publication 1 -->
-    <article class="publication-card">
-      <a href="error-451.html" class="card-link">
-        <div class="card-interface">
-          <div class="card-label">
-            <span class="label-type"></span>
-            <span class="label-issue"></span>
-          </div>
-          <div class="card-preview">
-            <div class="preview-image" style="background-image: url('images/error.jpg');"></div>
-            <div class="preview-overlay">
-              <span class="overlay-text">→ ACCESS DOCUMENT</span>
-            </div>
-          </div>
-        </div>
-        
-        <div class="card-content">
-          <div class="content-header">
-            <h3 class="content-title">ERROR 451: LEGAL WARFARE AS A SYSTEM LAYER</h3>
-            <div class="content-meta">
-              <span class="meta-date">DEC 26, 2025</span>
-              <span class="meta-readtime">• 18 MIN READ</span>
-            </div>
-          </div>
-          
-          <div class="content-excerpt">
-            <p>How institutions weaponize legal frameworks to control digital infrastructure and enforce systemic compliance through code-as-law.</p>
-          </div>
-        </div>
-      </a>
-    </article>
-    
-    <!-- Publication 2 -->
-    <article class="publication-card">
-      <a href="log_03.html" class="card-link">
-        <div class="card-interface">
-          <div class="card-label">
-            <span class="label-type"></span>
-            <span class="label-issue"></span>
-          </div>
-          <div class="card-preview">
-            <div class="preview-image" style="background-image: url('images/root.jpg');"></div>
-            <div class="preview-overlay">
-              <span class="overlay-text">→ ACCESS LOG</span>
-            </div>
-          </div>
-        </div>
-        
-        <div class="card-content">
-          <div class="content-header">
-            <h3 class="content-title">ROOT ACCESS: HACKING AS SYSTEM LITERACY</h3>
-            <div class="content-meta">
-              <span class="meta-date">DEC 25, 2025</span>
-              <span class="meta-readtime">• 22 MIN READ</span>
-            </div>
-          </div>
-          
-          <div class="content-excerpt">
-            <p>Examining how power moves through code and infrastructure, tracing the knowledge gaps between surface tools and deep system understanding.</p>
-          </div>
-        </div>
-      </a>
-    </article>
-
-
-
-
-    <article class="publication-card">
-      <a href="log_02.html" class="card-link">
-        <div class="card-interface">
-          <div class="card-label">
-            <span class="label-type"></span>
-            <span class="label-issue"></span>
-          </div>
-          <div class="card-preview">
-            <div class="preview-image" style="background-image: url('images/sobukwe.jpg');"></div>
-            <div class="preview-overlay">
-              <span class="overlay-text">→ ACCESS LOG</span>
-            </div>
-          </div>
-        </div>
-        
-        <div class="card-content">
-          <div class="content-header">
-            <h3 class="content-title">THE SOBUKWE PROTOCOL</h3>
-            <div class="content-meta">
-              <span class="meta-date">DEC 25, 2025</span>
-              <span class="meta-readtime">• 18 MIN READ</span>
-            </div>
-          </div>
-          
-          <div class="content-excerpt">
-            <p>How systems isolate what they cannot corrupt. Administrative violence as institutional response to non-coercible intelligence.</p>
-          </div>
-        </div>
-      </a>
-    </article>
-
-
-
-    
-    <!-- Publication 3 -  -->
-    <article class="publication-card">
-      <a href="log_01.html" class="card-link">
-        <div class="card-interface">
-          <div class="card-label">
-            <span class="label-type"></span>
-            <span class="label-issue"></span>
-          </div>
-          <div class="card-preview">
-            <div class="preview-image" style="background-image: url('images/wwbz_graphic.png');"></div>
-            <div class="preview-overlay">
-              <span class="overlay-text">→ ACCESS LOG</span>
-            </div>
-          </div>
-        </div>
-        
-        <div class="card-content">
-          <div class="content-header">
-            <h3 class="content-title">UNSEEN CONVERSATIONS</h3>
-            <div class="content-meta">
-              <span class="meta-date">DEC 25, 2025</span>
-              <span class="meta-readtime">• 55 MIN READ</span>
-            </div>
-          </div>
-          
-          <div class="content-excerpt">
-            <p>Five conversations operating outside the optimization loop—documenting agency that cannot be platformed, creativity that corrupts when formatted, and communities that route around central servers.  </p>
-          </div>
-        </div>
-      </a>
-    </article>
-
-
-
-<article class="publication-card">
-      <a href="maintenance-underground.html" class="card-link">
-        <div class="card-interface">
-          <div class="card-label">
-            <span class="label-type"></span>
-            <span class="label-issue"></span>
-          </div>
-          <div class="card-preview">
-            <div class="preview-image" style="background-image: url('images/maintain.jpg');"></div>
-            <div class="preview-overlay">
-              <span class="overlay-text">→ ACCESS DOCUMENT</span>
-            </div>
-          </div>
-        </div>
-        
-        <div class="card-content">
-          <div class="content-header">
-            <h3 class="content-title">INFRASTRUCTURE GHOSTS: THE MAINTANANCE UNDERGROUND</h3>
-            <div class="content-meta">
-              <span class="meta-date">DEC 25, 2025</span>
-              <span class="meta-readtime">• 18 MIN READ</span>
-            </div>
-          </div>
-          
-          <div class="content-excerpt">
-            <p>The invisible operators who keep legacy systems alive - when innovation moves on, maintanance becomes civilisational memory.</p>
-          </div>
-        </div>
-      </a>
-    </article>
-
-
-  </div>
-</section>
-
- <!-- Divider -->
- <div class="divider"></div>
-
-
-<!-- Video Footer Section -->
-<section class="video-footer">
-    <div class="video-section-header">
-        <h2>OPERATING FRAMEWORK</h2>
-    </div>
-    
-    <div class="video-container">
-        <!-- Replace 'your-video.mp4' with your actual video file -->
-        <video autoplay muted loop playsinline>
-            <source src="images/radical_edd.mp4" type="video/mp4">
-            <!-- Add fallback for browsers that don't support video -->
-            Your browser does not support the video tag.
-        </video>
-        <div class="video-overlay">
-            <div class="video-caption"></div>
-        </div>
-    </div>
-</section>
-
-
-
- 
-<!-- REVISED MINIMALIST MANIFESTO SECTION -->
-<section id="manifesto" class="manifesto-section">
-    <!-- About Text Content -->
-    <div class="manifesto-content">
-        <p>
-            1heavy0 is a systems analysis project examining how technical infrastructure concentrates power, defers maintenance, and fails.
-            We study the layers beneath interfaces—where architecture becomes governance, protocols become politics, and operational decisions shape long-term outcomes. 
-        </p>
-
-        <p>
-            Our work focuses on cloud platforms, payment systems, identity infrastructure, AI stacks, protocol governance, and maintenance regimes. Technology is treated as infrastructure: layered, institutional, and inseparable from power. 
-        </p>
-
-        <p>
-            We publish long-form analysis and periodic investigations grounded in technical documentation, historical context, and institutional analysis. Each piece stress-tests real systems by examining incentives, dependencies, and failure modes over time. We prioritize clarity, evidence, and structural understanding over speed or commentary. 
-        </p>
-
-        <p>
-            This work is written for engineers, researchers, policymakers, and high-agency technologists who need to understand the systems they build, govern, or rely on—beyond vendor narratives and surface abstractions. 
-        </p>
-
-        <!-- Minimalist Grid Statement -->
-        <div class="grid-statement-container">
-            <div class="grid-statement">
-                <div class="grid-line top"></div>
-                <div class="grid-line right"></div>
-                <div class="grid-line bottom"></div>
-                <div class="grid-line left"></div>
-                
-                <div class="grid-content">
-                    <p class="grid-text">We are not first. We are thorough.</p>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
- <!-- Divider -->
-<!-- <div class="divider"></div> -->
-
- <!-- Footer (Above Video) -->
- <footer class="site-footer">
-    <div class="footer-container">
-        <p class="footer-tagline"></p>
-        <a href="https://instagram.com/1heavy0" target="_blank" class="instagram-link">
-            <svg class="instagram-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20" height="20">
-                <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zM5.838 12a6.162 6.162 0 1112.324 0 6.162 6.162 0 01-12.324 0zM12 16a4 4 0 110-8 4 4 0 010 8zm4.965-10.405a1.44 1.44 0 112.881.001 1.44 1.44 0 01-2.881-.001z"/>
-            </svg>
+      <div class="hero-button-container">
+        <a href="#articles" class="hero-button primary">
+          <span class="button-text">FULL ARCHIVE</span>
+          <span class="button-arrow">→</span>
         </a>
-        <p class="copyright">© 2026 1HEAVY0 MEDIA</p>
+        <a href="#manifesto" class="hero-button secondary">
+          <span class="button-text">SYSTEM MANIFESTO</span>
+          <span class="button-arrow">→</span>
+        </a>
+      </div>
     </div>
-</footer>
+  </section>
 
+  <!-- divider -->
+  <div class="divider" style="height:1px; background:#e5e5e5; max-width:600px; margin:2rem auto;"></div>
 
- <!-- Smooth scroll script for anchor link -->
- <script>
- document.addEventListener('DOMContentLoaded', function() {
-     // Function to handle all anchor links
-     function handleAnchorClick(e) {
-         const href = this.getAttribute('href');
-         if (href.startsWith('#')) {
-             e.preventDefault();
-             const targetId = href.substring(1);
-             const targetSection = document.getElementById(targetId);
-             if (targetSection) {
-                 window.scrollTo({
-                     top: targetSection.offsetTop - 120, // Adjust for fixed nav
-                     behavior: 'smooth'
-                 });
-             }
-         }
-     }
-     
-     // Apply to all anchor links with hash
-     document.querySelectorAll('a[href^="#"]').forEach(link => {
-         link.addEventListener('click', handleAnchorClick);
-     });
- });
- </script>
+  <!-- FULL ARCHIVE GRID (all articles, reworded descriptions) -->
+  <section id="articles" class="archive-section">
+    <div class="section-header">
+      <h2 class="section-title">All System Analyses</h2>
+      <p class="section-subtitle">15 AUTOPSIES • 2025–2026</p>
+    </div>
+    <div class="publications-grid">
+        
+        
+        
+        <article class="publication-card">
+  <a href="cloud-energy-burden.html" class="card-link">
+    <div class="card-interface">
+      <div class="card-label"><span class="label-type"></span><span class="label-issue"></span></div>
+      <div class="card-preview">
+        <div class="preview-image" style="background-image: url('images/cloud-energy.jpg');"></div>
+        <div class="preview-overlay"><span class="overlay-text">→ ACCESS</span></div>
+      </div>
+    </div>
+    <div class="card-content">
+      <h3 class="content-title">THE CLOUD'S ENERGY BURDEN</h3>
+      <div class="content-meta"><span class="meta-date">FEB 18, 2026</span><span>• 26 MIN</span></div>
+      <div class="content-excerpt">
+        <p>Cloud providers externalize carbon liability through geographic arbitrage, temporal load shifting, and accounting fictions — while claiming carbon neutrality.</p>
+      </div>
+      <div class="content-tags">
+        <span class="tag">CLIMATE</span><span class="tag">CLOUD</span><span class="tag">EXTERNALIZATION</span>
+      </div>
+    </div>
+  </a>
+</article>
+        
+        
+        
+        
+        <article class="publication-card">
+  <a href="dns-memory-hole.html" class="card-link">
+    <div class="card-interface">
+      <div class="card-label"><span class="label-type"></span><span class="label-issue"></span></div>
+      <div class="card-preview">
+        <div class="preview-image" style="background-image: url('images/dns-memory.jpg');"></div>
+        <div class="preview-overlay"><span class="overlay-text">→ ACCESS</span></div>
+      </div>
+    </div>
+    <div class="card-content">
+      <h3 class="content-title">DNS AS MEMORY HOLE</h3>
+      <div class="content-meta"><span class="meta-date">FEB 19, 2026</span><span>• 24 MIN</span></div>
+      <div class="content-excerpt">
+        <p>Domain expiration is not natural decay but engineered forgetting—registrar cartels, ICANN policy, and search algorithms coordinate to erase digital history.</p>
+      </div>
+      <div class="content-tags">
+        <span class="tag">DNS</span><span class="tag">MEMORY</span><span class="tag">CENSORSHIP</span>
+      </div>
+    </div>
+  </a>
+</article>
+        
+        
+        
+        
+        
+        <article class="publication-card">
+  <a href="ai-temporal-colonialism.html" class="card-link">
+    <div class="card-interface">
+      <div class="card-label"><span class="label-type"></span><span class="label-issue"></span></div>
+      <div class="card-preview">
+        <div class="preview-image" style="background-image: url('images/ai-temporal.jpg');"></div>
+        <div class="preview-overlay"><span class="overlay-text">→ ACCESS</span></div>
+      </div>
+    </div>
+    <div class="card-content">
+      <h3 class="content-title">AI TRAINING AS TEMPORAL COLONIALISM</h3>
+      <div class="content-meta"><span class="meta-date">FEB 20, 2026</span><span>• 28 MIN</span></div>
+      <div class="content-excerpt">
+        <p>Large language models mortgage future compute, energy, and hardware—extracting value from generations that cannot consent to the debt.</p>
+      </div>
+      <div class="content-tags">
+        <span class="tag">AI</span><span class="tag">DEBT</span><span class="tag">ENERGY</span><span class="tag">FUTURE</span>
+      </div>
+    </div>
+  </a>
+</article>
+        
+        
+
+      <!-- 1. Obsolescence By Update -->
+      <article class="publication-card">
+        <a href="obsolescence-by-update.html" class="card-link">
+          <div class="card-interface">
+            <div class="card-label"><span class="label-type"></span><span class="label-issue"></span></div>
+            <div class="card-preview">
+              <div class="preview-image" style="background-image: url('images/update.jpg');"></div>
+              <div class="preview-overlay"><span class="overlay-text">→ ACCESS</span></div>
+            </div>
+          </div>
+          <div class="card-content">
+            <h3 class="content-title">OBSOLESCENCE BY UPDATE</h3>
+            <div class="content-meta"><span class="meta-date">FEB 02, 2026</span><span>• 18 MIN</span></div>
+            <div class="content-excerpt"><p>Software updates as planned hardware depletion — the environmental debt built into every upgrade cycle.</p></div>
+            <div class="content-tags"><span class="tag">INFRASTRUCTURE</span><span class="tag">ENVIRONMENT</span></div>
+          </div>
+        </a>
+      </article>
+
+      <!-- 2. Certificate Authority Cartel -->
+      <article class="publication-card">
+        <a href="certificate-authority-cartel.html" class="card-link">
+          <div class="card-interface">
+            <div class="preview-image" style="background-image: url('images/ctrl.jpg');"></div>
+            <div class="preview-overlay"><span class="overlay-text">→ ACCESS</span></div>
+          </div>
+          <div class="card-content">
+            <h3 class="content-title">CERTIFICATE AUTHORITY CARTEL</h3>
+            <div class="content-meta"><span>FEB 02, 2026</span><span>• 14 MIN</span></div>
+            <div class="content-excerpt"><p>The monopolization of digital trust — how three companies control encryption's root of trust.</p></div>
+            <div class="content-tags"><span class="tag">ENCRYPTION</span><span class="tag">CARTEL</span></div>
+          </div>
+        </a>
+      </article>
+
+      <!-- 3. AI Inference Colonialism -->
+      <article class="publication-card">
+        <a href="ai-inference-colonialism.html" class="card-link">
+          <div class="card-interface">
+            <div class="preview-image" style="background-image: url('images/inference.jpg');"></div>
+            <div class="preview-overlay"><span class="overlay-text">→ ACCESS</span></div>
+          </div>
+          <div class="card-content">
+            <h3 class="content-title">AI INFERENCE: COLONIAL ARCHITECTURE</h3>
+            <div class="content-meta"><span>FEB 02, 2026</span><span>• 20 MIN</span></div>
+            <div class="content-excerpt"><p>AI as extractive industry — the colonial economics of large language models.</p></div>
+            <div class="content-tags"><span class="tag">AI</span><span class="tag">COLONIALISM</span></div>
+          </div>
+        </a>
+      </article>
+
+      <!-- 4. Containerization Amnesia -->
+      <article class="publication-card">
+        <a href="containerization-amnesia.html" class="card-link">
+          <div class="card-interface">
+            <div class="preview-image" style="background-image: url('images/contain.jpg');"></div>
+            <div class="preview-overlay"><span class="overlay-text">→ ACCESS</span></div>
+          </div>
+          <div class="card-content">
+            <h3 class="content-title">CONTAINERIZATION AMNESIA</h3>
+            <div class="content-meta"><span>FEB 02, 2026</span><span>• 15 MIN</span></div>
+            <div class="content-excerpt"><p>Abstraction as forgetting — how containerization erases institutional knowledge.</p></div>
+            <div class="content-tags"><span class="tag">CLOUD</span><span class="tag">MEMORY</span></div>
+          </div>
+        </a>
+      </article>
+
+      <!-- 5. Payment Infrastructure Geopolitics -->
+      <article class="publication-card">
+        <a href="payment-stack-politics.html" class="card-link">
+          <div class="card-interface">
+            <div class="preview-image" style="background-image: url('images/stack.jpg');"></div>
+            <div class="preview-overlay"><span class="overlay-text">→ ACCESS</span></div>
+          </div>
+          <div class="card-content">
+            <h3 class="content-title">PAYMENT INFRASTRUCTURE GEOPOLITICS</h3>
+            <div class="content-meta"><span>FEB 02, 2026</span><span>• 16 MIN</span></div>
+            <div class="content-excerpt"><p>The geopolitics of payment rails — how transaction infrastructure enforces borders.</p></div>
+            <div class="content-tags"><span class="tag">FINANCE</span><span class="tag">BORDERS</span></div>
+          </div>
+        </a>
+      </article>
+
+      <!-- 6. Cloud Exit Strategies -->
+      <article class="publication-card">
+        <a href="cloud-exit-strategies.html" class="card-link">
+          <div class="card-interface">
+            <div class="preview-image" style="background-image: url('images/esc.jpg');"></div>
+            <div class="preview-overlay"><span class="overlay-text">→ ACCESS</span></div>
+          </div>
+          <div class="card-content">
+            <h3 class="content-title">CLOUD EXIT STRATEGIES</h3>
+            <div class="content-meta"><span>FEB 02, 2026</span><span>• 18 MIN</span></div>
+            <div class="content-excerpt"><p>Cloud lock-in as governance — the hidden costs of exiting major platforms.</p></div>
+            <div class="content-tags"><span class="tag">CLOUD</span><span class="tag">LOCK-IN</span></div>
+          </div>
+        </a>
+      </article>
+
+      <!-- 7. API Deprecation -->
+      <article class="publication-card">
+        <a href="api-deprecation.html" class="card-link">
+          <div class="card-interface">
+            <div class="preview-image" style="background-image: url('images/api.jpg');"></div>
+            <div class="preview-overlay"><span class="overlay-text">→ ACCESS</span></div>
+          </div>
+          <div class="card-content">
+            <h3 class="content-title">API DEPRECATION AS POWER MOVE</h3>
+            <div class="content-meta"><span>JAN 10, 2026</span><span>• 24 MIN</span></div>
+            <div class="content-excerpt"><p>API deprecation as power play — when platforms kill the ecosystem.</p></div>
+            <div class="content-tags"><span class="tag">PLATFORMS</span><span class="tag">ANTITRUST</span></div>
+          </div>
+        </a>
+      </article>
+
+      <!-- 8. DNS Filtering -->
+      <article class="publication-card">
+        <a href="dns-filtering.html" class="card-link">
+          <div class="card-interface">
+            <div class="preview-image" style="background-image: url('images/reality-matrix.jpg');"></div>
+            <div class="preview-overlay"><span class="overlay-text">→ ACCESS</span></div>
+          </div>
+          <div class="card-content">
+            <h3 class="content-title">THE QUIET WAR OVER DNS FILTERING</h3>
+            <div class="content-meta"><span>JAN 10, 2026</span><span>• 22 MIN</span></div>
+            <div class="content-excerpt"><p>DNS as censorship infrastructure — the invisible battle over name resolution.</p></div>
+            <div class="content-tags"><span class="tag">CENSORSHIP</span><span class="tag">INFRASTRUCTURE</span></div>
+          </div>
+        </a>
+      </article>
+
+      <!-- 9. Error 451 -->
+      <article class="publication-card">
+        <a href="error-451.html" class="card-link">
+          <div class="card-interface">
+            <div class="preview-image" style="background-image: url('images/error.jpg');"></div>
+            <div class="preview-overlay"><span class="overlay-text">→ ACCESS</span></div>
+          </div>
+          <div class="card-content">
+            <h3 class="content-title">ERROR 451: LEGAL WARFARE</h3>
+            <div class="content-meta"><span>DEC 26, 2025</span><span>• 18 MIN</span></div>
+            <div class="content-excerpt"><p>Legal frameworks as attack surface — when law becomes system layer.</p></div>
+            <div class="content-tags"><span class="tag">LAW</span><span class="tag">GOVERNANCE</span></div>
+          </div>
+        </a>
+      </article>
+
+      <!-- 10. Root Access (log_03) -->
+      <article class="publication-card">
+        <a href="log_03.html" class="card-link">
+          <div class="card-interface">
+            <div class="preview-image" style="background-image: url('images/root.jpg');"></div>
+            <div class="preview-overlay"><span class="overlay-text">→ ACCESS</span></div>
+          </div>
+          <div class="card-content">
+            <h3 class="content-title">ROOT ACCESS: HACKING AS SYSTEM LITERACY</h3>
+            <div class="content-meta"><span>DEC 25, 2025</span><span>• 22 MIN</span></div>
+            <div class="content-excerpt"><p>Understanding power through code, not just using it — the knowledge gap between surface and core.</p></div>
+            <div class="content-tags"><span class="tag">HACKING</span><span class="tag">EPISTEMOLOGY</span></div>
+          </div>
+        </a>
+      </article>
+
+      <!-- 11. Sobukwe Protocol (log_02) -->
+      <article class="publication-card">
+        <a href="log_02.html" class="card-link">
+          <div class="card-interface">
+            <div class="preview-image" style="background-image: url('images/sobukwe.jpg');"></div>
+            <div class="preview-overlay"><span class="overlay-text">→ ACCESS</span></div>
+          </div>
+          <div class="card-content">
+            <h3 class="content-title">THE SOBUKWE PROTOCOL</h3>
+            <div class="content-meta"><span>DEC 25, 2025</span><span>• 18 MIN</span></div>
+            <div class="content-excerpt"><p>Systems isolate what they cannot corrupt — administrative violence as institutional response.</p></div>
+            <div class="content-tags"><span class="tag">VIOLENCE</span><span class="tag">CONTROL</span></div>
+          </div>
+        </a>
+      </article>
+
+      <!-- 12. Unseen Conversations (log_01) -->
+      <article class="publication-card">
+        <a href="log_01.html" class="card-link">
+          <div class="card-interface">
+            <div class="preview-image" style="background-image: url('images/wwbz_graphic.png');"></div>
+            <div class="preview-overlay"><span class="overlay-text">→ ACCESS</span></div>
+          </div>
+          <div class="card-content">
+            <h3 class="content-title">UNSEEN CONVERSATIONS</h3>
+            <div class="content-meta"><span>DEC 25, 2025</span><span>• 55 MIN</span></div>
+            <div class="content-excerpt"><p>Conversations outside the optimization loop — agency that cannot be platformed.</p></div>
+            <div class="content-tags"><span class="tag">COMMUNITY</span><span class="tag">OFF-GRID</span></div>
+          </div>
+        </a>
+      </article>
+
+      <!-- 13. Maintenance Underground -->
+      <article class="publication-card">
+        <a href="maintenance-underground.html" class="card-link">
+          <div class="card-interface">
+            <div class="preview-image" style="background-image: url('images/maintain.jpg');"></div>
+            <div class="preview-overlay"><span class="overlay-text">→ ACCESS</span></div>
+          </div>
+          <div class="card-content">
+            <h3 class="content-title">INFRASTRUCTURE GHOSTS: MAINTENANCE UNDERGROUND</h3>
+            <div class="content-meta"><span>DEC 25, 2025</span><span>• 18 MIN</span></div>
+            <div class="content-excerpt"><p>The invisible labor keeping civilization's systems alive — maintenance as memory.</p></div>
+            <div class="content-tags"><span class="tag">MAINTENANCE</span><span class="tag">LABOR</span></div>
+          </div>
+        </a>
+      </article>
+
+      <!-- 14. Digital Nomad -->
+      <article class="publication-card">
+        <a href="digital-nomad.html" class="card-link">
+          <div class="card-interface">
+            <div class="preview-image" style="background-image: url('images/nomad.jpg');"></div>
+            <div class="preview-overlay"><span class="overlay-text">→ ACCESS</span></div>
+          </div>
+          <div class="card-content">
+            <h3 class="content-title">DIGITAL NOMADISM AS LIFESTYLE INFRASTRUCTURE</h3>
+            <div class="content-meta"><span>DEC 26, 2025</span><span>• 21 MIN</span></div>
+            <div class="content-excerpt"><p>The industrialization of rootlessness — manufactured freedom and its infrastructure.</p></div>
+            <div class="content-tags"><span class="tag">LIFESTYLE</span><span class="tag">EXTRACTION</span></div>
+          </div>
+        </a>
+      </article>
+
+      <!-- 15. Defcon -->
+      <article class="publication-card">
+        <a href="defcon.html" class="card-link">
+          <div class="card-interface">
+            <div class="preview-image" style="background-image: url('images/defcon.jpg');"></div>
+            <div class="preview-overlay"><span class="overlay-text">→ ACCESS</span></div>
+          </div>
+          <div class="card-content">
+            <h3 class="content-title">DEFCON: PERFORMANCE VS. PRACTICE</h3>
+            <div class="content-meta"><span>DEC 26, 2025</span><span>• 23 MIN</span></div>
+            <div class="content-excerpt"><p>Two conferences, one badge — the performance of hacking and the private practice of security.</p></div>
+            <div class="content-tags"><span class="tag">CONFERENCE</span><span class="tag">SPECTACLE</span></div>
+          </div>
+        </a>
+      </article>
+    </div>
+  </section>
+
+  <!-- divider -->
+  <div class="divider" style="height:1px; background:#e5e5e5; max-width:600px; margin:2rem auto;"></div>
+
+  <!-- MANIFESTO (unchanged) -->
+  <section id="manifesto" class="manifesto-section">
+    <div class="manifesto-content">
+      <p>1heavy0 is a systems analysis project examining how technical infrastructure concentrates power, defers maintenance, and fails. We study the layers beneath interfaces — where architecture becomes governance, protocols become politics, and operational decisions shape long-term outcomes.</p>
+      <p>Our work focuses on cloud platforms, payment systems, identity infrastructure, AI stacks, protocol governance, and maintenance regimes. Technology is treated as infrastructure: layered, institutional, and inseparable from power.</p>
+      <p>We publish long-form analysis and periodic investigations grounded in technical documentation, historical context, and institutional analysis. Each piece stress-tests real systems by examining incentives, dependencies, and failure modes over time. We prioritize clarity, evidence, and structural understanding over speed or commentary.</p>
+      <p>This work is written for engineers, researchers, policymakers, and high-agency technologists who need to understand the systems they build, govern, or rely on — beyond vendor narratives and surface abstractions.</p>
+      <div class="grid-statement-container">
+        <div class="grid-statement">
+          <div class="grid-line top"></div><div class="grid-line right"></div><div class="grid-line bottom"></div><div class="grid-line left"></div>
+          <div class="grid-content"><p class="grid-text">We are not first. We are thorough.</p></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- VIDEO FOOTER (same) -->
+  <section class="video-footer">
+    <div class="video-section-header"><h2></h2></div>
+    <div class="video-container">
+      <video autoplay muted loop playsinline>
+        <source src="images/radical_edd.mp4" type="video/mp4">
+      </video>
+      <div class="video-overlay"><div class="video-caption"></div></div>
+    </div>
+  </section>
+
+  <!-- SITE FOOTER with BUY ME A COFFEE button -->
+  <footer class="site-footer">
+    <div class="footer-container">
+      <div class="footer-row">
+        <a href="https://instagram.com/1heavy0" target="_blank" class="instagram-link">
+          <svg class="instagram-icon" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zM5.838 12a6.162 6.162 0 1112.324 0 6.162 6.162 0 01-12.324 0zM12 16a4 4 0 110-8 4 4 0 010 8zm4.965-10.405a1.44 1.44 0 112.881.001 1.44 1.44 0 01-2.881-.001z"/></svg>
+          @1heavy0
+        </a>
+        <!-- Buy Me A Coffee button (image style) -->
+        <a href="https://buymeacoffee.com/1heavy0" target="_blank" class="bmc-button">
+          <img src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" alt="Buy Me A Coffee" style="height: 50px; width: auto;">
+        </a>
+      </div>
+      <p class="copyright">© 2026 1HEAVY0 MEDIA</p>
+    </div>
+  </footer>
+
+  <!-- smooth scroll script -->
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      document.querySelectorAll('a[href^="#"]').forEach(link => {
+        link.addEventListener('click', function(e) {
+          const href = this.getAttribute('href');
+          if (href.startsWith('#')) {
+            e.preventDefault();
+            const target = document.getElementById(href.substring(1));
+            if (target) {
+              window.scrollTo({ top: target.offsetTop - 120, behavior: 'smooth' });
+            }
+          }
+        });
+      });
+    });
+  </script>
+  <!-- BMC script (optional, but we already use image) -->
+  <!-- <script type="text/javascript" src="https://cdnjs.buymeacoffee.com/1.0.0/button.prod.min.js" data-name="bmc-button" data-slug="1heavy0" data-color="#FFDD00" data-emoji="" data-font="Cookie" data-text="Buy me a coffee" data-outline-color="#000000" data-font-color="#000000" data-coffee-color="#ffffff"></script> -->
 </body>
 </html>
